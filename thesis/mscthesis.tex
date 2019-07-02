@@ -1,0 +1,105 @@
+% mscthesis.tex
+%
+%
+% MSc Project Report / Thesis
+% Author: Oliver Earl <ole4@aber.ac.uk>
+%
+% This LaTeX template has been adapted from two sources:
+%
+% 1)
+% Aberystwyth University Dissertation Template for the Department of Computer Science
+% Adapted by Hannah Dee (hmd1@aber.ac.uk), Neil Taylor (nst@aber.ac.uk)
+%
+% 2)
+% Aberystwyth University Thesis Template for MSc Computer Science Students
+% Adapted by Edel Sherratt (eds@aber.ac.uk) in 2018, Richard Huss (rah94@aber.ac.uk) in 1997
+%
+% To build this document, run build.sh included with the repository. It was designed with pdflatex in mind.
+% Alternatively, TeXstudio or LaTeX Workshop for VS Code should be able to help you.
+
+\documentclass[nolot]{mscthesis}
+\usepackage{graphicx}
+\usepackage{subfigure}
+
+
+% Include the nolof and/or nolot option for no lists of figures and
+% tables respectively, if required. For example,
+%  \documentclass[nolof,nolot]{uwthesis}
+% will produce a thesis with neither. Useful if you have no figures
+% or tables.
+
+% Load any additional LaTeX packages you need here
+%\usepackage{longtable}
+%\usepackage{lscape}
+%\usepackage{pdflscape}
+%\usepackage{pdfpages}
+
+% Information about this thesis
+
+% Thesis metadata
+\title{Placeholder Title} % TODO: Come up with a permanent title
+\author{Oliver Earl}
+\dept{Department of Computer Science}
+\supervisor{Mr. Richard Shipman}
+\module{CHM9360}
+\degree{MSc Computer Science (Software Engineering)}
+
+% IEEE citation methodology
+\usepackage{cite}
+
+\begin{document}
+\setlength{\parindent}{0pt}
+  % Set the default line spacing. If you want double spacing the
+  % default, use \doublespacing instead of \onehalfspacing.
+
+  \onehalfspacing
+
+  % But the preface stuff is single-spaced
+  \begin{singlespace}
+
+  % Generates the title page, signature pages etc.
+  \beforepreface
+
+  % 'Preface' type sections are introduced with \prefacesection.
+  \prefacesection{ABSTRACT}
+  \input{Abstract/abstract}
+    
+
+  \prefacesection{ACKNOWLEDGEMENTS}
+  \input{Acknowledgements/acknowledgements}
+ 
+  % Table of Contents, List of Tables/Figures
+  \afterpreface
+
+  % Modifiy spacing from here onwards
+  \end{singlespace}
+
+% T
+%  H
+%   E
+%    S
+%     I
+%      S
+
+% Introduction
+\input{Introduction/introduction}
+
+% Literature Review
+\input{Literature_Review/literature_review}
+
+% Project Report
+\input{Report/report}
+
+% Critical Evaluation
+\input{Critical_Evaluation/critical_evaluation}
+
+% Conclusion
+\input{Conclusion/conclusion}
+
+% TODO: Add some means to add appendices, possibly from the other template
+
+% Bibliography
+\bibliographystyle{ieee}
+\bibliography{mybib}  % Pathname of your bibTeX file
+
+\end{document}
