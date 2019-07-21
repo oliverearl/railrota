@@ -12,38 +12,17 @@
 %\usepackage[a4paper,margin=2.5cm,nohead, headheight=3cm, headsep=20pt]{geometry}
 
 \usepackage{graphicx} %to allow images to be imported see example at end of template
-\usepackage{titling}
+
 \usepackage{palatino} %or {times} etc
 \usepackage{plain} %bibliography style 
 \usepackage{amsmath} %math fonts - just in case
 \usepackage{amsfonts} %math fonts
 \usepackage{amssymb} %math fonts
-\usepackage{pdfpages}
-\usepackage{fancyvrb}
-\usepackage{geometry}
-
-\usepackage{listings,xcolor}
-\lstset{
-  language        = php,
-  basicstyle      = \small\ttfamily,
-  keywordstyle    = \color{dkblue},
-  stringstyle     = \color{red},
-  identifierstyle = \color{dkgreen},
-  commentstyle    = \color{gray}
-}
-\definecolor{dkgreen}{rgb}{0,.6,0}
-\definecolor{ForestGreen}{rgb}{0,.6,0}
-\definecolor{dkblue}{rgb}{0,0,.6}
-\definecolor{dkyellow}{cmyk}{0,0,.8,.3}
 
 % packages for figures
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage{tabularx}
-\usepackage{ltablex}
-
-\usepackage[T1]{fontenc}
 
 % package for fonts
 \usepackage{times}
@@ -62,12 +41,10 @@
 % Various parameters
 \setlength{\textheight}{229mm}
 \setlength{\topmargin}{-5.4mm}
-
-\setlength{\headheight}{15.2pt}
-
-\setlength{\textwidth}{7in}
+\setlength{\textwidth}{150mm}
 \setlength{\oddsidemargin}{10.6mm}
 \setlength{\evensidemargin}{10.6mm}
+\setlength{\headheight}{15.2pt}
 
 \parskip=6pt
 
@@ -274,14 +251,13 @@
 
 
 
-\def\@maketitle{{
-\headheight 12pt\newpage
+\def\@maketitle{{\headheight 12pt\newpage
 \thispagestyle{empty}\c@page\z@
  \null
  \vskip 0.4in
  \hskip 0.3in
 \begin{minipage}{4.2in}
- \centering\mbox{\includegraphics[width=0.9\textwidth]{au_logo} }
+ %\centering\mbox{\includegraphics[width=6cm]{Images/aber-uni-logo} }
  \vskip 0.3in 
  \centering\Large{\bf\@title\par}
  \normalsize
@@ -289,12 +265,18 @@
  \centering Final Report for {\@modulecode} {\@moduletitle}
 
  \vskip 0.4in
-  \centering {\it Authors:}\hskip 0.05in \@author
+  \centering {\it Author:}\hskip 0.05in \@author\hskip 0.05in (\@authoremail)
+ \vskip 0.05in
+ \centering {\it Supervisor:}\hskip 0.05in \@supervisor\hskip 0.05in (\@supervisoremail)
 
  
  \vskip 0.3in
  \centering {\@date} \vskip 0.05in 
  \centering Version: {\@version} ({\@status})
+
+ \vskip 0.6in
+ This report was submitted as partial fulfilment of a {\@degreetype} degree in   
+  {\@degreeschemetitle} ({\@degreeschemecode})
 
 
 \end{minipage}
