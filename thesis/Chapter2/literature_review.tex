@@ -14,6 +14,8 @@ The efficiency of the outcome is determined not only by its validity, but also b
 
 In general, software for tackling this problem exist to reduce the intrinsic difficulties and time overheads presented by manually rostering workforce, which was a role traditionally carried out continuously by secretarial staff, who would ensure that constraints where not violated as aforementioned, and would optimise the rota as much as possible for the sake of soft constraints to be best met. Today, most of this work is done by software, although occasionally conflicts must be resolved by a human. \cite{Maes1994AgentsTR}
 
+Based on the project's aims and objectives, it is already established that an automated or semi-automated solution to automatically roster staff is unnecessary and beyond the scope of the application, as there are dedicated personnel responsible for ensuring that necessary gaps are filled, and volunteers add themselves to roles which they are qualified to fulfill at their own discretion. Nevertheless, having an understanding for this computational problem remains useful for the design and implementation of the project and is subsequently worth researching.
+
 \section{The Nurse Scheduling Problem (NSP)}
 The aforementioned problem of automatically finding the most optimal way to assign workers to shifts, with both hard constraints that must be met in order to be valid, and soft constraints that determine the optimality of the solution, is commonly referred to as the Nurse Scheduling Problem (henceforth NSP) and is considered by most sources to be of NP-hard (nondeterministic polynomial time) complexity. \cite{Tassopoulos2013} 
 
@@ -22,8 +24,6 @@ The reason behind nursing being the focus for this particular scheduling problem
 This has a strong parallel with the current challenges presented by the steam railway, where although there exists only one shift per day, vastly simplifying the problem, there is also a need for various volunteers with different skill levels and related constraints to be met.
 
 The two most well-researched and documented solutions to this problem involve the usage of genetic algorithms, and simulated annealing (including derivative methods), although other implementations have been explored in detail.
-
-% TODO: Continue elaborating on various sections.
 
 \subsection{Genetic Algorithms (GA)}
 Genetic algorithms (GA) are described by McCall as a heuristic search and optimisation technique originating in the 1960s that is modelled on Darwinian natural evolution, whereby a population of chromosomes - each a solution to a problem and a measurement of its effectiveness, called fitness. Those with the highest fitness are combined to produce new child chromosomes, and this process continues until criteria pertinent to the solution are met. \cite{MCCALL2005205}
@@ -47,7 +47,7 @@ As written by Press et al, the name of this algorithm is derived from an analogy
 
 \section{Prominent Rostering Solutions}
 
-
+As scheduling software began to come into prominence in the 1980s as manual work tracking systems and spreadsheet-based solutions, 
 
 \subsection{Heritage Operation Processing (HOPS)}
 
@@ -60,3 +60,5 @@ Lorem ipsum.
 \subsection{ABC Roster}
 
 Lorem ipsum.
+
+\section{Research Conclusion}
