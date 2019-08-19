@@ -13,10 +13,22 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
+     * Remembrance token, email verification indicator,
+     * timestamps, and admin flag are guarded.
+     *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'surname',
+        'email',
+        'phone_home',
+        'phone_work',
+        'phone_mobile',
+        'date_of_last_inspection',
+        'notes',
+        'is_available',
+        'password',
     ];
 
     /**
@@ -31,9 +43,12 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast to native types.
      *
+     * This is mainly being used to convert dates data into actual dates.
+     *
      * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'date_of_last_inspection' => 'date',
     ];
 }
