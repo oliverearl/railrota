@@ -8,15 +8,15 @@ class RoleType extends Model
 {
 
     protected $defaultTypes = [
-        'trainee',
-        'guard',
-        'instructor',
-        'driver',
-        'blockman',
-        'fireman',
-        'cleaner',
-        'passed_fireman',
-        'passed_cleaner',
+        'Trainee',
+        'Guard',
+        'Instructor',
+        'Driver',
+        'Blockman',
+        'Fireman',
+        'Cleaner',
+        'Passed Fireman',
+        'Passed Cleaner',
     ];
 
     /**
@@ -35,6 +35,6 @@ class RoleType extends Model
     }
 
     public function role() {
-        return $this->belongsTo('App\Role');
+        return $this->hasOne('App\Role');
     }
 }
