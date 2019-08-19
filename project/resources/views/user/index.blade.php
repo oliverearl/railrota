@@ -12,12 +12,10 @@
                     <th>First Name</th>
                     <th>Surname</th>
                     <th>Email Address</th>
+                    <th>Roles</th>
                     <th>Home Telephone</th>
                     <th>Work Telephone</th>
                     <th>Mobile Telephone</th>
-                    <th>Currently Available</th>
-                    <th>Date of Last Inspection</th>
-                    <th>Roles</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,24 +25,18 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->surname }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->phone_home }}</td>
-                    <td>{{ $user->phone_work }}</td>
-                    <td>{{ $user->phone_mobile }}</td>
-                    <td>{{ $user->is_available ? 'Yes' : 'No' }}</td>
-                    @if (is_null($user->date_of_last_inspection))
-                        <td><em>Unknown</em></td>
-                    @else
-                        <td>{{ $user->date_of_last_inspection->format('M d Y') }}</td>
-                    @endif
                     @if ($user->roles->isEmpty())
                         <td><em>No Roles Allocated</em></td>
                     @else
                         <td>
                             @foreach ($user->roles as $role)
-                                {{ $role->role_type->name }}
+                                <a href="{{ route('role_types.show', $role->role_type->id) }}">{{ $role->role_type->name }}</a><br>
                             @endforeach
                         </td>
                     @endif
+                    <td>{{ $user->phone_home }}</td>
+                    <td>{{ $user->phone_work }}</td>
+                    <td>{{ $user->phone_mobile }}</td>
                 </tr>
                 @endforeach
             </tbody>
