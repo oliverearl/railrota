@@ -33,4 +33,8 @@ class RoleType extends Model
     public function getDefaultTypes(): Array {
         return $this->defaultTypes;
     }
+
+    public function role() {
+        return $this->belongsTo('App\Role');
+    }
 }

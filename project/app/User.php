@@ -51,4 +51,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'date_of_last_inspection' => 'date',
     ];
+
+    public function roles() {
+        return $this->hasMany('App\Role');
+    }
 }
