@@ -11,10 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/**
+ * Unauthorised pages
+ */
+Route::get('/', 'WelcomeController@index')->name('welcome');
 
+/**
+ * Magic auth routes
+ */
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * Routes that require authentication
+ */
+Route::group(['middleware' => ['auth']], function() {
+    /**
+     * Static pages
+     */
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    /**
+     * Resources
+     */
+    Route::resource('users', 'UserController');
+    Route::resource('roles', 'RoleController');
+    Route::resource('role_types', 'RoleTypeController');
+});
