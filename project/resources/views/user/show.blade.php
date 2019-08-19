@@ -16,9 +16,9 @@
                 {{-- Buttons go here --}}
                 @if (Auth::id() === $user->id || Auth::user()->is_admin === 1)
                     {{-- Edit --}}
-                    <a class="btn btn-sm" href="/user/{{ $user->id }}/edit"></a>
+                    <a class="btn btn-outline-primary" href=" {{route('users.edit', $user->id)}}">Edit</a>
                 @endif
-                <a class="btn btn-primary btn-sm" href="{{ route('users.index') }}">Back</a>
+                <a class="btn btn-outline-secondary" href="{{ route('users.index') }}">Back</a>
             </div>
         </div>
 
