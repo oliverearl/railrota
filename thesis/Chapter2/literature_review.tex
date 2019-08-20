@@ -1,1 +1,63 @@
 \chapter{Literature Review}
+A roster, sometimes referred to as a rota or schedule, is a list with dates (or shifts) with staff, such as employees or volunteers assigned to them, indicating what work will be done and when it will be done. It might also indicate when staff are unavailable, such as them being on leave. \cite{CollinsRoster}
+
+Automatically assigning staff to a roster is a well-known problem in computing. As described by Ernst et al, it is highly challenging to 'determine optimal solutions that minimise costs, meet employee preferences, distribute shifts equitably among employees and satisfy all the workplace constraints.' \cite{ERNST20043}. As described, 'hard' constraints must be conformed to in order for the roster to be deemed valid. Such constraints might include: \cite{Chen2016}
+
+\begin{itemize}
+    \item Availability of staff - staff cannot be away or on leave
+    \item Staff cannot carry out more than a certain number of consecutive shifts
+    \item Staff cannot exceed maximum numbers of shifts, or fall under a given minimum
+    \item Staff must be of the right subtype, or meet criteria such as skill level or qualification
+\end{itemize}
+
+The efficiency of the outcome is determined not only by its validity, but also by how well it meets 'soft' constraints, such as regularity of shifts.
+
+In general, software for tackling this problem exist to reduce the intrinsic difficulties and time overheads presented by manually rostering workforce, which was a role traditionally carried out continuously by secretarial staff, who would ensure that constraints where not violated as aforementioned, and would optimise the rota as much as possible for the sake of soft constraints to be best met. Today, most of this work is done by software, although occasionally conflicts must be resolved by a human. \cite{Maes1994AgentsTR}
+
+Based on the project's aims and objectives, it is already established that an automated or semi-automated solution to automatically roster staff is unnecessary and beyond the scope of the application, as there are dedicated personnel responsible for ensuring that necessary gaps are filled, and volunteers add themselves to roles which they are qualified to fulfill at their own discretion. Nevertheless, having an understanding for this computational problem remains useful for the design and implementation of the project and is subsequently worth researching.
+
+\section{The Nurse Scheduling Problem (NSP)}
+The aforementioned problem of automatically finding the most optimal way to assign workers to shifts, with both hard constraints that must be met in order to be valid, and soft constraints that determine the optimality of the solution, is commonly referred to as the Nurse Scheduling Problem (henceforth NSP) and is considered by most sources to be of NP-hard (nondeterministic polynomial time) complexity. \cite{Tassopoulos2013} 
+
+The reason behind nursing being the focus for this particular scheduling problem is that it is particularly challenging to roster for shifts that exist around the clock (healthcare institutions such as carehomes and hospitals work during the day and night), that require staff with varying required skill and competency levels for different types of work, whilst also ensuring that other soft constraints such as regularity and routine of schedules to benefit nurse wellbeing are met. \cite{Burke2004}
+
+This has a strong parallel with the current challenges presented by the steam railway, where although there exists only one shift per day, vastly simplifying the problem, there is also a need for various volunteers with different skill levels and related constraints to be met.
+
+The two most well-researched and documented solutions to this problem involve the usage of genetic algorithms, and simulated annealing (including derivative methods), although other implementations have been explored in detail.
+
+\subsection{Genetic Algorithms (GA)}
+Genetic algorithms (GA) are described by McCall as a heuristic search and optimisation technique originating in the 1960s that is modelled on Darwinian natural evolution, whereby a population of chromosomes - each a solution to a problem and a measurement of its effectiveness, called fitness. Those with the highest fitness are combined to produce new child chromosomes, and this process continues until criteria pertinent to the solution are met. \cite{MCCALL2005205}
+
+Furthermore, random mutations have a possibility of occuring on each new generation, further modelling the real-world phenomenon of evolution and to diversify the population of chromosomes, as well as to increase the possibility of discovering the most optimal solution. \cite{AUGUSTINE2009}
+
+% TODO: Explain an implementation
+
+\subsection{Simulated Annealing}
+Baird describes simulated annealing as an optimisation algorithm that is used to find global optima in the presence of local optima. He explains that moves are randomly selected and always accepted if the current solution is improved as a result of that move. Should this not be the case, the move has a chance of being made anyway, with the probability determined based on the 'badness' of the move, which in turn is determined by the quantity in which the solution is made worse. \cite{Baird1998}
+
+As written by Press et al, the name of this algorithm is derived from an analogy with its namesake in thermodynamics, in the way that 'liquids freeze and crystallize, or metals cool and anneal' and how when high temperature liquids are cooled slowly, 'atoms are often able to line themselves up and form a pure crystal that is completely ordered'. \cite{Press:1992:NRC:148286}
+
+Ko et al explains that simulated annealing is an acceptable means of providing a good solution rather than the most optimal one, and that more accurate results can be obtained within shorter periods of time by using Cost Matrix-based simulated annealing (CSMA), a derivative method using a cost matrix for the transition rule. \cite{ko2013efficient}
+% TODO: p23.pdf / Chen et al
+
+% \subsection{Miscellaneous Implementations}
+
+% TODO: Tabu search, GRASP, stochastic optimisation
+
+\section{Prominent Rostering Solutions}
+
+As scheduling software began to come into prominence in the 1980s as manual work tracking systems and spreadsheet-based solutions, 
+
+\subsection{Heritage Operation Processing (HOPS)}
+
+Lorem ipsum.
+
+\subsection{Three Rings}
+
+Lorem ipsum.
+
+\subsection{ABC Roster}
+
+Lorem ipsum.
+
+\section{Research Conclusion}

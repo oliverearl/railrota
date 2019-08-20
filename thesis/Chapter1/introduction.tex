@@ -1,6 +1,57 @@
 \chapter{Introduction}
 
 \section{Background}
+Corris Railway is a historic narrow gauge railway located in Mid Wales, near the Welsh town of Machynlleth, originally having opened back in April 1859 and was then known as the Corris Machynlleth and River Dovey Tramroad. \cite{DEVEREAUX01} After a hiatus of around seventy-two years, the railway resumed regular passenger services in June 2002, and continues to operate to this day. \cite{CORRISSOCIETY1}
+
+The need for a rota system that can deal with the demands of rostering the various volunteer staff for this railway is the defining purpose of the project, and there is a need to be able to effectively work with the various roles, constraints, and requirements that pertain to the day-to-day operation of the railway. 
+
+\section{Project Aims and Objectives}
+\subsection{Functional Requirements}
+The aim of this project is to construct a rostering system, that is able to deal with the various demands of rostering volunteer staf for the Corris Railway. 
+
+A range of staff must be supported by the system, including locomotor crew, controllers, guards, and museum staff. Additionally, staff are able to supervise less experienced trainees, so this must also be accounted for. Staff must also be able to volunteer on days or weekends without explicitly specifying what - so the system must also be able to perform some optimisation.
+
+Each day has different set requirements and therefore requires different staff. A standard preset exists, but special events will have their own needs. Some days might have differing needs at different parts of the day.
+
+The project objectives that must be fulfilled for successful completion can be broken down atomically as the following functional requirements:
+
+\begin{itemize}
+    \item All users / volunteers
+    \begin{itemize}
+        \item All users must be able to navigate the roster, and view current, upcoming, and/or historic shifts
+        \item Users must be able to fill in and edit their personal information
+        \item Users must be able to assign themselves to shifts of which they are able to do
+        \item Users must \textbf{not} be able to assign themsleves to shifts that they are unable to do
+        \item Users must \textbf{not} be able to assign themsleves to simultaneous roles on the same shifts
+        \item Users must be able to indicate periods of availability
+        \item Users must be able to indicate their willingness or desire to do an upcoming shift (i.e. an unspecified upcoming weekend)
+        \item Users must be able to operate the web application easily from a mobile device such as a smartphone
+    \end{itemize}
+    \item Administrative users
+    \begin{itemize}
+        \item Administrators must be able to modify user information
+        \item Administrators must be able to assign roles and privileges that reflect a volunteer's ability and status
+        \item Administrators must be able to add, edit, and delete shifts
+        \item Administrators must be able to mark a shift as closed
+        \item Administrators must be able to define a shift's staffing requirements
+        \item Administrators must be able to email users regarding upcoming shifts
+    \end{itemize} 
+    \item The application must run on a predetermined operating environment
+\end{itemize}
+
+\subsection{Desirable Functionality}
+\subsubsection{Automated Rostering}
+The ability to automatically assign volunteers to shifts is considered beyond the scope of this project. Despite this, such functionality remains desirable due to the enormous time it can save administrative staff in ensuring that shifts remain open and filled. This is a complex computational problem however, and is explored in substantial detail in the literature review of this document.
+
+\subsubsection{Localisation Support}
+Localisation, often referred to as i18n, or internationalisation, entails allowing the software solution to support multiple languages, or locales. The primary motivation for this is derived from Corris Railway being situated in an area of rural Wales, where there are a substantial quantity of Welsh native speakers, as many as x\% in Machynlleth. % TODO: Insert the exact quantity once you're back online! %
+
+Furthermore, this is backed by devolved legislation. The Welsh Language Act mandates the importance of local organisations and businesses, including the Corris Railway, to operate bilingually to the fullest extent possible, and to make operating materials, such as internally used applications, usable in both English and Welsh. % TODO: Insert citation once you're back online!
+
+It is proven by suchandsuch study that users are more likely to happily adapt to a new system, if is provided in their native language. % TODO: Insert evidence for this once you're back online!
+
+\subsection{Operating Environment}
+The environment in which the software must operate is provided in detail in Appendix 5. Any proposed solution must be executable within these constraints.
 
 \section{Motivation}
 There are several important motivational factors that ultimately determined the selection of this project topic.
@@ -10,8 +61,3 @@ The most important motivating factor for the selection of this project is a genu
 With a substantial history of working with web applications and Internet technologies throughout academia, within industry, and in personal open source projects, a task to design, implement, test, and deploy a substantial full-stack program with a well-defined set of challenging requirements and technical and organisational hurdles that must be overcome is an exciting prospect, which contributes substantially to its potential success. In addition, as a long-time volunteer with experience donating both time and technical know-how to a range of charities and non-profit initiatives, the experience and domain expertise acquired from operating within those environments, as well as  having extensive understanding of the difficulties and unique challenges presented by volunteer management and rostering respectively will prove highly transferrable and useful throughout the overall system design phase.
 
 Furthermore, this project is intended for real-world implementation and application for the aforementioned steam railway and by its various volunteer workforce; placing it outside the safe confines of a classroom assignment and placing even greater importance on code quality and application ease of use.
-
-\section{Project Aims and Objectives}
-
-\section{Development Methodology}
-

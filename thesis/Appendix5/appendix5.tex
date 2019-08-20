@@ -1,0 +1,104 @@
+\chapter{Operating Environment}
+\label{Operating Environment}
+
+The following information was obtained in relation to the operating environment - a server located in the city of Amsterdam, Netherlands.
+
+\begin{lstlisting}[breaklines]
+rcs@silo:~$ cat /proc/cpuinfo 
+processor    : 0
+vendor_id    : GenuineIntel
+cpu family    : 6
+model        : 77
+model name    : Intel(R) Atom(TM) CPU  C2350  @ 1.74GHz
+stepping    : 8
+microcode    : 0x127
+cpu MHz        : 1745.626
+cache size    : 1024 KB
+physical id    : 0
+siblings    : 2
+core id        : 0
+cpu cores    : 2
+apicid        : 0
+initial apicid    : 0
+fpu        : yes
+fpu_exception    : yes
+cpuid level    : 11
+wp        : yes
+flags        : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes rdrand lahf_lm 3dnowprefetch ida arat epb dtherm tpr_shadow vnmi flexpriority ept vpid tsc_adjust smep erms
+bogomips    : 3491.25
+clflush size    : 64
+cache_alignment    : 64
+address sizes    : 36 bits physical, 48 bits virtual
+power management:
+
+processor    : 1
+vendor_id    : GenuineIntel
+cpu family    : 6
+model        : 77
+model name    : Intel(R) Atom(TM) CPU  C2350  @ 1.74GHz
+stepping    : 8
+microcode    : 0x127
+cpu MHz        : 1745.626
+cache size    : 1024 KB
+physical id    : 0
+siblings    : 2
+core id        : 1
+cpu cores    : 2
+apicid        : 2
+initial apicid    : 2
+fpu        : yes
+fpu_exception    : yes
+cpuid level    : 11
+wp        : yes
+flags        : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 movbe popcnt tsc_deadline_timer aes rdrand lahf_lm 3dnowprefetch ida arat epb dtherm tpr_shadow vnmi flexpriority ept vpid tsc_adjust smep erms
+bogomips    : 3491.25
+clflush size    : 64
+cache_alignment    : 64
+address sizes    : 36 bits physical, 48 bits virtual
+power management:
+
+rcs@silo:~$ cat /proc/meminfo 
+MemTotal:        4022480 kB
+MemFree:          146956 kB
+MemAvailable:    2274316 kB
+Buffers:          298592 kB
+Cached:          1919940 kB
+SwapCached:        19680 kB
+Active:          2073608 kB
+Inactive:        1386788 kB
+Active(anon):    1027160 kB
+Inactive(anon):   356332 kB
+Active(file):    1046448 kB
+Inactive(file):  1030456 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       1074172 kB
+SwapFree:         743280 kB
+Dirty:                 0 kB
+Writeback:             0 kB
+AnonPages:       1225512 kB
+Mapped:           111816 kB
+Shmem:            141628 kB
+Slab:             361412 kB
+SReclaimable:     303860 kB
+SUnreclaim:        57552 kB
+KernelStack:        4368 kB
+PageTables:        18012 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     3085412 kB
+Committed_AS:    3204708 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      279104 kB
+VmallocChunk:   34359401400 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:       91136 kB
+DirectMap2M:     4065280 kB
+\end{lstlisting}
