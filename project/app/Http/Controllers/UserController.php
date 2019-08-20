@@ -58,12 +58,13 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
+        $this->authorize('update', $user);
 
         return view('user.edit', compact('user'));
     }
@@ -72,16 +73,19 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'name' => 'required|min:1|max:255|string',
             'surname' => 'min:1|max:255|string|nullable',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'phone_home' => 'min:1|max:15|nullable|',
             'phone_work' => 'min:1|max:24|nullable',
             'phone_mobile' => 'min:1|max:15',
@@ -90,12 +94,11 @@ class UserController extends Controller
             'is_admin' => 'boolean',
         ]);
 
-        $user = User::findOrFail($id);
         $user->fill($request->except('password', 'is_available'));
 
         // Check if admin-only things have been filled in and validate accordingly
         if (($request->get('is_admin') || $request->get('date_of_last_inspection'))) {
-            abort_if(!Auth::user()->is_admin, 403);
+            abort_unless(Auth::user()->isAdmin(), 403);
         }
 
         // Check for password changes

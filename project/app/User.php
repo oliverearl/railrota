@@ -56,4 +56,12 @@ class User extends Authenticatable
     public function roles() {
         return $this->hasMany('App\Role');
     }
+
+    public function isAdmin() {
+        return $this->is_admin;
+    }
+
+    public function isMyself(User $user) {
+        return $this-> id === $user->id;
+    }
 }
