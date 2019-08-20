@@ -28,6 +28,7 @@ class User extends Authenticatable
         'date_of_last_inspection',
         'notes',
         'is_available',
+        'is_admin',
         'password',
     ];
 

@@ -13,6 +13,7 @@
         @include('layouts._nav')
 
         <main class="py-lg-4 container">
+            @include('flash::message')
             @yield('content')
         </main>
     </div>
