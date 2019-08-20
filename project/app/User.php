@@ -64,4 +64,8 @@ class User extends Authenticatable
     public function isMyself(User $user) {
         return $this-> id === $user->id;
     }
+
+    public static function getUser($id) {
+        return User::findOrDie($id);
+    }
 }
