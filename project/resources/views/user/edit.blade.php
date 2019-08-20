@@ -22,7 +22,7 @@
         <section class="col-lg-6">
             {{-- Role Assignment --}}
             @if (Auth::user()->isAdmin())
-                <form action="{{ route('roles.create') }}" method="POST" class="form-group">
+                <form action="{{ route('roles.store') }}" method="POST" class="form-group">
                     @csrf()
                     <h3>Assign a new role</h3>
                     <div class="form-group @if ($errors->has('role_types')) has-error @endif">
