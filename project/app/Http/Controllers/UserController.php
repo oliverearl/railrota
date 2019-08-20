@@ -95,10 +95,7 @@ class UserController extends Controller
 
         // Check if admin-only things have been filled in and validate accordingly
         if (($request->get('is_admin') || $request->get('date_of_last_inspection'))) {
-            if (Auth::user()->is_admin === 0) {
-                flash()->error('You are not authorised to do that.')->important();
-                return redirect()->back();
-            }
+            abort_if(!Auth::user()->is_admin, 403);
         }
 
         // Check for password changes
