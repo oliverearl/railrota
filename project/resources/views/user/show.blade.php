@@ -7,7 +7,6 @@
 @section('title', $title)
 
 @section('content')
-    <main class="container">
         <div class="row">
             <div class="col-md-5">
                 <h2> Viewing {{ $user->name }}'s Record</h2>
@@ -97,5 +96,4 @@
 
             </section>
         </div>
-    </main>
 @endsection
