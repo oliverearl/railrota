@@ -94,11 +94,11 @@ class UserController extends Controller
             'is_admin' => 'boolean',
         ]);
 
-        $user->fill($request->except('password', 'is_available'));
+        $user->fill($request->except('password', 'is_available', 'is_admin'));
 
         // Check if admin-only things have been filled in and validate accordingly
         if (($request->get('is_admin') || $request->get('date_of_last_inspection'))) {
-            abort_unless(Auth::user()->isAdmin(), 403);
+            abort_unless(Auth::user()->isAdmin(), 403, 'You are not authorised to do that.');
         }
 
         // Check for password changes
@@ -107,7 +107,6 @@ class UserController extends Controller
         }
 
         // TODO: Figure out a much better way to handle checkboxes because this is disgusting. Really disgusting.
-
         // Check for change in availability by means of its absence
         if (is_null($request->get('is_available'))) {
             $user->is_available = 0;
@@ -115,11 +114,11 @@ class UserController extends Controller
             $user->is_available = 1;
         }
 
-        // Same with admin
-        if (is_null($request->get('is_admin'))) {
-            $user->is_admin = 0;
-        } else {
+        // Do the same for admins
+        if ($request->get('is_admin')) {
             $user->is_admin = 1;
+        } else {
+            $user->is_admin = 0;
         }
 
         $user->save();

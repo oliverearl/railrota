@@ -9,7 +9,7 @@
 
 @section('buttons')
 {{-- Buttons go here --}}
-@if (Auth::id() === $user->id || Auth::user()->is_admin === 1)
+@if (Auth::id() === $user->id || Auth::user()->isAdmin())
     {{-- Edit --}}
     <a class="btn btn-outline-primary" href=" {{route('users.edit', $user->id)}}">Edit</a>
 @endif
