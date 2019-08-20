@@ -14,7 +14,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        // TODO: Figure out some form of damn pagination when using joins
+        $roles = Role::join('users', 'roles.user_id', '=', 'users.id')->orderBy('users.name', 'asc')->get();
+
+        return view('role.index', compact('roles'));
     }
 
     /**
@@ -30,12 +33,27 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('manipulate');
+
+        $this->validate($request, [
+            'user_id' => 'required|integer|exists:users,id',
+            'role_types' => 'required|integer|exists:role_types,id'
+        ]);
+
+        Role::create([
+            'user_id' => $request->user_id,
+            'role_type_id' => $request->role_types,
+        ]);
+
+        flash()->success('Role added successfully!')->important();
+        return redirect()->route('roles.index');
     }
 
     /**
