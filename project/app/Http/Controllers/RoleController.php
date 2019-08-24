@@ -80,8 +80,9 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param \App\Role $role
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Role $role)
     {
@@ -120,11 +121,18 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role  $role
+     * @param \App\Role $role
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(Role $role)
     {
-        //
+        $this->authorize('manipulate');
+
+        $role->delete();
+
+        flash()->success('Role has been deleted successfully!')->important();
+
+        return redirect()->route('roles.index');
     }
 }

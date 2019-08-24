@@ -27,7 +27,13 @@
                             <tr>
                                 @if (Auth::user()->isAdmin())
                                     <td><a class="btn btn-primary" href=" {{ route('roles.edit', $role->id) }}">Edit</a></td>
-                                    <td><a class="btn btn-danger" href="#">Delete</a></td>
+                                    <td>
+                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline">
+                                            @csrf()
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 @endif
                                 <td>{{ $role->user->name }}</td>
                                 <td>{{ $role->user->surname }}</td>
