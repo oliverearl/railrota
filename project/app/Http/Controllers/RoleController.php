@@ -47,6 +47,16 @@ class RoleController extends Controller
             'role_types' => 'required|integer|exists:role_types,id'
         ]);
 
+        $query = Role::where([
+            ['user_id', '=', $request->user_id],
+            ['role_type_id', '=', $request->role_types],
+        ])->get();
+
+        if (!$query->isEmpty()) {
+            flash()->error('This user already has that role.')->important();
+            return redirect()->back();
+        }
+
         $role = Role::create([
             'user_id' => $request->user_id,
             'role_type_id' => $request->role_types,
