@@ -104,7 +104,7 @@ class RoleController extends Controller
         $role->save();
 
         flash()->success('Role modified successfully!')->important();
-        return redirect()->route('roles.edit', $role->id);
+        return redirect()->route('roles.index');
     }
 
     /**
