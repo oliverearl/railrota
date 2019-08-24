@@ -1,4 +1,4 @@
-@extends('user._user')
+@extends('layouts._control')
 
 @php
     $title = "Editing {$user->name}'s Record" ?: 'Editing Record';
