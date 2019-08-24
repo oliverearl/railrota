@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RoleType extends Model
 {
 
-    protected $defaultTypes = [
+    protected $oldDefaultTypes = [
         'Trainee',
         'Guard',
         'Instructor',
@@ -17,6 +17,14 @@ class RoleType extends Model
         'Cleaner',
         'Passed Fireman',
         'Passed Cleaner',
+    ];
+
+    protected $defaultTypes = [
+        'Controller',
+        'Guard',
+        'Blockman',
+        'Driver - Diesel and Electric',
+        'Driver - Steam Locomotive'
     ];
 
     /**
@@ -30,11 +38,15 @@ class RoleType extends Model
     ];
 
 
-    public function getDefaultTypes(): Array {
+    public function getDefaultTypes() {
         return $this->defaultTypes;
     }
 
     public function role() {
         return $this->hasOne('App\Role');
+    }
+
+    public function getAllRoleTypes() {
+        return RoleType::all();
     }
 }
