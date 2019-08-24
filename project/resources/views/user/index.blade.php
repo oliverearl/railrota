@@ -21,7 +21,7 @@
             <tbody>
                 @foreach ($users as $user)
                 <tr>
-                <td><a class="btn btn-primary" href="/users/{{$user->id}}">View</td>
+                    <td><a class="btn btn-primary" href="{{ route('users.show', $user->id) }}">View</a></td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->surname }}</td>
                     <td>{{ $user->email }}</td>
