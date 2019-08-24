@@ -130,12 +130,21 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        // Behaviour currently not intended.
-        //
+        $this->authorize('delete', $user);
+
+        if ($user->id === Auth::id()) {
+            flash()->error('You can\'t delete yourself!')->important();
+            return redirect()->back();
+        }
+
+        $user->delete();
+        flash()->success("{$user->name} has been deleted successfully!")->important();
+        return redirect()->route('users.index');
     }
 }

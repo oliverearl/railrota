@@ -11,7 +11,12 @@
 {{-- Buttons go here --}}
 @if (Auth::id() === $user->id || Auth::user()->isAdmin())
     {{-- Edit --}}
-    <a class="btn btn-outline-primary" href=" {{route('users.edit', $user->id)}}">Edit</a>
+    <a class="btn btn-primary" href=" {{route('users.edit', $user->id)}}">Edit</a>
+    <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline">
+        @csrf()
+        @method('delete')
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
 @endif
 <a class="btn btn-outline-secondary" href="{{ route('users.index') }}">Back</a>
 @endsection
