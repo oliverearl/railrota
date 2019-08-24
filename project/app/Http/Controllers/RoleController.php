@@ -15,8 +15,8 @@ class RoleController extends Controller
     public function index()
     {
         // TODO: Figure out some form of damn pagination when using joins
-        $roles = Role::join('users', 'roles.user_id', '=', 'users.id')->orderBy('users.name', 'asc')->get();
-
+        //$roles = Role::join('users', 'roles.user_id', '=', 'users.id')->orderBy('users.name', 'asc')->get();
+        $roles = Role::latest()->paginate();
         return view('role.index', compact('roles'));
     }
 
@@ -75,19 +75,36 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        $this->authorize('manipulate');
+
+        $competencies = $role->role_type->role_competencies()->get();
+
+        return view('role.edit', compact('role', 'competencies'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Role $role
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $this->authorize('manipulate');
+
+        $this->validate($request, [
+            'role_type_id' => 'required|integer|exists:role_competencies,role_type_id',
+            'role_competency_id' => 'required|integer|exists:role_competencies,id',
+        ]);
+
+        $role->fill($request->only('role_competency_id'));
+        $role->save();
+
+        flash()->success('Role modified successfully!')->important();
+        return redirect()->route('roles.edit', $role->id);
     }
 
     /**

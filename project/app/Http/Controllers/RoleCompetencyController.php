@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RoleCompetency;
+use App\RoleType;
 use Illuminate\Http\Request;
 
 class RoleCompetencyController extends Controller

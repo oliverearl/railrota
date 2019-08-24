@@ -37,13 +37,16 @@ class RoleType extends Model
         'description'
     ];
 
+    public function role() {
+        return $this->hasOne('App\Role');
+    }
+
+    public function role_competencies() {
+        return $this->hasMany('App\RoleCompetency');
+    }
 
     public function getDefaultTypes() {
         return $this->defaultTypes;
-    }
-
-    public function role() {
-        return $this->hasOne('App\Role');
     }
 
     public function getAllRoleTypes() {
