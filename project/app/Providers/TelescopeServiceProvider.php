@@ -62,10 +62,10 @@ class TelescopeServiceProvider extends TelescopeApplicationServiceProvider
     protected function gate()
     {
         Gate::define('viewTelescope', function ($user) {
-            return in_array($user->email, [
-                // TODO: This is completely temporary.
-                'ole4@aber.ac.uk'
-            ]);
+            // Great idea from https://medium.com/@Zerquix18/full-guide-to-install-and-set-up-laravel-telescope-daf558f734f2
+            $ids = env('TELESCOPE_USERS', '');
+            $ids = explode(',', $ids);
+            return in_array($user->id, $ids);
         });
     }
 }
