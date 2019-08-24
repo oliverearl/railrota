@@ -23,7 +23,8 @@ class UserSeeder extends Seeder
             'remember_token' =>             Str::random(10),
             'is_available' =>               true,
             'is_admin' =>                   true,
-            'date_of_last_inspection' =>    Carbon::now()
+            'notes' =>                      'Pretty cool guy and doesn\'t afraid of anything.',
+            'date_of_last_inspection' =>    Carbon::now(),
         ]);
         // Generate users
         factory(App\User::class, 20)->create();
