@@ -20,9 +20,9 @@ class CreateRolesTable extends Migration
             $table->unsignedBigInteger('role_competency_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('role_type_id')->references('id')->on('role_types');
-            $table->foreign('role_competency_id')->references('id')->on('role_competencies');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('role_type_id')->references('id')->on('role_types')->onDelete('cascade');
+            $table->foreign('role_competency_id')->references('id')->on('role_competencies')->onDelete('cascade');
 
         });
     }
