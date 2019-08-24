@@ -47,13 +47,13 @@ class RoleController extends Controller
             'role_types' => 'required|integer|exists:role_types,id'
         ]);
 
-        Role::create([
+        $role = Role::create([
             'user_id' => $request->user_id,
             'role_type_id' => $request->role_types,
         ]);
 
         flash()->success('Role added successfully!')->important();
-        return redirect()->route('roles.index');
+        return redirect()->route('roles.edit', $role->id);
     }
 
     /**
