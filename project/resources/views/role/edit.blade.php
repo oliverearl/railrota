@@ -22,14 +22,17 @@
                 <input type="hidden" name="role_type_id" id="role_type_id" value="{{ $role->role_type->id }}" required>
                 <label for="role_competency_id">Role competencies</label>
                 <div class="form-group @if ($errors->has('role_competency_id')) has-error @endif">
-                    <select name="role_competency_id" id="role_competency_id" class="form-control">
+                    <select name="role_competency_id" id="role_competency_id" class="form-control" required>
                         @foreach($competencies as $competency)
-                            <option value="{{ $competency->id }}">{{ $competency->name }}</option>
+                                <option value="{{ $competency->id }}"
+                                @if ($competency->id === $role->role_competency_id) {{'selected="selected"'}} @endif>
+                                    {{ $competency->name }}
+                                </option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <input class="form-group btn btn-primary" type="submit" value="Edit">
+                    <input class="form-group btn btn-primary" type="submit" value="Save">
                 </div>
             </form>
         </section>
