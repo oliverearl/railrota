@@ -20,30 +20,39 @@ class RoleCompetencySeeder extends Seeder
         $time = Carbon::now();
 
         foreach ($roleTypes as $type) {
+            $keys = [];
             $defaults = [];
             switch (strtolower($type->name)) {
                 case 'controller':
                 case 'guard':
                 case 'blockman':
-                    $defaults = $connection->getControllerDefaults();
+                    $keys =     array_keys($connection->getControllerDefaults());
+                    $values =   $connection->getControllerDefaults();
                     break;
                 case 'driver - diesel and electric':
-                    $defaults = $connection->getPoweredDefaults();
+                    $keys =     array_keys($connection->getPoweredDefaults());
+                    $values =   $connection->getPoweredDefaults();
                     break;
                 case 'driver - steam locomotive':
-                    $defaults = $connection->getSteamDefaults();
+                    $keys =     array_keys($connection->getSteamDefaults());
+                    $values =   $connection->getSteamDefaults();
                     break;
                 default:
                     break;
             }
-            foreach ($defaults as $default) {
-                DB::table('role_competencies')->insert([
-                    'name'          => $default,
-                    'description'   => "{$default} description",
-                    'role_type_id'  => $type->id,
-                    'created_at'    => $time,
-                    'updated_at'    => $time,
-                ]);
+            if (!empty($keys) || !empty($values)) {
+                foreach ($keys as $key) {
+                    DB::table('role_competencies')->insert([
+                        'name'          => $key,
+                        'description'   => "{$key} description",
+                        'role_type_id'  => $type->id,
+                        'tier'          => $values[$key],
+                        'created_at'    => $time,
+                        'updated_at'    => $time,
+                    ]);
+                }
+            } else {
+                die('Could not retrieve data correctly.');
             }
         }
     }

@@ -17,10 +17,11 @@ class CreateRoleCompetenciesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->unsignedBigInteger('tier')->default(1);
             $table->unsignedBigInteger('role_type_id');
             $table->timestamps();
 
-            $table->foreign('role_type_id')->references('id')->on('role_types');
+            $table->foreign('role_type_id')->references('id')->on('role_types')->onDelete('cascade');
         });
     }
 

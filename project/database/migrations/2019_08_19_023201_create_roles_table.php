@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_type_id');
-            $table->unsignedBigInteger('role_competency_id');
+            $table->unsignedBigInteger('role_competency_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
