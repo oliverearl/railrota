@@ -51,8 +51,8 @@
                         </tr>
                         </thead>
                         <tr>
-                            <td>{{ $role->role_type->name }}</td>
-                            <td>{{ $role->role_competency->name }}</td>
+                            <td><a href="{{ route('role_types.show', $role->role_type->id) }}">{{ $role->role_type->name }}</a></td>
+                            <td><a href="{{ route('role_competencies.show', $role->role_competency->id) }}">{{ $role->role_competency->name }}</a></td>
                             <td><a class="form-group btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a></td>
                             <td>
                                 <form id="delete_role_{{ $role->id }}" action="{{ route('roles.destroy', $role->id) }}" method="POST">
