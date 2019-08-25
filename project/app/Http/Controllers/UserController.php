@@ -123,7 +123,7 @@ class UserController extends Controller
 
         $user->save();
 
-        flash()->success('Update successful!')->important();
+        flash()->success("{$user->name} has been updated successfully!")->important();
         return redirect()->route('users.index');
     }
 
