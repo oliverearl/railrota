@@ -52,9 +52,9 @@
                                 @endif
                             </tr>
                         @endforeach
-                    @endif
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 @endsection

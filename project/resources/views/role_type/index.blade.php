@@ -7,9 +7,10 @@
 
 @section('content')
     <div class="container">
+
         <div class="result-set">
             <h1>{{ $title }}</h1>
-            @if ($roleTypes->isEmpty())
+        @if ($roleTypes->isEmpty())
                 <p>No role types have been defined.</p>
             @else
                 <table class="table table-bordered table-striped table-hover" id="data-table">
@@ -46,9 +47,14 @@
                             @endif
                         </tr>
                     @endforeach
-                    @endif
                     </tbody>
                 </table>
+            @endif
         </div>
+        @if (Auth::user()->isAdmin())
+            <div class="col-md-12 page-action">
+                <a class="btn btn-primary" href="{{ route('role_types.create') }}">Add Role Type</a>
+            </div>
+        @endif
     </div>
 @endsection
