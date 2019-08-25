@@ -19,8 +19,7 @@
                                 <th>Edit</th>
                                 <th>Delete</th>
                             @endif
-                            <th>First Name</th>
-                            <th>Surname</th>
+                            <th>Full Name</th>
                             <th>Role Type</th>
                             <th>Competency Level</th>
                             <th>Role Since</th>
@@ -39,8 +38,7 @@
                                         </form>
                                     </td>
                                 @endif
-                                <td>{{ $role->user->name }}</td>
-                                <td>{{ $role->user->surname }}</td>
+                                <td><a href="{{ route('users.show', $role->user->id) }}">{{ $role->user->name }} {{ $role->user->surname }}</a></td>
                                 <td><a href="{{ route('role_types.show', $role->role_type->id) }}">{{ $role->role_type->name }}</a></td>
                                 @if (is_null($role->role_competency))
                                     <td><em>No Competency Assigned</em></td>
