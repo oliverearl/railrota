@@ -1,9 +1,11 @@
 <?php
 
+use App\RoleType;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class RoleTypesSeeder extends Seeder
+class RoleTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,7 +14,7 @@ class RoleTypesSeeder extends Seeder
      */
     public function run()
     {
-        $types = new \App\RoleType;
+        $types = new RoleType;
         $time = Carbon::now();
 
         foreach ($types->getDefaultTypes() as $type) {
