@@ -67,23 +67,43 @@ class RoleTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RoleType  $roleType
+     * @param \Illuminate\Http\Request $request
+     * @param \App\RoleType $roleType
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function update(Request $request, RoleType $roleType)
     {
-        //
+        $this->authorize('manipulate');
+
+        $this->validate($request, [
+           'name' => 'required|min:1|max:255|string|unique:role_types,name',
+            'description' => 'min:1|max:1024}string|nullable',
+        ]);
+
+        $roleType->fill($request->all());
+        $roleType->save();
+
+        flash()->success("{$roleType->name} has been updated successfully!")->important();
+        return redirect()->route('role_types.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RoleType  $roleType
+     * @param \App\RoleType $roleType
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy(RoleType $roleType)
     {
-        //
+        $this->authorize('manipulate');
+
+        $roleType->delete();
+
+        flash()->success("Role Type deleted successfully!")->important();
+
+        return redirect()->route('role_types.index');
     }
 }
