@@ -9,6 +9,6 @@
             @yield('buttons')
         </div>
     </div>
-
+    @include('layouts._errors')
     @yield('route')
 @endsection

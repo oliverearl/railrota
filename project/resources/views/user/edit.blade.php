@@ -1,4 +1,4 @@
-@extends('user._user')
+@extends('layouts._control')
 
 @php
     $title = "Editing {$user->name}'s Record" ?: 'Editing Record';
@@ -20,7 +20,6 @@
             </form>
         </section>
         <section class="col-lg-6">
-            {{-- Role Assignment --}}
             @if (Auth::user()->isAdmin())
                 <form action="{{ route('roles.store') }}" method="POST" class="form-group">
                     @csrf()
@@ -39,13 +38,22 @@
                     <a class="form-group btn btn-secondary" href="{{ route('role_types.create') }}">Add New Role Type</a>
                 </form>
 
-                {{-- Remove Existing Roles --}}
-                <h3>Remove an existing role</h3>
+                <h3>Modify an existing role</h3>
                 @if (!$user->roles->isEmpty())
                 <table class="table table-responsive table-striped">
                     @foreach ($user->roles as $role)
+                        <thead>
                         <tr>
-                            <td>{{ $role->role_type->name }}</td>
+                            <th>Role</th>
+                            <th>Competency</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td><a href="{{ route('role_types.show', $role->role_type->id) }}">{{ $role->role_type->name }}</a></td>
+                            <td><a href="{{ route('role_competencies.show', $role->role_competency->id) }}">{{ $role->role_competency->name }}</a></td>
+                            <td><a class="form-group btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a></td>
                             <td>
                                 <form id="delete_role_{{ $role->id }}" action="{{ route('roles.destroy', $role->id) }}" method="POST">
                                     @csrf()

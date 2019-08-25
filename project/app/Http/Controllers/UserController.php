@@ -88,10 +88,11 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone_home' => 'min:1|max:15|nullable|',
             'phone_work' => 'min:1|max:24|nullable',
-            'phone_mobile' => 'min:1|max:15',
+            'phone_mobile' => 'min:1|max:15|nullable',
             'date_of_last_inspection' => 'date|nullable',
             'is_available' => 'boolean',
             'is_admin' => 'boolean',
+            'notes' => 'min:1:max1024|string|nullable',
         ]);
 
         $user->fill($request->except('password', 'is_available', 'is_admin'));
@@ -123,19 +124,28 @@ class UserController extends Controller
 
         $user->save();
 
-        flash()->success('Update successful!')->important();
+        flash()->success("{$user->name} has been updated successfully!")->important();
         return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        // Behaviour currently not intended.
-        //
+        $this->authorize('delete', $user);
+
+        if ($user->id === Auth::id()) {
+            flash()->error('You can\'t delete yourself!')->important();
+            return redirect()->back();
+        }
+
+        $user->delete();
+        flash()->success("{$user->name} has been deleted successfully!")->important();
+        return redirect()->route('users.index');
     }
 }
