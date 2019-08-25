@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
-    $title = 'Role Types';
+    $title = 'Role Competencies';
 @endphp
 @section('title', $title)
 
@@ -10,8 +10,8 @@
 
         <div class="result-set">
             <h1>{{ $title }}</h1>
-        @if ($roleTypes->isEmpty())
-                <p>No role types have been defined.</p>
+            @if ($roleCompetencies->isEmpty())
+                <p>No role competencies have been defined.</p>
             @else
                 <table class="table table-bordered table-striped table-hover" id="data-table">
                     <thead>
@@ -22,41 +22,45 @@
                             <th>Delete</th>
                         @endif
                         <th>Name</th>
+                        <th>Associated Role Type</th>
+                        <th>Tier</th>
                         <th>Last Updated</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($roleTypes as $roleType)
+                    @foreach ($roleCompetencies as $roleCompetency)
                         <tr>
                             @if (Auth::user()->isAdmin())
-                                <td><a class="btn btn-secondary" href=" {{ route('role_types.show', $roleType->id) }}">View</a></td>
-                                <td><a class="btn btn-primary" href=" {{ route('role_types.edit', $roleType->id) }}">Edit</a></td>
+                                <td><a class="btn btn-secondary" href=" {{ route('role_competencies.show', $roleCompetency->id) }}">View</a></td>
+                                <td><a class="btn btn-primary" href=" {{ route('role_competencies.edit', $roleCompetency->id) }}">Edit</a></td>
                                 <td>
-                                    <form action="{{ route('role_types.destroy', $roleType->id) }}" method="POST" style="display:inline">
+                                    <form action="{{ route('role_competencies.destroy', $roleCompetency->id) }}" method="POST" style="display:inline">
                                         @csrf()
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
                             @endif
-                            <td>{{ $roleType->name }}</td>
-                            @if (is_null($roleType->updated_at))
+                            <td>{{ $roleCompetency->name }}</td>
+                            <td><a href="{{ route('role_types.show', $roleCompetency->role_type->id) }}">{{ $roleCompetency->role_type->name }}</a></td>
+                            <td>{{ $roleCompetency->tier }}</td>
+                            @if (is_null($roleCompetency->updated_at))
                                 <td><em>Unknown</em></td>
                             @else
-                                <td>{{ $roleType->updated_at->format('d/m/Y') }}</td>
+                                <td>{{ $roleCompetency->updated_at->format('d/m/Y') }}</td>
                             @endif
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
                 <div class="text-center">
-                    {{ $roleTypes->links() }}
+                    {{ $roleCompetencies->links() }}
                 </div>
             @endif
         </div>
         @if (Auth::user()->isAdmin())
             <div class="col-md-12 page-action">
-                <a class="btn btn-primary" href="{{ route('role_types.create') }}">Add Role Type</a>
+                <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Add Role Competency</a>
             </div>
         @endif
     </div>

@@ -111,6 +111,7 @@ class RoleTypeController extends Controller
      * @param \App\RoleType $roleType
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Exception
      */
     public function destroy(RoleType $roleType)
     {

@@ -37,12 +37,12 @@ class RoleCompetency extends Model
 
     public function role()
     {
-        $this->belongsTo('App\Role');
+        return $this->belongsTo('App\Role');
     }
 
     public function role_type()
     {
-        $this->hasOne('App\RoleType');
+        return $this->belongsTo('App\RoleType');
     }
 
     public function getControllerDefaults() {

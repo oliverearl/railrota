@@ -18,7 +18,7 @@
 @section('route')
     <div class="row">
         <section class="col-lg-6">
-            @if (!is_null($role->competency_id))
+            @if (!$competencies->isEmpty())
             <p>Make modifications to the current grade here.</p>
             <form action="{{ route('roles.update', $role->id) }}" method="POST" class="form-group">
                 @method('patch')
@@ -41,9 +41,9 @@
                 </div>
             </form>
             @else
-                <p>You need to add competencies to this role.</p>
+                <p>This role type has no set competencies. You need to add one.</p>
                 <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Create Competency</a>
-                <a class="btn btn-danger" href="{{ route('role_types.index') }}">Proceed Anyway</a>
+                <a class="btn btn-danger" href="{{ route('roles.index') }}">Proceed Anyway</a>
             @endif
         </section>
     </div>

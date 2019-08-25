@@ -52,7 +52,11 @@
                         </thead>
                         <tr>
                             <td><a href="{{ route('role_types.show', $role->role_type->id) }}">{{ $role->role_type->name }}</a></td>
-                            <td><a href="{{ route('role_competencies.show', $role->role_competency->id) }}">{{ $role->role_competency->name }}</a></td>
+                            @if (!is_null($role->role_competency))
+                                <td><a href="{{ route('role_competencies.show', $role->role_competency->id) }}">{{ $role->role_competency->name }}</a></td>
+                            @else
+                                <td><em>No Competency Assigned</em></td>
+                            @endif
                             <td><a class="form-group btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a></td>
                             <td>
                                 <form id="delete_role_{{ $role->id }}" action="{{ route('roles.destroy', $role->id) }}" method="POST">
