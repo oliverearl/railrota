@@ -20,20 +20,25 @@
 @endsection
 
 @section('table_content')
-<thead>
-<tr>
-    <td>Competencies</td>
-    <td>Tier</td>
-</tr>
-</thead>
-    <tbody>
-    @foreach ($competencies as $competency)
+    @if (!$competencies->isEmpty())
+        <thead>
         <tr>
-            <td><a href="{{ route('role_competencies.show', $competency->id) }}">{{ $competency->name }}</a></td>
-            <td>{{ $competency->tier }}</td>
+            <td>Competencies</td>
+            <td>Tier</td>
         </tr>
-    @endforeach
-    </tbody>
+        </thead>
+        <tbody>
+        @foreach ($competencies as $competency)
+            <tr>
+                <td><a href="{{ route('role_competencies.show', $competency->id) }}">{{ $competency->name }}</a></td>
+                <td>{{ $competency->tier }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    @else
+        <p>There are no competencies assigned to this role type.</p>
+    @endif
+    <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Add Competency</a>
 @endsection
 
 @section('footer')
