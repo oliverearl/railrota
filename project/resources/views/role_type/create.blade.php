@@ -1,7 +1,7 @@
 @extends('layouts._control')
 
 @php
-    $title = "Adding a new Role Type';
+    $title = 'Adding a new Role Type';
 @endphp
 
 @section('title', $title)
@@ -12,5 +12,38 @@
 @endsection
 
 @section('route')
-    @include('role_type._form')
+            <div class="row">
+                <section class="col-lg-6">
+                    <form action="{{ route('role_types.create', $roleType->id) }}" method="POST" class="form-group">
+                        @csrf()
+                        <div class="form-group @if ($errors->has('name')) has-error @endif">
+                            <label class="" for="name">Name</label>
+                            <input class="form-control"
+                                   type="text"
+                                   name="name"
+                                   id="name"
+                                   minlength="1"
+                                   maxlength="255"
+                                   required
+                                   value="{{ old('name', '') }}"
+                            >
+                        </div>
+
+                        <div class="form-group @if ($errors->has('description')) has-error @endif">
+                            <label class="" for="description">Description</label>
+                            <textarea class="form-control"
+                                      name="description"
+                                      id="description"
+                                      style="resize: none"
+                            >{{ old('description', '') }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-group btn btn-primary" type="submit" value="Submit">
+                        </div>
+                    </form>
+                </section>
+            </div>
+
 @endsection
+
