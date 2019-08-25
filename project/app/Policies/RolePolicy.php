@@ -33,7 +33,8 @@ class RolePolicy
         //
     }
 
-    public function manipulate() {
+    public function manipulate()
+    {
         return Auth::id()->isAdmin();
     }
 }
