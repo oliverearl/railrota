@@ -88,7 +88,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone_home' => 'min:1|max:15|nullable|',
             'phone_work' => 'min:1|max:24|nullable',
-            'phone_mobile' => 'min:1|max:15',
+            'phone_mobile' => 'min:1|max:15|nullable',
             'date_of_last_inspection' => 'date|nullable',
             'is_available' => 'boolean',
             'is_admin' => 'boolean',
