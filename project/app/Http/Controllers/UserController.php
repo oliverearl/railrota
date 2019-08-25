@@ -92,6 +92,7 @@ class UserController extends Controller
             'date_of_last_inspection' => 'date|nullable',
             'is_available' => 'boolean',
             'is_admin' => 'boolean',
+            'notes' => 'min:1:max1024|string|nullable',
         ]);
 
         $user->fill($request->except('password', 'is_available', 'is_admin'));
