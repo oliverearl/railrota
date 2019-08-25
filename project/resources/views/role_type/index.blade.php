@@ -49,6 +49,9 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div class="text-center">
+                    {{ $roleTypes->links() }}
+                </div>
             @endif
         </div>
         @if (Auth::user()->isAdmin())
