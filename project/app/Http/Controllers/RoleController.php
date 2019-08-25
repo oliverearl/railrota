@@ -132,7 +132,7 @@ class RoleController extends Controller
 
         $role->delete();
 
-        flash()->success('Role has been deleted successfully!')->important();
+        flash()->success("Role deleted successfully!")->important();
 
         return redirect()->route('roles.index');
     }
