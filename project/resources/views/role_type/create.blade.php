@@ -14,7 +14,7 @@
 @section('route')
             <div class="row">
                 <section class="col-lg-6">
-                    <form action="{{ route('role_types.create', $roleType->id) }}" method="POST" class="form-group">
+                    <form action="{{ route('role_types.store') }}" method="POST" class="form-group">
                         @csrf()
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <label class="" for="name">Name</label>
