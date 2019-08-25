@@ -48,7 +48,7 @@ class RoleCompetencyController extends Controller
      */
     public function show(RoleCompetency $roleCompetency)
     {
-        //
+        return view ('role_competency.show', compact('roleCompetency'));
     }
 
     /**
