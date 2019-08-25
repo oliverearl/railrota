@@ -25,7 +25,7 @@ class RoleTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('role_type.create', compact('roleType'));
     }
 
     /**
