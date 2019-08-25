@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Roles')
+@php
+    $title = 'Roles';
+@endphp
+@section('title', $title)
 
 @section('content')
     <div class="container">
         <div class="result-set">
+            <h1>{{ $title }}</h1>
                 @if ($roles->isEmpty())
                     <p>No roles are present.</p>
                 @else

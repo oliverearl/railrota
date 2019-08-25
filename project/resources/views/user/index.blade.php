@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@php
+    $title = 'Users';
+@endphp
+@section('title', $title)
 
 @section('content')
 <div class="container">
     <div class="result-set">
+        <h1> {{ $title }}</h1>
         @if ($users->isEmpty())
             <p>No users are present.</p>
         @else
