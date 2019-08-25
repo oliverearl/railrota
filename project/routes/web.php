@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth']], function() {
      * Static pages
      */
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/admin', 'AdminDashboardController@index')->name('admin');
 
     /**
      * Resources

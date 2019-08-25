@@ -8,7 +8,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+            @auth
             {{-- Left Side --}}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -18,10 +18,8 @@
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">Users</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('roles.index')}}" class="nav-link">Roles</a>
-                </li>
             </ul>
+            @endauth
 
             {{-- Right Side --}}
             <ul class="navbar-nav ml-auto">
@@ -41,7 +39,11 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class='dropdown-item' href="{{ route('users.show', Auth::id()) }}">View Profile</a>
                             <a class='dropdown-item' href="{{ route('users.edit', Auth::id()) }}">Edit Profile</a>
+                            @if (Auth::user()->isAdmin())
+                                <a class='dropdown-item' href="{{ route('admin') }}">Admin Dashboard</a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
