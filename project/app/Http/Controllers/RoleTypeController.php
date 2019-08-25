@@ -53,12 +53,15 @@ class RoleTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RoleType  $roleType
+     * @param \App\RoleType $roleType
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(RoleType $roleType)
     {
-        //
+        $this->authorize('manipulate');
+
+        return view('role_type.edit', compact('roleType'));
     }
 
     /**
