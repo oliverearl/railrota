@@ -25,18 +25,32 @@ class RoleTypeController extends Controller
      */
     public function create()
     {
-        return view('role_type.create', compact('roleType'));
+        return view('role_type.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('manipulate');
+
+        $this->validate($request, [
+            'name' => 'required|min:1|max:255|string|unique:role_types,name',
+            'description' => 'min:1|max:1024}string|nullable',
+        ]);
+
+        $roleType = new RoleType();
+        $roleType->fill($request->all());
+        $roleType->save();
+
+        flash()->success("{$roleType->name} has been added successfully!")->important();
+        return redirect()->route('role_types.index');
     }
 
     /**
@@ -80,7 +94,7 @@ class RoleTypeController extends Controller
         $this->authorize('manipulate');
 
         $this->validate($request, [
-           'name' => 'required|min:1|max:255|string|unique:role_types,name',
+            'name' => 'required|min:1|max:255|string|unique:role_types,name,' . $roleType->id,
             'description' => 'min:1|max:1024}string|nullable',
         ]);
 
