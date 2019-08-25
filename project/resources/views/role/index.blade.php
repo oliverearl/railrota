@@ -15,6 +15,7 @@
                     <table class="table table-bordered table-striped table-hover" id="data-table">
                         <thead>
                         <tr>
+                            <th>View</th>
                             @if (Auth::user()->isAdmin())
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -28,6 +29,7 @@
                         <tbody>
                         @foreach ($roles as $role)
                             <tr>
+                                <td><a class="btn btn-secondary" href="{{ route('roles.show', $role->id) }}">View</a></td>
                                 @if (Auth::user()->isAdmin())
                                     <td><a class="btn btn-primary" href=" {{ route('roles.edit', $role->id) }}">Edit</a></td>
                                     <td>
