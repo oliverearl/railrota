@@ -47,7 +47,9 @@ class RoleTypeController extends Controller
      */
     public function show(RoleType $roleType)
     {
-        return view('role_type.show', compact('roleType'));
+        $competencies = $roleType->role_competencies()->get();
+
+        return view('role_type.show', compact('roleType', 'competencies'));
     }
 
     /**
