@@ -27,7 +27,8 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        flash()->warning('Roles cannot be made directly.')->important();
+        return redirect()->back();
     }
 
     /**
@@ -53,7 +54,7 @@ class RoleController extends Controller
         ])->get();
 
         if (!$query->isEmpty()) {
-            flash()->error('This user already has that role.')->important();
+            flash()->error('That role already exists.')->important();
             return redirect()->back();
         }
 
@@ -74,7 +75,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return view('role.show', compact('role'));
     }
 
     /**
