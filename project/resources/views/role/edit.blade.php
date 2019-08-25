@@ -20,8 +20,8 @@
                 @include('layouts._errors')
                 @csrf()
                 <input type="hidden" name="role_type_id" id="role_type_id" value="{{ $role->role_type->id }}" required>
-                <label for="role_competency_id">Role competencies</label>
                 <div class="form-group @if ($errors->has('role_competency_id')) has-error @endif">
+                    <label for="role_competency_id">Role competencies</label>
                     <select name="role_competency_id" id="role_competency_id" class="form-control" required>
                         @foreach($competencies as $competency)
                                 <option value="{{ $competency->id }}"

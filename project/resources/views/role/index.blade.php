@@ -37,7 +37,7 @@
                                 @endif
                                 <td>{{ $role->user->name }}</td>
                                 <td>{{ $role->user->surname }}</td>
-                                <td>{{ $role->role_type->name }}</td>
+                                <td><a href="{{ route('role_types.show', $role->role_type->id) }}">{{ $role->role_type->name }}</a></td>
                                 @if (is_null($role->role_competency))
                                     <td><em>No Competency Assigned</em></td>
                                 @else
