@@ -97,11 +97,19 @@ class RoleCompetencyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RoleCompetency  $roleCompetency
+     * @param \App\RoleCompetency $roleCompetency
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Exception
      */
     public function destroy(RoleCompetency $roleCompetency)
     {
-        //
+        $this->authorize('manipulate');
+
+        $roleCompetency->delete();
+
+        flash()->success('Role Competency deleted successfully!')->important();
+
+        return redirect()->route('role_competencies.index');
     }
 }
