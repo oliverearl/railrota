@@ -15,7 +15,8 @@ class RoleCompetencyController extends Controller
      */
     public function index()
     {
-        //
+        $roleCompetencies = RoleCompetency::latest()->paginate();
+        return view('role_competency.index', compact('roleCompetencies'));
     }
 
     /**
