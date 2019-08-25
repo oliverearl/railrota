@@ -42,7 +42,7 @@
                                 </td>
                             @endif
                             <td>{{ $roleCompetency->name }}</td>
-                            <td><a href="{{ route('role_type.show', $roleCompetency->role_type->id) }}">{{ $roleCompetency->role_type->name }}</a></td>
+                            <td><a href="{{ route('role_types.show', $roleCompetency->role_type->id) }}">{{ $roleCompetency->role_type->name }}</a></td>
                             <td>{{ $roleCompetency->tier }}</td>
                             @if (is_null($roleCompetency->updated_at))
                                 <td><em>Unknown</em></td>
