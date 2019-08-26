@@ -10,7 +10,8 @@ class RoleCompetency extends Model
     protected $fillable = [
         'role_type_id',
         'name',
-        'description'
+        'description',
+        'tier',
     ];
 
     protected $defaultGrades = [

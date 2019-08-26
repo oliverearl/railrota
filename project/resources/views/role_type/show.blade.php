@@ -38,7 +38,9 @@
     @else
         <p>There are no competencies assigned to this role type.</p>
     @endif
-    <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Add Competency</a>
+    @if (Auth::user()->isAdmin())
+        <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Add Competency</a>
+    @endif
 @endsection
 
 @section('footer')
