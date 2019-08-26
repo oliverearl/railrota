@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $time = Carbon::now();
         // Insert myself first
         DB::table('users')->insert([
             'name' =>                       'Oliver',
@@ -24,7 +25,9 @@ class UserSeeder extends Seeder
             'is_available' =>               true,
             'is_admin' =>                   true,
             'notes' =>                      'Pretty cool guy and doesn\'t afraid of anything.',
-            'date_of_last_inspection' =>    Carbon::now(),
+            'date_of_last_inspection' =>    $time,
+            'created_at' =>                 $time,
+            'updated_at' =>                 $time,
         ]);
         // Generate users
         factory(App\User::class, 20)->create();
