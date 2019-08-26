@@ -14,7 +14,6 @@
 @section('route')
     <div class="row">
         <section class="col-lg-6">
-            <p>Make modifications to this locomotive here.</p>
             <form action="{{ route('powered_locomotives.store') }}" method="POST" class="form-group">
                 @csrf()
                 <div class="form-group @if ($errors->has('name')) has-error @endif">
