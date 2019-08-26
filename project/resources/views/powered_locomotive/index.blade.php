@@ -16,8 +16,8 @@
                 <table class="table table-bordered table-striped table-hover" id="data-table">
                     <thead>
                     <tr>
+                        <th>View</th>
                         @if (Auth::user()->isAdmin())
-                            <th>View</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         @endif
@@ -28,8 +28,8 @@
                     <tbody>
                     @foreach ($poweredLocomotives as $poweredLocomotive)
                         <tr>
+                            <td><a class="btn btn-secondary" href=" {{ route('powered_locomotives.show', $poweredLocomotive->id) }}">View</a></td>
                             @if (Auth::user()->isAdmin())
-                                <td><a class="btn btn-secondary" href=" {{ route('powered_locomotives.show', $poweredLocomotive->id) }}">View</a></td>
                                 <td><a class="btn btn-primary" href=" {{ route('powered_locomotives.edit', $poweredLocomotive->id) }}">Edit</a></td>
                                 <td>
                                     <form action="{{ route('powered_locomotives.destroy', $poweredLocomotive->id) }}" method="POST" style="display:inline">

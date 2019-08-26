@@ -20,20 +20,20 @@
 @endsection
 
 @section('table_content')
-        <thead>
-        <tr>
-            <td>Name</td>
-            <td>Last Updated</td>
-        </tr>
-        </thead>
-        <tbody>
-            <td>{{ $poweredLocomotive->name }}</td>
-            @if (is_null($poweredLocomotive->created_at))
-                <td><em>Unknown</em></td>
-            @else
-                <td>{{ $poweredLocomotive->created_at->format('d/m/Y') }}</td>
-            @endif
-        </tbody>
+    <thead>
+    <tr>
+        <td>Name</td>
+        <td>Last Updated</td>
+    </tr>
+    </thead>
+    <tbody>
+    <td>{{ $poweredLocomotive->name }}</td>
+    @if (is_null($poweredLocomotive->created_at))
+        <td><em>Unknown</em></td>
+    @else
+        <td>{{ $poweredLocomotive->created_at->format('d/m/Y') }}</td>
+    @endif
+    </tbody>
 @endsection
 
 @section('footer')
