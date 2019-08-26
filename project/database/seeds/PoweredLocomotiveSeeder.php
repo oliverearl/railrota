@@ -18,7 +18,7 @@ class PoweredLocomotiveSeeder extends Seeder
         $time = Carbon::now();
 
         foreach ($locomotives->getDefaultLocomotives() as $locomotive) {
-            DB::table('role_types')->insert([
+            DB::table('powered_locomotives')->insert([
                 'name'          => $locomotive,
                 'description'   => "{$locomotive} description",
                 'created_at'    => $time,
