@@ -10,4 +10,15 @@ class PoweredLocomotive extends Model
         'name',
         'description'
     ];
+
+    protected $defaultLocomotives = [
+        'No. 5',
+        'No. 6',
+        'No. 9',
+        'No. 11',
+    ];
+
+    public function getDefaultLocomotives() {
+        return $this->defaultLocomotives;
+    }
 }
