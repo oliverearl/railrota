@@ -95,7 +95,7 @@ class PoweredLocomotiveController extends Controller
         $this->authorize('manipulate');
 
         $this->validate($request, [
-            'name' => 'required|min:1|max:255|string|unique:role_types,name,' . $poweredLocomotive->id,
+            'name' => 'required|min:1|max:255|string|unique:powered_locomotives,name,' . $poweredLocomotive->id,
             'description' => 'min:1|max:1024|string|nullable',
         ]);
 
