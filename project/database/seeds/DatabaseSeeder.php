@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             RoleCompetencySeeder::class,
             UserSeeder::class,
             PoweredLocomotiveSeeder::class,
+            SteamLocomotiveSeeder::class,
         ]);
     }
 }
