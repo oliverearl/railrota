@@ -16,8 +16,8 @@
                 <table class="table table-bordered table-striped table-hover" id="data-table">
                     <thead>
                     <tr>
+                        <th>View</th>
                         @if (Auth::user()->isAdmin())
-                            <th>View</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         @endif
@@ -28,8 +28,8 @@
                     <tbody>
                     @foreach ($roleTypes as $roleType)
                         <tr>
+                            <td><a class="btn btn-secondary" href=" {{ route('role_types.show', $roleType->id) }}">View</a></td>
                             @if (Auth::user()->isAdmin())
-                                <td><a class="btn btn-secondary" href=" {{ route('role_types.show', $roleType->id) }}">View</a></td>
                                 <td><a class="btn btn-primary" href=" {{ route('role_types.edit', $roleType->id) }}">Edit</a></td>
                                 <td>
                                     <form action="{{ route('role_types.destroy', $roleType->id) }}" method="POST" style="display:inline">
