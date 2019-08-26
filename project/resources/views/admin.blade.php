@@ -47,8 +47,8 @@
         <div class="col-6 col-md">
             <h2>Locations</h2>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">View Locations</a></li>
-                <li><a class="text-muted" href="#">Add a Location</a></li>
+                <li><a class="text-muted" href="{{ route('locations.index') }}">View Locations</a></li>
+                <li><a class="text-muted" href="{{ route('locations.create') }}">Add a Location</a></li>
             </ul>
         </div>
         <div class="col-6 col-md">
