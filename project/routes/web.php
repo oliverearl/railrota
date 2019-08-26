@@ -38,4 +38,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', 'RoleController');
     Route::resource('role_types', 'RoleTypeController');
     Route::resource('role_competencies', 'RoleCompetencyController');
+    Route::resource('powered_locomotives', 'PoweredLocomotiveController');
 });
