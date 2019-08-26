@@ -14,7 +14,8 @@ class PoweredLocomotiveController extends Controller
      */
     public function index()
     {
-        return view('powered_locomotive.index');
+        $poweredLocomotives = PoweredLocomotive::latest()->paginate();
+        return view('powered_locomotive.index', compact('poweredLocomotives'));
     }
 
     /**
@@ -52,7 +53,7 @@ class PoweredLocomotiveController extends Controller
         $poweredLocomotive->save();
 
         flash()->success("{$poweredLocomotive->name} has been added successfully!")->important();
-        return redirect()->route('powered_locomotive.index');
+        return redirect()->route('powered_locomotives.index');
     }
 
     /**
@@ -102,7 +103,7 @@ class PoweredLocomotiveController extends Controller
         $poweredLocomotive->save();
 
         flash()->success("{$poweredLocomotive->name} has been updated successfully!")->important();
-        return redirect()->route('powered_locomotive.index');
+        return redirect()->route('powered_locomotives.index');
     }
 
     /**
@@ -121,6 +122,6 @@ class PoweredLocomotiveController extends Controller
 
         flash()->success("Locomotive deleted successfully!")->important();
 
-        return redirect()->route('powered_locomotive.index');
+        return redirect()->route('powered_locomotives.index');
     }
 }
