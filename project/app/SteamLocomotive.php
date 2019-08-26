@@ -16,7 +16,8 @@ class SteamLocomotive extends Model
         'No 10',
     ];
 
-    public function getDefaultLocomotives() {
+    public function getDefaultLocomotives()
+    {
         return $this->defaultLocomotives;
     }
 }

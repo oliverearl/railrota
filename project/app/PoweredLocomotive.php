@@ -18,7 +18,8 @@ class PoweredLocomotive extends Model
         'No. 11',
     ];
 
-    public function getDefaultLocomotives() {
+    public function getDefaultLocomotives()
+    {
         return $this->defaultLocomotives;
     }
 }
