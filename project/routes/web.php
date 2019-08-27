@@ -41,4 +41,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('powered_locomotives', 'PoweredLocomotiveController');
     Route::resource('steam_locomotives', 'SteamLocomotiveController');
     Route::resource('locations', 'LocationController');
+    Route::resource('operations', 'OperationController');
+
+    /**
+     * Additional non-CRUD Operations Routes
+     */
+    Route::get('/operations/glance', 'OperationController@glance')->name('operations.glance');
+    Route::get('/operations/pdf', 'OperationController@pdf')->name('operations.pdf');
 });
