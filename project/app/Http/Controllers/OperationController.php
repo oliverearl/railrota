@@ -21,7 +21,7 @@ class OperationController extends Controller
 
     public function glance()
     {
-        $operations = Operation::latest()->paginate();
+        $operations = Operation::orderBy('date', 'desc')->paginate();
         return view('operation.glance', compact('operations'));
     }
 
@@ -84,7 +84,7 @@ class OperationController extends Controller
      */
     public function show(Operation $operation)
     {
-        //
+        return view('operation.show', compact('operation'));
     }
 
     /**

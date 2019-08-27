@@ -1,7 +1,7 @@
 @extends('layouts._control')
 
 @php
-    $title = "Editing {$operation->name} Operation" ?: 'Editing Operation';
+    $title = 'Editing Operation';
 @endphp
 
 @section('title', $title)
