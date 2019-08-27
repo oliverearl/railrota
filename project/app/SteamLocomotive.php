@@ -13,7 +13,7 @@ class SteamLocomotive extends Model
 
     protected $defaultLocomotives = [
         'No. 7',
-        'No 10',
+        'No. 10',
     ];
 
     public function getDefaultLocomotives()
