@@ -132,7 +132,7 @@ class OperationController extends Controller
 
         $operation->save();
 
-        $date = Carbon::parse($operation->date)->format('d-m-y');
+        $date = Carbon::parse($operation->date)->format('d/m/y');
         flash()->success("Operation {$date} has been updated successfully!")->important();
         return redirect()->route('operations.index');
     }
