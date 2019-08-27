@@ -46,13 +46,18 @@
                                     <div role="tabpanel" class="tab-pane active" id="operation_{{ $operation->id }}_overview">
                                         @if ($operation->is_running)
                                             <h3>Shifts</h3>
-                                            <ul>
-                                                <li>Shift 1</li>
-                                                <li>Shift 2</li>
-                                                <li>Shift 3</li>
-                                            </ul>
+                                            @if ($operation->operation_shifts->isEmpty())
+                                                <p><em>There are no shifts assigned to this operation.</em></p>
+                                            @else
+                                                <p>There are {{ $operation->operation_shifts->count() }} shifts assigned to this operation.</p>
+                                                <ul>
+                                                    @foreach ($operation->operation_shifts as $shift)
+                                                        <li><a href="#operation_{{ $operation->id }}__{{ $shift->id }}">{{ $shift->role_type->name }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                             <h3>Notes</h3>
-                                            @if(is_null($operation->is_null))
+                                            @if (is_null($operation->is_null))
                                                 <p><em>There are no notes for this operation.</em></p>
                                             @else
                                                 <p>{{ $operation->notes }}</p>
@@ -78,12 +83,12 @@
                                                     @endif
                                                     <li>It requires a grade of <a href="{{ route('role_competencies.show', $shift->role_competency_id) }}">{{ $shift->role_competency->name }}</a> (tier {{ $shift->role_competency->tier }}) or above to fulfill.</li>
                                                     @if (!is_null($shift->steam_locomotive_id))
-                                                            <li>This shift covers <a href="{{ route('steam_locomotives.show', $shift->steam_locomotive_id) }}">{{ $shift->steam_locomotive->name }}</a></li>
+                                                        <li>This shift covers <a href="{{ route('steam_locomotives.show', $shift->steam_locomotive_id) }}">{{ $shift->steam_locomotive->name }}</a></li>
                                                     @elseif (!is_null($shift->powered_locomotive_id))
-                                                            <li>This shift covers <a href="{{ route('powered_locomotives.show', $shift->powered_locomotive_id) }}">{{ $shift->powered_locomotive->name }}</a></li>
+                                                        <li>This shift covers <a href="{{ route('powered_locomotives.show', $shift->powered_locomotive_id) }}">{{ $shift->powered_locomotive->name }}</a></li>
                                                     @endif
                                                     @if (!is_null($shift->location_id))
-                                                            <li>This shift is located at <a href="{{ route('locations.show', $shift->location_id) }}">{{ $shift->location->name }}</a></li>
+                                                        <li>This shift is located at <a href="{{ route('locations.show', $shift->location_id) }}">{{ $shift->location->name }}</a></li>
                                                     @endif
                                                 </ul>
                                                 <div class="page-action mb-sm-3">
@@ -101,7 +106,7 @@
                                                         </form>
                                                     @endif
                                                 </div>
-                                                    @if (Auth::user()->isAdmin())
+                                                @if (Auth::user()->isAdmin())
                                                     <div class="page-action mb-sm-3">
                                                         <h4>Shift Controls</h4>
                                                         <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}">Add Shift</a>
@@ -111,8 +116,8 @@
                                                             @method('delete')
                                                             <button type="submit" class="btn btn-sm btn-danger">Delete Shift</button>
                                                         </form>
-                                                </div>
-                                                    @endif
+                                                    </div>
+                                                @endif
 
                                             </div>
                                         @endforeach
@@ -120,7 +125,7 @@
                                     @else
                                         <p class="text-danger"><strong>This operation has been cancelled.</strong></p>
                                         @if (Auth::user()->isAdmin())
-                                            <a class="btn btn-sm btn-primary" href="#">Reinstate Operation</a>
+                                            <a class="btn btn-sm btn-primary" href="{{ route('operations.edit', $operation->id) }}">Reinstate Operation</a>
                                         @endif
                                     @endif
                                 </div>
