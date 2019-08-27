@@ -14,7 +14,7 @@ class RoleTypeController extends Controller
      */
     public function index()
     {
-        $roleTypes = RoleType::latest()->paginate();
+        $roleTypes = RoleType::orderBy('name', 'asc')->paginate();
         return view('role_type.index', compact('roleTypes'));
     }
 

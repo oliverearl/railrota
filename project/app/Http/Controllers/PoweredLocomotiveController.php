@@ -14,7 +14,7 @@ class PoweredLocomotiveController extends Controller
      */
     public function index()
     {
-        $poweredLocomotives = PoweredLocomotive::latest()->paginate();
+        $poweredLocomotives = PoweredLocomotive::orderBy('name', 'asc')->paginate();
         return view('powered_locomotive.index', compact('poweredLocomotives'));
     }
 
