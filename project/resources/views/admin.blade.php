@@ -54,8 +54,10 @@
         <div class="col-6 col-md">
             <h2>Operations</h2>
             <ul class="list-unstyled text-small">
-                <li><a class="text-muted" href="#">Create an Operation</a></li>
-                <li><a class="text-muted" href="#">View Operations</a></li>
+                <li><a class="text-muted" href="{{ route('operations.index') }}">Create an Operation</a></li>
+                <li><a class="text-muted" href="{{ route('operations.create') }}">Add an Operations</a></li>
+                <li><a class="text-muted" href="{{ route('operations.glance') }}">Glance View</a></li>
+                <li><a class="text-muted" href="{{ route('operations.pdf') }}">Export PDF</a></li>
             </ul>
         </div>
     </div>
