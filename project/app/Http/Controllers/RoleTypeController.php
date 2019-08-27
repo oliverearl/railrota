@@ -45,7 +45,7 @@ class RoleTypeController extends Controller
 
         $this->validate($request, [
             'name' => 'required|min:1|max:255|string|unique:role_types,name',
-            'description' => 'min:1|max:1024}string|nullable',
+            'description' => 'min:1|max:1024|string|nullable',
         ]);
 
         $roleType = new RoleType();
