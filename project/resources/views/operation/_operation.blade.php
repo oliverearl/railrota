@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <div class="card">
             <header class="card-header">
-                <h2>{{ \Carbon\Carbon::parse($operation->date)->toFormattedDateString() }}</h2>
+                <h2><a href="{{ route('operations.show', $operation->id) }}">{{ \Carbon\Carbon::parse($operation->date)->toFormattedDateString() }}</a></h2>
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#operation_{{ $operation->id }}_overview">Overview</a>
