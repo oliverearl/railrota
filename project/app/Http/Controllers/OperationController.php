@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Operation;
+use Barryvdh\DomPDF\Facade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,14 @@ class OperationController extends Controller
 
     public function pdf()
     {
-        // TODO: Complete PDF functionality
-        // This is just a template for now, but will be filled out later
+        $operations = Operation::orderBy('date', 'desc')->get();
+        $filename = Carbon::now()->format('ymd') . '_operations.pdf';
 
-        // $filename = Carbon::now()->format('ymd') . '_operations.pdf'
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.operations', compact('operations'));
+        $pdf->save(storage_path() . '/' . $filename);
 
-        // $operations = Operations::get();
-        // $pdf = PDF::loadView('operation.pdf', $operations);
-        // $pdf->save(storage_path() . $filename);
-        // return $pdf->download($filename);
+        return $pdf->download($filename);
     }
 
     /**
