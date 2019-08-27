@@ -14,7 +14,7 @@ class SteamLocomotiveController extends Controller
      */
     public function index()
     {
-        $steamLocomotives = SteamLocomotive::latest()->paginate();
+        $steamLocomotives = SteamLocomotive::orderBy('name', 'asc')->paginate();
         return view('steam_locomotive.index', compact('steamLocomotives'));
     }
 

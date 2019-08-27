@@ -13,11 +13,16 @@ class SteamLocomotive extends Model
 
     protected $defaultLocomotives = [
         'No. 7',
-        'No 10',
+        'No. 10',
     ];
 
     public function getDefaultLocomotives()
     {
         return $this->defaultLocomotives;
+    }
+
+    public function operation_shifts()
+    {
+        return $this->hasMany('App\OperationShift');
     }
 }

@@ -12,8 +12,7 @@
             {{-- Left Side --}}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    {{-- TODO: Reminder to fill in navigation links as application develops. --}}
-                    <a href="#" class="nav-link">Operations</a>
+                    <a href="{{ route('operations.index') }}" class="nav-link">Operations</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">Users</a>

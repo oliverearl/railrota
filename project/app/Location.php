@@ -20,4 +20,9 @@ class Location extends Model
     {
         return $this->defaultLocations;
     }
+
+    public function operation_shifts()
+    {
+        return $this->hasMany('App\OperationShift');
+    }
 }

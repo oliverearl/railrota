@@ -46,23 +46,33 @@ class RoleCompetency extends Model
         return $this->belongsTo('App\RoleType');
     }
 
-    public function getControllerDefaults() {
+    public function operation_shifts()
+    {
+        return $this->hasMany('App\OperationShift');
+    }
+
+    public function getControllerDefaults()
+    {
         return $this->defaultGrades;
     }
 
-    public function getGuardDefaults() {
+    public function getGuardDefaults()
+    {
         return $this->defaultGrades;
     }
 
-    public function getBlockmanDefaults() {
+    public function getBlockmanDefaults()
+    {
         return $this->defaultGrades;
     }
 
-    public function getPoweredDefaults() {
+    public function getPoweredDefaults()
+    {
         return $this->defaultPoweredDriverGrades;
     }
 
-    public function getSteamDefaults() {
+    public function getSteamDefaults()
+    {
         return $this->defaultSteamDriverGrades;
     }
 }

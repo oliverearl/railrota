@@ -22,4 +22,9 @@ class PoweredLocomotive extends Model
     {
         return $this->defaultLocomotives;
     }
+
+    public function operation_shifts()
+    {
+        return $this->hasMany('App\OperationShift');
+    }
 }
