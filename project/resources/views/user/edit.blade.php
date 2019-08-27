@@ -28,6 +28,7 @@
                         <label for="role_types">Role types</label>
                         <select name="role_types" id="role_types" class="form-control">
                             {{-- TODO: I really don't like this. Refactor when you have a better way. --}}
+                            {{-- TODO: Update from 27/8/19 - I know how to fix this now, but it'll have to wait --}}
                             @foreach (App\RoleType::all() as $type)
                                 <option value="{{$type->id}}">{{ $type->name }}</option>
                             @endforeach
