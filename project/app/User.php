@@ -53,19 +53,28 @@ class User extends Authenticatable
         'date_of_last_inspection' => 'date',
     ];
 
-    public function roles() {
+    public function roles()
+    {
         return $this->hasMany('App\Role');
     }
 
-    public function isAdmin() {
+    public function operation_shifts()
+    {
+        return $this->hasMany('App\OperationShift');
+    }
+
+    public function isAdmin()
+    {
         return $this->is_admin;
     }
 
-    public function isMyself(User $user) {
+    public function isMyself(User $user)
+    {
         return $this-> id === $user->id;
     }
 
-    public static function getUser($id) {
+    public static function getUser($id)
+    {
         return User::findOrDie($id);
     }
 }

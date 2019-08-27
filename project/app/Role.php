@@ -12,15 +12,18 @@ class Role extends Model
         'role_competency_id'
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo('App\User');
     }
 
-    public function role_type() {
+    public function role_type()
+    {
         return $this->belongsTo('App\RoleType');
     }
 
-    public function role_competency() {
+    public function role_competency()
+    {
         return $this->belongsTo('App\RoleCompetency', 'role_competency_id');
     }
 }
