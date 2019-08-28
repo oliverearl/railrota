@@ -32,7 +32,7 @@
                                 </ul>
                             @endif
                             <h3>Notes</h3>
-                            @if (is_null($operation->is_null))
+                            @if (is_null($operation->notes))
                                 <p><em>There are no notes for this operation.</em></p>
                             @else
                                 <p>{{ $operation->notes }}</p>
