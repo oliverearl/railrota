@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class OperationShift extends Model
 {
     protected $fillable = [
-        'operation_id',
         'user_id',
         'role_type_id',
         'role_competency_id',
@@ -17,9 +16,27 @@ class OperationShift extends Model
         'notes',
     ];
 
+    /**
+     * TODO: This method is awful and needs to be recycled.
+     * Why would anyone in their right mind need this much data?
+     * Well, it's because of time constraints.
+     */
+    public static function getData()
+    {
+        return [
+            'users' => User::all(['id', 'name', 'surname', 'is_available']),
+            'role_types' => RoleType::all(['id', 'name']),
+            // TODO: Refactor when competencies become a subset of role types
+            //'role_competencies' => RoleCompetency::all(['id', 'name', 'role_type_id']),
+            'locations' => Location::all(['id', 'name']),
+            'steam_locomotives' => SteamLocomotive::all(['id', 'name']),
+            'powered_locomotives' => PoweredLocomotive::all(['id', 'name']),
+        ];
+    }
+
     public function operation()
     {
-        return $this->belongsTo('App\Operation');
+        return $this->belongsTo('App\Operation', 'operation_id');
     }
 
     public function user()
