@@ -55,8 +55,9 @@
                                     @endif
                                     @if (is_null($shift->role_competency_id))
                                         <li><em>No grade / competency requirement was specified.</em></li>
+                                    @else
+                                        <li>It requires a grade of <a href="{{ route('role_competencies.show', $shift->role_competency_id) }}">{{ $shift->role_competency->name }}</a> (tier {{ $shift->role_competency->tier }}) or above to fulfill.</li>
                                     @endif
-                                    <li>It requires a grade of <a href="{{ route('role_competencies.show', $shift->role_competency_id) }}">{{ $shift->role_competency->name }}</a> (tier {{ $shift->role_competency->tier }}) or above to fulfill.</li>
                                     @if (!is_null($shift->steam_locomotive_id))
                                         <li>This shift covers <a href="{{ route('steam_locomotives.show', $shift->steam_locomotive_id) }}">{{ $shift->steam_locomotive->name }}</a></li>
                                     @elseif (!is_null($shift->powered_locomotive_id))
