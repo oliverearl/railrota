@@ -39,8 +39,8 @@ Route::group(['middleware' => ['auth']], function() {
      */
     Route::get('/operations/glance', 'OperationController@glance')->name('operations.glance');
     Route::get('/operations/pdf', 'OperationController@pdf')->name('operations.pdf');
-    Route::patch('/operations/{id}/shifts/{id}/register', 'OperationShiftController@register')->name('operations.shifts.register');
-    Route::patch('/operations/{id}/shifts/{id}/deregister', 'OperationShiftController@deregister')->name('operations.shifts.deregister');
+    Route::patch('/operations/{operation_id}/shifts/{shift_id}/register', 'OperationShiftController@register')->name('operations.shifts.register');
+    Route::patch('/operations/{operation_id}/shifts/{shift_id}/deregister', 'OperationShiftController@deregister')->name('operations.shifts.deregister');
 
     /**
      * Resources
