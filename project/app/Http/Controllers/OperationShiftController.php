@@ -16,7 +16,7 @@ class OperationShiftController extends Controller
      */
     public function index(Operation $operation)
     {
-        //
+        return redirect()->route('operations.index');
     }
 
     /**
@@ -24,10 +24,13 @@ class OperationShiftController extends Controller
      *
      * @param Operation $operation
      * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create(Operation $operation)
     {
-        //
+        $this->authorize('create');
+
+        return view('shift.create', compact('operation'));
     }
 
     /**
@@ -51,7 +54,7 @@ class OperationShiftController extends Controller
      */
     public function show(Operation $operation, OperationShift $operationShift)
     {
-        //
+        return redirect()->route('operations.show', $operation->id);
     }
 
     /**
@@ -60,10 +63,13 @@ class OperationShiftController extends Controller
      * @param Operation $operation
      * @param \App\OperationShift $operationShift
      * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Operation $operation, OperationShift $operationShift)
     {
-        //
+        $this->authorize('edit');
+
+        return view ('shift.edit', compact('operation', 'operationShift'));
     }
 
     /**
@@ -85,9 +91,17 @@ class OperationShiftController extends Controller
      * @param Operation $operation
      * @param \App\OperationShift $operationShift
      * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Exception
      */
     public function destroy(Operation $operation, OperationShift $operationShift)
     {
-        //
+        $this->authorize('destroy');
+
+        $operationShift->delete();
+
+        flash()->success('Shift deleted successfully!')->important();
+
+        return redirect()->route('operations.show', $operation->id);
     }
 }
