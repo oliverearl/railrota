@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feature;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -24,11 +24,10 @@ class UsersTest extends TestCase
         $this->admin = factory('App\User')->create(['is_admin' => 1]);
     }
 
-    /** @test */
     /**
      * Check to see whether basic auth is working and users cannot be seen.
      */
-    public function a_guest_cannot_view_all_the_users()
+    public function test_a_guest_cannot_view_all_the_users()
     {
         $response = $this->get(route('users.index'));
 
@@ -40,8 +39,7 @@ class UsersTest extends TestCase
      * Tests whether a user can view the user index. This is viewable by all
      * authenticated users.
      */
-    /** @test */
-    public function a_user_can_view_all_the_users()
+    public function test_a_user_can_view_all_the_users()
     {
         $this->actingAs($this->user);
 
@@ -56,8 +54,7 @@ class UsersTest extends TestCase
      * Both their own, and other users' profiles are viewable by
      * all user tiers.
      */
-    /** @test */
-    public function a_user_can_view_a_user()
+    public function test_a_user_can_view_a_user()
     {
         $this->actingAs($this->user);
 
@@ -71,8 +68,7 @@ class UsersTest extends TestCase
      * Checks to ensure that non-administrator users cannot
      * create new users themselves.
      */
-    /** @test */
-    public function a_user_cannot_store_a_user()
+    public function test_a_user_cannot_store_a_user()
     {
         $this->actingAs($this->user);
 
@@ -86,8 +82,7 @@ class UsersTest extends TestCase
     /**
      * Checks to ensure whether users can update their own profiles.
      */
-    /** @test */
-    public function a_user_can_update_themselves()
+    public function test_a_user_can_update_themselves()
     {
         $this->actingAs($this->user);
 
@@ -104,8 +99,7 @@ class UsersTest extends TestCase
      *
      * A complete new user is generated to test this due to some RNG issues.
      */
-    /** @test */
-    public function a_user_cannot_give_themselves_administrative_privileges()
+    public function test_a_user_cannot_give_themselves_administrative_privileges()
     {
         $user = factory('App\User')->create();
         $this->actingAs($user);
@@ -124,8 +118,7 @@ class UsersTest extends TestCase
      * Like the last test, the validation that has been set up is awful, so this builds
      * its own user, just in case.
      */
-    /** @test */
-    public function a_user_cannot_modify_their_own_date_of_last_inspection()
+    public function test_a_user_cannot_modify_their_own_date_of_last_inspection()
     {
         $user = factory('App\User')->create();
         $this->actingAs($user);
@@ -142,8 +135,7 @@ class UsersTest extends TestCase
      * Checks to ensure that users cannot modify other users' profiles.
      * Only administrators can do that.
      */
-    /** @test */
-    public function a_user_cannot_update_a_different_user()
+    public function test_a_user_cannot_update_a_different_user()
     {
         $this->actingAs($this->user);
 
@@ -160,8 +152,7 @@ class UsersTest extends TestCase
      * Checks to ensure that users cannot access destroy functionality on users.
      * Regardless of whether themselves, or another user.
      */
-    /** @test */
-    public function a_user_cannot_destroy_a_user()
+    public function test_a_user_cannot_destroy_a_user()
     {
         $this->actingAs($this->user);
 
@@ -176,8 +167,7 @@ class UsersTest extends TestCase
      * Checks to ensure that administrators can create new users.
      * This can be used in addition with the usual site registration functionality.
      */
-    /** @test */
-    public function an_admin_can_store_a_user()
+    public function test_an_admin_can_store_a_user()
     {
         $this->actingAs($this->admin);
 
@@ -193,8 +183,7 @@ class UsersTest extends TestCase
      * Checks to ensure that admins can modify other users, in addition to their
      * own profiles.
      */
-    /** @test */
-    public function an_admin_can_update_a_user()
+    public function test_an_admin_can_update_a_user()
     {
         $this->actingAs($this->admin);
 
@@ -211,8 +200,7 @@ class UsersTest extends TestCase
      * Admins can delete other users, and this checks to ensure
      * that this functionality is intact.
      */
-    /** @test */
-    public function an_admin_can_destroy_a_user()
+    public function test_an_admin_can_destroy_a_user()
     {
         $this->actingAs($this->admin);
 
@@ -227,8 +215,7 @@ class UsersTest extends TestCase
      * Although administrators can delete other users, they should not
      * be able to delete themselves. They can delete other admins, however.
      */
-    /** @test */
-    public function an_admin_cannot_destroy_themselves()
+    public function test_an_admin_cannot_destroy_themselves()
     {
         $this->actingAs($this->admin);
 
