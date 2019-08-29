@@ -20,6 +20,19 @@
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link"><i class="fas fa-users"></i> Users</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a id="dataDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fas fa-table"></i> Data<span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dataDropdown">
+                        <a class='dropdown-item' href="{{ route('roles.index') }}"><i class="fas fa-user-tag"></i> Roles</a>
+                        <a class='dropdown-item' href="{{ route('role_types.index') }}"><i class="fas fa-user-md"></i> Role Types</a>
+                        <a class='dropdown-item' href="{{ route('role_competencies.index') }}"><i class="fas fa-graduation-cap"></i> Role Competencies</a>
+                        <a class='dropdown-item' href="{{ route('locations.index') }}"><i class="fas fa-map-signs"></i> Locations</a>
+                        <a class='dropdown-item' href="{{ route('steam_locomotives.index') }}"><i class="fas fa-train"></i> Steam Locomotives</a>
+                        <a class='dropdown-item' href="{{ route('powered_locomotives.index') }}"><i class="fas fa-bolt"></i> Diesel and Electric Locomotives</a>
+                    </div>
+                </li>
             </ul>
             @endauth
 
