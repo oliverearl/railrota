@@ -24,7 +24,8 @@ class RoleType extends Model
         'Guard',
         'Blockman',
         'Driver - Diesel and Electric',
-        'Driver - Steam Locomotive'
+        'Driver - Steam Locomotive',
+        'Museum Staff',
     ];
 
     /**
