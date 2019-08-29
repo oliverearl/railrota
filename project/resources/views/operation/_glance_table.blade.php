@@ -53,7 +53,11 @@
                                     @if (\Carbon\Carbon::today() > $operationDate || !$operation->is_running)
                                         <li><em>Unfulfilled</em></li>
                                     @else
-                                        <li><a href="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}">Vacant</a></li>
+                                        <form action="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
+                                            @csrf()
+                                            @method('patch')
+                                            <button type="submit" class="btn btn-outline-primary">Vacant</button>
+                                        </form>
                                     @endif
                                 @else
                                     <li><a href="{{ route('users.show', $shift->user->id) }}">{{ $shift->user->name }} {{ $shift->user->surname }}</a></li>
