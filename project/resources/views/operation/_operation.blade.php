@@ -44,6 +44,10 @@
                             @endif
                     </div>
                     @if (!$operation->operation_shifts->isEmpty())
+                        @php
+                            $today = \Carbon\Carbon::today();
+                            $operationDate = \Carbon\Carbon::parse($operation->date);
+                        @endphp
                         @foreach($operation->operation_shifts as $shift)
                             <div role="tabpanel" class="tab-pane border-secondary" id="operation_{{ $operation->id }}__{{ $shift->id }}">
                                 <h3>{{ $shift->role_type->name }}</h3>
@@ -67,19 +71,27 @@
                                         <li>This shift is located at <a href="{{ route('locations.show', $shift->location_id) }}">{{ $shift->location->name }}</a></li>
                                     @endif
                                 </ul>
+                                <h3>Notes</h3>
+                                @if (is_null($shift->notes))
+                                    <p><em>There are no notes for this shift.</em></p>
+                                @else
+                                    <p>{{ $shift->notes }}</p>
+                                @endif
                                 <div class="page-action mb-sm-3">
-                                    @if (is_null($shift->user_id))
-                                        <form action="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
-                                            @csrf()
-                                            @method('patch')
-                                            <button type="submit" class="btn btn-outline-primary">Volunteer for this Shift</button>
-                                        </form>
-                                    @elseif ($shift->user_id === Auth::id())
-                                        <form action="{{ route('operations.shifts.deregister', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
-                                            @csrf()
-                                            @method('patch')
-                                            <button type="submit" class="btn btn-outline-primary">Pull out of this Shift</button>
-                                        </form>
+                                    @if ($today <= $operationDate)
+                                        @if (is_null($shift->user_id))
+                                            <form action="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
+                                                @csrf()
+                                                @method('patch')
+                                                    <button type="submit" class="btn btn-outline-primary">Volunteer for this Shift</button>
+                                            </form>
+                                        @elseif ($shift->user_id === Auth::id())
+                                            <form action="{{ route('operations.shifts.deregister', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
+                                                @csrf()
+                                                @method('patch')
+                                                <button type="submit" class="btn btn-outline-danger">Pull out of this Shift</button>
+                                            </form>
+                                        @endif
                                     @endif
                                 </div>
                                 @if (Auth::user()->isAdmin())

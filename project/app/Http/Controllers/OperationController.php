@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Operation;
+use App\RoleType;
 use Barryvdh\DomPDF\Facade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,16 +24,19 @@ class OperationController extends Controller
     public function glance()
     {
         $operations = Operation::orderBy('date', 'desc')->paginate();
-        return view('operation.glance', compact('operations'));
+        $roleTypes = RoleType::all();
+
+        return view('operation.glance', compact('operations', 'roleTypes'));
     }
 
     public function pdf()
     {
         $operations = Operation::orderBy('date', 'desc')->get();
+        $roleTypes = RoleType::all();
         $filename = Carbon::now()->format('ymd') . '_operations.pdf';
 
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadView('pdf.operations', compact('operations'));
+        $pdf->loadView('pdf.operations', compact('operations', 'roleTypes'));
         $pdf->save(storage_path() . '/' . $filename);
 
         return $pdf->download($filename);

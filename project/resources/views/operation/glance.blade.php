@@ -1,15 +1,17 @@
 @extends('layouts._control')
 
 @php
-    $title = 'Glance View';
+    $title = 'Calendar View';
 @endphp
 
 @section('title', $title)
 @section('subtitle', $title)
 
 @section('buttons')
-    <a class="btn btn-info" href="{{ route('operations.pdf') }}">Export to PDF</a>
-    <a class="btn btn-outline-secondary" href="{{ route('operations.index') }}">Back</a>
+    @if (Auth::user()->isAdmin())
+        <a class="btn btn-primary" href="{{ route('operations.create') }}">Add New Operation</a>
+    @endif
+    <a class="btn btn-secondary" href="{{ route('operations.pdf') }}">Export to PDF</a>
 @endsection
 
 @section('route')
@@ -18,7 +20,9 @@
             @if ($operations->isEmpty())
                 <p>No operations have been defined.</p>
             @else
-                @include('operation._glance_table')
+                <table class="table table-bordered table-striped table-hover" id="data-table">
+                    @include('operation._glance_table')
+                </table>
                 <div class="text-center">
                     {{ $operations->links() }}
                 </div>

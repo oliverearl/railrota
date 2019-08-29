@@ -12,6 +12,9 @@
             {{-- Left Side --}}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+                    <a href="{{ route('operations.calendar') }}" class="nav-link">Calendar</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('operations.index') }}" class="nav-link">Operations</a>
                 </li>
                 <li class="nav-item">

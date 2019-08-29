@@ -1,39 +1,69 @@
-<table class="table table-bordered table-striped table-hover" id="data-table">
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Shift Cancelled?</th>
-        <th>Number of Shifts</th>
-        <th>Vacancies?</th>
-        <th>Last Updated</th>
-        <th>Date Created</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach ($operations as $operation)
-        <tr>
-            <td>{{ \Carbon\Carbon::parse($operation->date)->toFormattedDateString()  }}</td>
-            @if (is_null($operation->is_running))
-                <td class="text-danger">Yes</td>
-            @else
-                <td class="text-success">No</td>
-            @endif
-            <td>{{ $operation->operation_shifts->count() }}</td>
-            @php
-                // Not amazing, but it'll do
-                $count = 0
-            @endphp
-            @foreach ($operation->operation_shifts as $shift)
-                @if (is_null($shift->user_id))
-                    @php
-                        $count++;
-                    @endphp
-                @endif
-            @endforeach
-            <td>{{ $count }}</td>
-            <td>{{ $operation->updated_at->format('d/m/y') }}</td>
-            <td>{{ $operation->created_at->format('d/m/y') }}</td>
-        </tr>
+<thead>
+<tr>
+    <th>Operation</th>
+    <th>Running</th>
+    <th>Shifts</th>
+    <th>Vacancies</th>
+    @foreach ($roleTypes as $roleType)
+        <th>{{ $roleType->name }}</th>
     @endforeach
-    </tbody>
-</table>
+</tr>
+</thead>
+<tbody>
+@foreach ($operations as $operation)
+    @php
+        $operationDate = \Carbon\Carbon::parse($operation->date);
+    @endphp
+    <tr>
+        {{-- Date --}}
+        <td>{{ $operationDate->format('d/m/y') }}</td>
+        {{-- Running --}}
+        @if (!($operation->is_running))
+            <td class="text-danger">No</td>
+        @else
+            <td class="text-success">Yes</td>
+        @endif
+        {{-- Shifts --}}
+        <td>{{ $operation->operation_shifts->count() }}</td>
+        {{-- Vacancies --}}
+        @php
+            // Not amazing, but it'll do
+            $count = 0
+        @endphp
+        @foreach ($operation->operation_shifts as $shift)
+            @if (is_null($shift->user_id))
+                @php
+                    $count++;
+                @endphp
+            @endif
+        @endforeach
+        <td>{{ $count }}</td>
+        {{-- Shifts --}}
+        @if ($operation->operation_shifts->isEmpty())
+            @foreach ($roleTypes as $roleType)
+                <td></td>
+            @endforeach
+        @else
+            @foreach ($roleTypes as $roleType)
+                <td>
+                    <ul style="list-style: none; padding-left: 0;">
+                        @foreach($operation->operation_shifts as $shift)
+                            @if ($shift->role_type->name === $roleType->name)
+                                @if (is_null($shift->user_id))
+                                    @if (\Carbon\Carbon::today() > $operationDate || !$operation->is_running)
+                                        <li><em>Unfulfilled</em></li>
+                                    @else
+                                        <li><a href="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}">Vacant</a></li>
+                                    @endif
+                                @else
+                                    <li><a href="{{ route('users.show', $shift->user->id) }}">{{ $shift->user->name }} {{ $shift->user->surname }}</a></li>
+                                @endif
+                            @endif
+                        @endforeach
+                    </ul>
+                </td>
+            @endforeach
+        @endif
+    </tr>
+@endforeach
+</tbody>
