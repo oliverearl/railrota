@@ -9,14 +9,14 @@
 
 @section('buttons')
     @if (Auth::user()->isAdmin())
-        <a class="btn btn-primary" href=" {{route('steam_locomotives.edit', $steamLocomotive->id)}}">Edit</a>
+        <a class="btn btn-primary" href=" {{route('steam_locomotives.edit', $steamLocomotive->id)}}"><i class="fas fa-edit"></i> Edit</a>
         <form action="{{ route('steam_locomotives.destroy', $steamLocomotive->id) }}" method="POST" style="display:inline">
             @csrf()
             @method('delete')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
         </form>
     @endif
-    <a class="btn btn-outline-secondary" href="{{ route('steam_locomotives.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('steam_locomotives.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('table_content')

@@ -8,7 +8,7 @@
 @section('subtitle', $title)
 
 @section('buttons')
-    <a class="btn btn-outline-secondary" href="{{ route('role_competencies.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('role_competencies.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('route')

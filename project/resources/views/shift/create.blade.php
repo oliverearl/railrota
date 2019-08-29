@@ -10,7 +10,7 @@
 @section('subtitle', $title)
 
 @section('buttons')
-    <a class="btn btn-outline-secondary" href="{{ route('operations.show', $operation->id) }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('operations.show', $operation->id) }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('route')

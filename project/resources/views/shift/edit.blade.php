@@ -9,7 +9,7 @@
 @section('subtitle', $title)
 
 @section('buttons')
-    <a class="btn btn-outline-secondary" href="{{ route('operations.show', $operation->id) }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('operations.show', $operation->id) }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('route')
@@ -30,7 +30,7 @@
                         @endforeach
                     </select>
                     <div class="page-action mt-sm-2 mb-sm-1">
-                        <a href="{{ route('role_types.create') }}" class="btn btn-outline-primary">Add Role Type</a>
+                        <a href="{{ route('role_types.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus-square"></i> Add Role Type</a>
                     </div>
                     <small><strong>NB: </strong><em>You will set the required competency / grade level on the next screen.</em></small>
                 </div>
@@ -48,7 +48,7 @@
                         @endforeach
                     </select>
                     <div class="page-action mt-sm-2 mb-sm-1">
-                        <a href="{{ route('locations.create') }}" class="btn btn-outline-primary">Add Location</a>
+                        <a href="{{ route('locations.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus-square"></i> Add Location</a>
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@
                         @endforeach
                     </select>
                     <div class="page-action mt-sm-2 mb-sm-1">
-                        <a href="{{ route('powered_locomotives.create') }}" class="btn btn-outline-primary">Add Locomotive</a>
+                        <a href="{{ route('powered_locomotives.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus-square"></i> Add Locomotive</a>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                         @endforeach
                     </select>
                     <div class="page-action mt-sm-2 mb-sm-1">
-                        <a href="{{ route('steam_locomotives.create') }}" class="btn btn-outline-primary">Add Locomotive</a>
+                        <a href="{{ route('steam_locomotives.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus-square"></i> Add Locomotive</a>
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
                         @endforeach
                     </select>
                     <div class="page-action mt-sm-2 mb-sm-1">
-                        <a href="{{ route('users.create') }}" class="btn btn-outline-primary">Add User</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-outline-primary"><i class="fas fa-plus-square"></i> Add User</a>
                     </div>
                 </div>
 

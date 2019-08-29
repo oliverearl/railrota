@@ -29,14 +29,14 @@
                         <tbody>
                         @foreach ($roles as $role)
                             <tr>
-                                <td><a class="btn btn-secondary" href="{{ route('roles.show', $role->id) }}">View</a></td>
+                                <td><a class="btn btn-secondary" href="{{ route('roles.show', $role->id) }}"><i class="fas fa-binoculars"></i> View</a></td>
                                 @if (Auth::user()->isAdmin())
-                                    <td><a class="btn btn-primary" href=" {{ route('roles.edit', $role->id) }}">Edit</a></td>
+                                    <td><a class="btn btn-primary" href=" {{ route('roles.edit', $role->id) }}"><i class="fas fa-edit"></i> Edit</a></td>
                                     <td>
                                         <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline">
                                             @csrf()
                                             @method('delete')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
                                         </form>
                                     </td>
                                 @endif

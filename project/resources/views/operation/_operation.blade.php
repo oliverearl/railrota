@@ -39,7 +39,7 @@
                             @endif
                             @if (Auth::user()->isAdmin())
                                 <div class="page-action mb-sm-3">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}">Add Shift</a>
+                                    <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}"><i class="fas fa-plus-square"></i> Add Shift</a>
                                 </div>
                             @endif
                     </div>
@@ -89,7 +89,7 @@
                                             <form action="{{ route('operations.shifts.deregister', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
                                                 @csrf()
                                                 @method('patch')
-                                                <button type="submit" class="btn btn-outline-danger">Pull out of this Shift</button>
+                                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-door-open"></i> Pull out of this Shift</button>
                                             </form>
                                         @endif
                                     @endif
@@ -97,12 +97,12 @@
                                 @if (Auth::user()->isAdmin())
                                     <div class="page-action mb-sm-3">
                                         <h4>Shift Controls</h4>
-                                        <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}">Add Shift</a>
-                                        <a class="btn btn-sm btn-secondary" href="{{ route('operations.shifts.edit', [$operation->id, $shift->id]) }}">Edit Shift</a>
+                                        <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}"><i class="fas fa-plus-square"></i> Add Shift</a>
+                                        <a class="btn btn-sm btn-secondary" href="{{ route('operations.shifts.edit', [$operation->id, $shift->id]) }}"><i class="fas fa-edit"></i> Edit Shift</a>
                                         <form action="{{ route('operations.shifts.destroy', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
                                             @csrf()
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete Shift</button>
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Delete Shift</button>
                                         </form>
                                     </div>
                                 @endif
@@ -113,18 +113,18 @@
                     @else
                         <p class="text-danger"><strong>This operation has been cancelled.</strong></p>
                         @if (Auth::user()->isAdmin())
-                            <a class="btn btn-sm btn-primary" href="{{ route('operations.edit', $operation->id) }}">Reinstate Operation</a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('operations.edit', $operation->id) }}"><i class="fas fa-sync"></i> Reinstate Operation</a>
                         @endif
                     @endif
                 </div>
                 @if (Auth::user()->isAdmin())
                     <div class="page-action" style="padding-top: 10px">
                         <h4>Operation Controls</h4>
-                        <a class="btn btn-secondary" href="{{ route('operations.edit', $operation->id) }}">Edit Operation</a>
+                        <a class="btn btn-secondary" href="{{ route('operations.edit', $operation->id) }}"><i class="fas fa-edit"></i> Edit Operation</a>
                         <form action="{{ route('operations.destroy', $operation->id) }}" method="POST" style="display:inline">
                             @csrf()
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete Operation</button>
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete Operation</button>
                         </form>
                     </div>
                 @endif

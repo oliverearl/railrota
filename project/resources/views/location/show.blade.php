@@ -13,10 +13,10 @@
         <form action="{{ route('locations.destroy', $location->id) }}" method="POST" style="display:inline">
             @csrf()
             @method('delete')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
         </form>
     @endif
-    <a class="btn btn-outline-secondary" href="{{ route('locations.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('locations.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('table_content')
