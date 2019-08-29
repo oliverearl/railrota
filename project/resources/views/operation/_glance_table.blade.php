@@ -16,7 +16,7 @@
     @endphp
     <tr>
         {{-- Date --}}
-        <td>{{ $operationDate->format('d/m/y') }}</td>
+        <td><a href=" {{ route('operations.show', $operation->id) }}">{{ $operationDate->format('d/m/y') }}</a></td>
         {{-- Running --}}
         @if (!($operation->is_running))
             <td class="text-danger">No</td>
