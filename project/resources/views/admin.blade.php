@@ -56,7 +56,7 @@
             <ul class="list-unstyled text-small">
                 <li><a class="text-muted" href="{{ route('operations.index') }}">View Operations</a></li>
                 <li><a class="text-muted" href="{{ route('operations.create') }}">Add an Operation</a></li>
-                <li><a class="text-muted" href="{{ route('operations.glance') }}">Glance View</a></li>
+                <li><a class="text-muted" href="{{ route('operations.glance') }}">Glance / Calendar View</a></li>
                 <li><a class="text-muted" href="{{ route('operations.pdf') }}">Export PDF</a></li>
             </ul>
         </div>
