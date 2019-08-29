@@ -65,7 +65,7 @@ class OperationShiftController extends Controller
         $operationShift->save();
 
         flash()->success("{$operationShift->role_type->name} shift has been updated successfully!")->important();
-        return redirect()->route('operations.show', $operation->id);
+        return redirect()->route('operations.shifts.competency', [$operation->id, $operationShift->id]);
     }
 
     /**
@@ -123,6 +123,8 @@ class OperationShiftController extends Controller
             'powered_locomotive_id' => 'nullable|integer|exists:powered_locomotives,id',
             'steam_locomotive_id' => 'nullable|integer|exists:steam_locomotives,id',
             'notes' => 'min:1|max:1024|string|nullable',
+
+            'role_competency_id' => 'nullable|integer|exists:role_competencies,id',
         ]);
 
         $operationShift = OperationShift::findOrFail($id);
@@ -138,7 +140,8 @@ class OperationShiftController extends Controller
         $operationShift->save();
 
         flash()->success("{$operationShift->role_type->name} shift has been updated successfully!")->important();
-        return redirect()->route('operations.show', $operation->id);
+        //return redirect()->route('operations.show', $operation->id);
+        return redirect()->route('operations.shifts.competency', [$operation->id, $operationShift->id]);
     }
 
     /**
@@ -213,5 +216,13 @@ class OperationShiftController extends Controller
 
         flash()->success('You have pulled out of this shift.');
         return redirect()->route('operations.show', $operation->id);
+    }
+
+    public function competency(Operation $operation, $id)
+    {
+        $this->authorize('edit');
+        $operationShift = OperationShift::findOrFail($id);
+
+        return view('shift.competency', compact('operation', 'operationShift'));
     }
 }
