@@ -50,7 +50,7 @@
                            minlength="1"
                            maxlength="255"
                            required
-                           value={{ old('email') }}
+                           value="{{ old('email') }}"
                     >
                 </div>
 
@@ -75,10 +75,11 @@
                                maxlength="255"
                                required
                         >
-                </div>
+                    </div>
 
-                <div class="form-group">
-                    <input class="form-group btn btn-primary" type="submit" value="Submit">
+                    <div class="form-group">
+                        <input class="form-group btn btn-primary" type="submit" value="Submit">
+                    </div>
                 </div>
             </form>
         </section>
