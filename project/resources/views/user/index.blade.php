@@ -67,5 +67,10 @@
                 </div>
             @endif
         </div>
+        @if (Auth::user()->isAdmin())
+            <div class="col-md-12 page-action">
+                <a class="btn btn-primary" href="{{ route('users.create') }}"><i class="fas fa-plus-square"></i> Add User</a>
+            </div>
+        @endif
     </div>
 @endsection
