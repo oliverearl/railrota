@@ -9,14 +9,14 @@
 
 @section('buttons')
     @if (Auth::user()->isAdmin())
-        <a class="btn btn-primary" href=" {{route('role_types.edit', $roleType->id)}}">Edit</a>
+        <a class="btn btn-primary" href=" {{route('role_types.edit', $roleType->id)}}"><i class="fas fa-edit"></i> Edit</a>
         <form action="{{ route('role_types.destroy', $roleType->id) }}" method="POST" style="display:inline">
             @csrf()
             @method('delete')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
         </form>
     @endif
-    <a class="btn btn-outline-secondary" href="{{ route('role_types.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('role_types.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('table_content')
@@ -39,7 +39,7 @@
         <p>There are no competencies assigned to this role type.</p>
     @endif
     @if (Auth::user()->isAdmin())
-        <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Add Competency</a>
+        <a class="btn btn-primary" href="{{ route('role_competencies.create') }}"><i class="fas fa-plus-square"></i> Add Competency</a>
     @endif
 @endsection
 

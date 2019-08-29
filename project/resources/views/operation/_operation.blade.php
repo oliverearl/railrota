@@ -32,18 +32,22 @@
                                 </ul>
                             @endif
                             <h3>Notes</h3>
-                            @if (is_null($operation->is_null))
+                            @if (is_null($operation->notes))
                                 <p><em>There are no notes for this operation.</em></p>
                             @else
                                 <p>{{ $operation->notes }}</p>
                             @endif
                             @if (Auth::user()->isAdmin())
                                 <div class="page-action mb-sm-3">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}">Add Shift</a>
+                                    <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}"><i class="fas fa-plus-square"></i> Add Shift</a>
                                 </div>
                             @endif
                     </div>
                     @if (!$operation->operation_shifts->isEmpty())
+                        @php
+                            $today = \Carbon\Carbon::today();
+                            $operationDate = \Carbon\Carbon::parse($operation->date);
+                        @endphp
                         @foreach($operation->operation_shifts as $shift)
                             <div role="tabpanel" class="tab-pane border-secondary" id="operation_{{ $operation->id }}__{{ $shift->id }}">
                                 <h3>{{ $shift->role_type->name }}</h3>
@@ -55,8 +59,9 @@
                                     @endif
                                     @if (is_null($shift->role_competency_id))
                                         <li><em>No grade / competency requirement was specified.</em></li>
+                                    @else
+                                        <li>It requires a grade of <a href="{{ route('role_competencies.show', $shift->role_competency_id) }}">{{ $shift->role_competency->name }}</a> (tier {{ $shift->role_competency->tier }}) or above to fulfill.</li>
                                     @endif
-                                    <li>It requires a grade of <a href="{{ route('role_competencies.show', $shift->role_competency_id) }}">{{ $shift->role_competency->name }}</a> (tier {{ $shift->role_competency->tier }}) or above to fulfill.</li>
                                     @if (!is_null($shift->steam_locomotive_id))
                                         <li>This shift covers <a href="{{ route('steam_locomotives.show', $shift->steam_locomotive_id) }}">{{ $shift->steam_locomotive->name }}</a></li>
                                     @elseif (!is_null($shift->powered_locomotive_id))
@@ -66,30 +71,38 @@
                                         <li>This shift is located at <a href="{{ route('locations.show', $shift->location_id) }}">{{ $shift->location->name }}</a></li>
                                     @endif
                                 </ul>
+                                <h3>Notes</h3>
+                                @if (is_null($shift->notes))
+                                    <p><em>There are no notes for this shift.</em></p>
+                                @else
+                                    <p>{{ $shift->notes }}</p>
+                                @endif
                                 <div class="page-action mb-sm-3">
-                                    @if (is_null($shift->user_id))
-                                        <form action="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
-                                            @csrf()
-                                            @method('patch')
-                                            <button type="submit" class="btn btn-outline-primary">Volunteer for this Shift</button>
-                                        </form>
-                                    @elseif ($shift->user_id === Auth::id())
-                                        <form action="{{ route('operations.shifts.deregister', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
-                                            @csrf()
-                                            @method('patch')
-                                            <button type="submit" class="btn btn-outline-primary">Pull out of this Shift</button>
-                                        </form>
+                                    @if ($today <= $operationDate)
+                                        @if (is_null($shift->user_id))
+                                            <form action="{{ route('operations.shifts.register', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
+                                                @csrf()
+                                                @method('patch')
+                                                    <button type="submit" class="btn btn-outline-primary">Volunteer for this Shift</button>
+                                            </form>
+                                        @elseif ($shift->user_id === Auth::id())
+                                            <form action="{{ route('operations.shifts.deregister', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
+                                                @csrf()
+                                                @method('patch')
+                                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-door-open"></i> Pull out of this Shift</button>
+                                            </form>
+                                        @endif
                                     @endif
                                 </div>
                                 @if (Auth::user()->isAdmin())
                                     <div class="page-action mb-sm-3">
                                         <h4>Shift Controls</h4>
-                                        <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}">Add Shift</a>
-                                        <a class="btn btn-sm btn-secondary" href="{{ route('operations.shifts.edit', [$operation->id, $shift->id]) }}">Edit Shift</a>
+                                        <a class="btn btn-sm btn-primary" href="{{ route('operations.shifts.create', $operation->id) }}"><i class="fas fa-plus-square"></i> Add Shift</a>
+                                        <a class="btn btn-sm btn-secondary" href="{{ route('operations.shifts.edit', [$operation->id, $shift->id]) }}"><i class="fas fa-edit"></i> Edit Shift</a>
                                         <form action="{{ route('operations.shifts.destroy', [$operation->id, $shift->id]) }}" method="POST" style="display:inline">
                                             @csrf()
                                             @method('delete')
-                                            <button type="submit" class="btn btn-sm btn-danger">Delete Shift</button>
+                                            <button type="submit" class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i> Delete Shift</button>
                                         </form>
                                     </div>
                                 @endif
@@ -100,18 +113,18 @@
                     @else
                         <p class="text-danger"><strong>This operation has been cancelled.</strong></p>
                         @if (Auth::user()->isAdmin())
-                            <a class="btn btn-sm btn-primary" href="{{ route('operations.edit', $operation->id) }}">Reinstate Operation</a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('operations.edit', $operation->id) }}"><i class="fas fa-sync"></i> Reinstate Operation</a>
                         @endif
                     @endif
                 </div>
                 @if (Auth::user()->isAdmin())
                     <div class="page-action" style="padding-top: 10px">
                         <h4>Operation Controls</h4>
-                        <a class="btn btn-secondary" href="{{ route('operations.edit', $operation->id) }}">Edit Operation</a>
+                        <a class="btn btn-secondary" href="{{ route('operations.edit', $operation->id) }}"><i class="fas fa-edit"></i> Edit Operation</a>
                         <form action="{{ route('operations.destroy', $operation->id) }}" method="POST" style="display:inline">
                             @csrf()
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete Operation</button>
+                            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete Operation</button>
                         </form>
                     </div>
                 @endif

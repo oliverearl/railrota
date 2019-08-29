@@ -11,14 +11,14 @@
     {{-- Buttons go here --}}
     @if (Auth::user()->isAdmin())
         {{-- Edit --}}
-        <a class="btn btn-primary" href=" {{route('role_competencies.edit', $roleCompetency->id)}}">Edit</a>
+        <a class="btn btn-primary" href=" {{route('role_competencies.edit', $roleCompetency->id)}}"><i class="fas fa-edit"></i> Edit</a>
         <form action="{{ route('role_competencies.destroy', $roleCompetency->id) }}" method="POST" style="display:inline">
             @csrf()
             @method('delete')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
         </form>
     @endif
-    <a class="btn btn-outline-secondary" href="{{ route('role_competencies.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('role_competencies.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('table_content')

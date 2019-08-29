@@ -30,12 +30,12 @@
                         <tr>
                             <td><a class="btn btn-secondary" href=" {{ route('locations.show', $location->id) }}">View</a></td>
                             @if (Auth::user()->isAdmin())
-                                <td><a class="btn btn-primary" href=" {{ route('locations.edit', $location->id) }}">Edit</a></td>
+                                <td><a class="btn btn-primary" href=" {{ route('locations.edit', $location->id) }}"><i class="fas fa-edit"></i> Edit</a></td>
                                 <td>
                                     <form action="{{ route('locations.destroy', $location->id) }}" method="POST" style="display:inline">
                                         @csrf()
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
                                     </form>
                                 </td>
                             @endif
@@ -56,7 +56,7 @@
         </div>
         @if (Auth::user()->isAdmin())
             <div class="col-md-12 page-action">
-                <a class="btn btn-primary" href="{{ route('locations.create') }}">Add Location</a>
+                <a class="btn btn-primary" href="{{ route('locations.create') }}"><i class="fas fa-plus-square"></i> Add Location</a>
             </div>
         @endif
     </div>

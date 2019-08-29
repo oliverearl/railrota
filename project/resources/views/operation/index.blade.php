@@ -9,10 +9,9 @@
 
 @section('buttons')
     @if (Auth::user()->isAdmin())
-        <a class="btn btn-primary" href="{{ route('operations.create') }}">Add New Operation</a>
+        <a class="btn btn-primary" href="{{ route('operations.create') }}"><i class="fas fa-plus-square"></i> Add New Operation</a>
     @endif
-    <a class="btn btn-secondary" href="{{ route('operations.glance') }}">Glance View</a>
-    <a class="btn btn-info" href="{{ route('operations.pdf') }}">Export to PDF</a>
+    <a class="btn btn-secondary" href="{{ route('operations.pdf') }}"><i class="fas fa-file-pdf"></i> Export to PDF</a>
 @endsection
 
 @section('route')

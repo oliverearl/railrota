@@ -9,9 +9,9 @@
 
 @section('buttons')
     @if (!is_null($role->competency_id))
-    <a class="btn btn-outline-secondary" href="{{ route('roles.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('roles.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
     @else
-    <a class="btn btn-outline-secondary disabled" href="#">Back</a>
+    <a class="btn btn-outline-secondary disabled" href="#"><i class="fas fa-arrow-circle-left"></i> Back</a>
     @endif
 @endsection
 
@@ -42,7 +42,7 @@
             </form>
             @else
                 <p>This role type has no set competencies. You need to add one.</p>
-                <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Create Competency</a>
+                <a class="btn btn-primary" href="{{ route('role_competencies.create') }}"><i class="fas fa-plus-square"></i> Create Competency</a>
                 <a class="btn btn-danger" href="{{ route('roles.index') }}">Proceed Anyway</a>
             @endif
         </section>

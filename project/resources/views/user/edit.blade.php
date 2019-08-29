@@ -8,7 +8,7 @@
 @section('subtitle', $title)
 
 @section('buttons')
-    <a class="btn btn-outline-secondary" href="{{ route('users.index') }}">Back</a>
+    <a class="btn btn-outline-secondary" href="{{ route('users.index') }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
 @endsection
 
 @section('route')
@@ -35,8 +35,8 @@
                         </select>
                     </div>
                     <input type="hidden" name="user_id" id="user_id" value="{{ $user->id }}">
-                    <input class="form-group btn btn-primary" type="submit" value="Assign Role">
-                    <a class="form-group btn btn-secondary" href="{{ route('role_types.create') }}">Add New Role Type</a>
+                    <button type="submit" class="form-group btn btn-primary"><i class="fas fa-plus-square"></i> Assign Role</button>
+                    <a class="form-group btn btn-secondary" href="{{ route('role_types.create') }}"><i class="fas fa-plus-square"></i> Add New Role Type</a>
                 </form>
 
                 <h3>Modify an existing role</h3>
@@ -58,13 +58,13 @@
                             @else
                                 <td><em>No Competency Assigned</em></td>
                             @endif
-                            <td><a class="form-group btn btn-primary" href="{{ route('roles.edit', $role->id) }}">Edit</a></td>
+                            <td><a class="form-group btn btn-primary" href="{{ route('roles.edit', $role->id) }}"><i class="fas fa-edit"></i> Edit</a></td>
                             <td>
                                 <form id="delete_role_{{ $role->id }}" action="{{ route('roles.destroy', $role->id) }}" method="POST">
                                     @csrf()
                                     @method('delete')
                                     <input name="id" id="role_{{ $role->id }}" type="hidden" value="{{$role->id}}">
-                                    <input class="form-group btn btn-danger" type="submit" value="Remove">
+                                    <button class="form-group btn btn-danger" type="submit"><i class="far fa-trash-alt"></i> Remove</button>
                                 </form>
                             </td>
                         </tr>

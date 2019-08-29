@@ -31,13 +31,13 @@
                     @foreach ($roleCompetencies as $roleCompetency)
                         <tr>
                             @if (Auth::user()->isAdmin())
-                                <td><a class="btn btn-secondary" href=" {{ route('role_competencies.show', $roleCompetency->id) }}">View</a></td>
-                                <td><a class="btn btn-primary" href=" {{ route('role_competencies.edit', $roleCompetency->id) }}">Edit</a></td>
+                                <td><a class="btn btn-secondary" href=" {{ route('role_competencies.show', $roleCompetency->id) }}"><i class="fas fa-binoculars"></i> View</a></td>
+                                <td><a class="btn btn-primary" href=" {{ route('role_competencies.edit', $roleCompetency->id) }}"><i class="fas fa-edit"></i> Edit</a></td>
                                 <td>
                                     <form action="{{ route('role_competencies.destroy', $roleCompetency->id) }}" method="POST" style="display:inline">
                                         @csrf()
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
                                     </form>
                                 </td>
                             @endif
@@ -60,7 +60,7 @@
         </div>
         @if (Auth::user()->isAdmin())
             <div class="col-md-12 page-action">
-                <a class="btn btn-primary" href="{{ route('role_competencies.create') }}">Add Role Competency</a>
+                <a class="btn btn-primary" href="{{ route('role_competencies.create') }}"><i class="fas fa-plus-square"></i> Add Role Competency</a>
             </div>
         @endif
     </div>

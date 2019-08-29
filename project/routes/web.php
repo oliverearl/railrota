@@ -32,6 +32,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin', 'AdminDashboardController@index')->name('admin');
 
     /**
+     * Additional non-CRUD Operations Routes
+     * Turns out these need to be before resources
+     * https://stackoverflow.com/questions/16661292/add-new-methods-to-a-resource-controller-in-laravel
+     *
+     */
+    Route::get('/operations/glance', 'OperationController@glance')->name('operations.glance');
+    Route::get('/operations/calendar', 'OperationController@glance')->name('operations.calendar');
+    Route::get('/operations/pdf', 'OperationController@pdf')->name('operations.pdf');
+    Route::patch('/operations/{operation}/shifts/{shift}/register', 'OperationShiftController@register')->name('operations.shifts.register');
+    Route::patch('/operations/{operation}/shifts/{shift}/deregister', 'OperationShiftController@deregister')->name('operations.shifts.deregister');
+
+    /**
      * Resources
      */
     Route::resource('users', 'UserController');
@@ -44,11 +56,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('operations', 'OperationController');
     Route::resource('operations.shifts', 'OperationShiftController');
 
-    /**
-     * Additional non-CRUD Operations Routes
-     */
-    Route::get('/operations/glance', 'OperationController@glance')->name('operations.glance');
-    Route::get('/operations/pdf', 'OperationController@pdf')->name('operations.pdf');
-    Route::patch('/operations/{id}/shifts/{id}/register', 'OperationShiftController@register')->name('operations.shifts.register');
-    Route::patch('/operations/{id}/shifts/{id}/deregister', 'OperationShiftController@deregister')->name('operations.shifts.deregister');
+
 });
