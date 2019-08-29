@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Operation;
+use App\RoleType;
+use Barryvdh\DomPDF\Facade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -22,20 +24,22 @@ class OperationController extends Controller
     public function glance()
     {
         $operations = Operation::orderBy('date', 'desc')->paginate();
-        return view('operation.glance', compact('operations'));
+        $roleTypes = RoleType::all();
+
+        return view('operation.glance', compact('operations', 'roleTypes'));
     }
 
     public function pdf()
     {
-        // TODO: Complete PDF functionality
-        // This is just a template for now, but will be filled out later
+        $operations = Operation::orderBy('date', 'desc')->get();
+        $roleTypes = RoleType::all();
+        $filename = Carbon::now()->format('ymd') . '_operations.pdf';
 
-        // $filename = Carbon::now()->format('ymd') . '_operations.pdf'
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.operations', compact('operations', 'roleTypes'));
+        $pdf->save(storage_path() . '/' . $filename);
 
-        // $operations = Operations::get();
-        // $pdf = PDF::loadView('operation.pdf', $operations);
-        // $pdf->save(storage_path() . $filename);
-        // return $pdf->download($filename);
+        return $pdf->download($filename);
     }
 
     /**
@@ -132,7 +136,7 @@ class OperationController extends Controller
 
         $operation->save();
 
-        $date = Carbon::parse($operation->date)->format('d-m-y');
+        $date = Carbon::parse($operation->date)->format('d/m/y');
         flash()->success("Operation {$date} has been updated successfully!")->important();
         return redirect()->route('operations.index');
     }

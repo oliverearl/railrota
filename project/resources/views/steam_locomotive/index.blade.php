@@ -28,14 +28,14 @@
                     <tbody>
                     @foreach ($steamLocomotives as $steamLocomotive)
                         <tr>
-                            <td><a class="btn btn-secondary" href=" {{ route('steam_locomotives.show', $steamLocomotive->id) }}">View</a></td>
+                            <td><a class="btn btn-secondary" href=" {{ route('steam_locomotives.show', $steamLocomotive->id) }}"><i class="fas fa-binoculars"></i> View</a></td>
                             @if (Auth::user()->isAdmin())
-                                <td><a class="btn btn-primary" href=" {{ route('steam_locomotives.edit', $steamLocomotive->id) }}">Edit</a></td>
+                                <td><a class="btn btn-primary" href=" {{ route('steam_locomotives.edit', $steamLocomotive->id) }}"><i class="fas fa-edit"></i> Edit</a></td>
                                 <td>
                                     <form action="{{ route('steam_locomotives.destroy', $steamLocomotive->id) }}" method="POST" style="display:inline">
                                         @csrf()
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i> Delete</button>
                                     </form>
                                 </td>
                             @endif
@@ -56,7 +56,7 @@
         </div>
         @if (Auth::user()->isAdmin())
             <div class="col-md-12 page-action">
-                <a class="btn btn-primary" href="{{ route('steam_locomotives.create') }}">Add Locomotive</a>
+                <a class="btn btn-primary" href="{{ route('steam_locomotives.create') }}"><i class="fas fa-plus-square"></i> Add Locomotive</a>
             </div>
         @endif
     </div>

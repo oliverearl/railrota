@@ -1,0 +1,127 @@
+@extends('layouts._control')
+
+@php
+    $formattedDate = \Carbon\Carbon::parse($operation->date)->format('d/m/y');
+    $title = "Adding Shift on {$formattedDate}";
+    //dd($data['role_types']->first()->name);
+@endphp
+
+@section('title', $title)
+@section('subtitle', $title)
+
+@section('buttons')
+    <a class="btn btn-outline-secondary" href="{{ route('operations.show', $operation->id) }}"><i class="fas fa-arrow-circle-left"></i> Back</a>
+@endsection
+
+@section('route')
+    <div class="row">
+        <section class="col-md-12">
+            <form action="{{ route('operations.shifts.store', $operation->id) }}" method="POST" class="form-group">
+                @csrf()
+                <div class="form-group @if ($errors->has('role_type_id')) has-error @endif">
+                    <h3>Role Type</h3>
+                    <p>Only volunteers with this role type will be able to sign up to volunteer.</p>
+                    <label for="role_type_id">Role Type</label>
+                    <select name="role_type_id" id="role_type_id" class="form-control" required>
+                        @foreach($data['role_types'] as $roleType)
+                            <option value="{{ $roleType->id }}">
+                                {{ $roleType->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="page-action mt-sm-2 mb-sm-1">
+                        <a href="{{ route('role_types.create') }}" class="btn btn-outline-primary">Add Role Type</a>
+                    </div>
+                    <small><strong>NB: </strong><em>You will set the required competency / grade level on the next screen.</em></small>
+                </div>
+
+                <div class="form-group @if ($errors->has('location_id')) has-error @endif">
+                    <h3>Locations</h3>
+                    <p>Does the shift have an associated location? If so, choose one.</p>
+                    <label for="location_id">Location</label>
+                    <select name="location_id" id="location_id" class="form-control">
+                        <option value="" selected="selected">Not Applicable</option>
+                        @foreach($data['locations'] as $location)
+                            <option value="{{ $location->id }}">
+                                {{ $location->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="page-action mt-sm-2 mb-sm-1">
+                        <a href="{{ route('locations.create') }}" class="btn btn-outline-primary">Add Location</a>
+                    </div>
+                </div>
+
+                <div class="form-group @if ($errors->has('powered_locomotive_id')) has-error @endif">
+                    <h3>Diesel or Electric Locomotives</h3>
+                    <p>If the shift has an associated diesel or electric locomotive, please select it here.</p>
+                    <p class="text-danger">Do not select more than one type of locomotive.</p>
+                    <label for="powered_locomotive_id">Diesel or Electric Locomotive</label>
+                    <select name="powered_locomotive_id" id="powered_locomotive_id" class="form-control">
+                        <option value="" selected="selected">Not Applicable</option>
+                        @foreach($data['powered_locomotives'] as $locomotive)
+                            <option value="{{ $locomotive->id }}">
+                                {{ $locomotive->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="page-action mt-sm-2 mb-sm-1">
+                        <a href="{{ route('powered_locomotives.create') }}" class="btn btn-outline-primary">Add Locomotive</a>
+                    </div>
+                </div>
+
+                <div class="form-group @if ($errors->has('steam_locomotive_id')) has-error @endif">
+                    <h3>Steam Locomotives</h3>
+                    <p>Similarly, if the shift involves a steam-powered locomotive, please select it here.</p>
+                    <p class="text-danger">Do not select more than one type of locomotive.</p>
+                    <label for="steam_locomotive_id">Steam Locomotive</label>
+                    <select name="steam_locomotive_id" id="steam_locomotive_id" class="form-control">
+                        <option value="" selected="selected">Not Applicable</option>
+                        @foreach($data['steam_locomotives'] as $locomotive)
+                            <option value="{{ $locomotive->id }}">
+                                {{ $locomotive->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="page-action mt-sm-2 mb-sm-1">
+                        <a href="{{ route('steam_locomotives.create') }}" class="btn btn-outline-primary">Add Locomotive</a>
+                    </div>
+                </div>
+
+
+                <div class="form-group @if ($errors->has('steam_locomotive_id')) has-error @endif">
+                    <h3>Pre-Assigned Volunteer</h3>
+                    <p>If you know in advance who will be volunteering for this shift, you can sign them up here.</p>
+                    <p class="text-danger"><strong>You</strong> are responsible for ensuring the volunteer is suitable to work this shift.</p>
+                    <label for="user_id">Steam Locomotive</label>
+                    <select name="user_id" id="user_id" class="form-control">
+                        <option value="" selected="selected">Leave Vacant</option>
+                        @foreach($data['users'] as $user)
+                            <option value="{{ $user->id }}">
+                                {{ $user->name }} {{ $user->surname }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <div class="page-action mt-sm-2 mb-sm-1">
+                        <a href="{{ route('users.create') }}" class="btn btn-outline-primary">Add User</a>
+                    </div>
+                </div>
+
+                <div class="form-group @if ($errors->has('notes')) has-error @endif">
+                    <h3>Notes</h3>
+                    <p>You can add optional notes or custom requirements for this shift here.</p>
+                    <label class="" for="notes">Notes</label>
+                    <textarea class="form-control"
+                              name="notes"
+                              id="notes"
+                              style="resize: none"
+                    >{{ old('notes', '') }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-group btn btn-primary" type="submit" value="Submit">
+                </div>
+            </form>
+        </section>
+    </div>
+@endsection

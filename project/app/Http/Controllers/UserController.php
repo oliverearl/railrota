@@ -25,21 +25,40 @@ class UserController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function create()
     {
-        //
+        $this->authorize('create');
+
+        return view('user.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create');
+
+        $this->validate($request, [
+            'name' => 'required|min:1|max:255|string',
+            'surname' => 'min:1|max:255|string|nullable',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:1|max:255|string|confirmed'
+        ]);
+        $user = new User();
+        $user->fill($request->except('password', 'is_available', 'is_admin'));
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        flash()->success("{$user->name} has been added successfully!")->important();
+        return redirect()->route('users.edit', $user->id);
     }
 
     /**
