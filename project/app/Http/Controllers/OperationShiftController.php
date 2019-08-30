@@ -167,9 +167,7 @@ class OperationShiftController extends Controller
     public function register(Operation $operation, $id)
     {
         // $this->authorize('register'); // currently not using in exchange for this absolute unit
-
         $operationShift = OperationShift::findOrFail($id);
-
         // ADMIN IS CRUISE CONTROL FOR COOL
         if (!Auth::user()->isAdmin()) {
             // Check role
@@ -209,8 +207,8 @@ class OperationShiftController extends Controller
     public function deregister(Operation $operation, $id)
     {
         $operationShift = OperationShift::findOrFail($id);
-
-        abort_unless($operationShift->user_id === Auth::id() || Auth::user()->isAdmin(), 403);
+        
+        abort_unless($operationShift->user_id == Auth::id() || Auth::user()->isAdmin(), 403);
         $operationShift->user_id = null;
         $operationShift->update();
 
