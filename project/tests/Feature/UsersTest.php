@@ -14,7 +14,7 @@ class UsersTest extends TestCase
     protected $admin;
 
     /**
-     * Sets up standard user and administrator instances for testing.
+     * Test setup
      */
     protected function setUp(): void
     {
@@ -39,7 +39,7 @@ class UsersTest extends TestCase
      * Tests whether a user can view the user index. This is viewable by all
      * authenticated users.
      */
-    public function test_a_user_can_view_all_the_users()
+    public function test_a_user_can_view_all_users()
     {
         $this->actingAs($this->user);
 
@@ -146,6 +146,10 @@ class UsersTest extends TestCase
 
         $response = $this->patch(route('users.update', $user->id), $user->toArray());
         $response->assertForbidden();
+        $this->assertNotEquals(1, \App\User::where([
+            ['name', '=', $user->name],
+            ['description', '=', $user->surname],
+        ])->count());
     }
 
     /**
@@ -192,8 +196,13 @@ class UsersTest extends TestCase
         $user->name = 'Updated Name';
         $user->surname = 'Updated Surname';
 
-        $this->patch(route('users.update', $user->id), $user->toArray());
-        $this->assertDatabaseHas('users', ['id' => $user->id, 'name' => $user->name, 'surname' => $user->surname]);
+        $response = $this->patch(route('users.update', $user->id), $user->toArray());
+        $response->assertRedirect();
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'surname' => $user->surname,
+        ]);
     }
 
     /**
