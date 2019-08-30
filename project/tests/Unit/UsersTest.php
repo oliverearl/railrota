@@ -40,4 +40,13 @@ class UsersTest extends TestCase
 
         $this->assertNotFalse($user->isAdmin());
     }
+
+    /**
+     * Check for associated operation shifts
+     */
+    public function test_a_user_can_retrieve_its_associated_operation_shifts()
+    {
+        $user = factory('App\User')->create();
+        $this->assertNotNull($user->operation_shifts);
+    }
 }

@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(SteamLocomotive::class, function (Faker $faker) {
     return [
-        'name' => htmlspecialchars($faker->company),
+        'name' => htmlspecialchars($faker->name),
         'description' => $faker->realText(),
     ];
 });

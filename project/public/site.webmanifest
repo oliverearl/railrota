@@ -1,0 +1,19 @@
+{
+    "name": "Railrota",
+    "short_name": "Railrota",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#01afd2",
+    "background_color": "#01afd2",
+    "display": "standalone"
+}
