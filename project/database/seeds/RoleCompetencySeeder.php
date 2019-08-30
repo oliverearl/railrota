@@ -23,12 +23,6 @@ class RoleCompetencySeeder extends Seeder
             $keys = [];
             $defaults = [];
             switch (strtolower($type->name)) {
-                case 'controller':
-                case 'guard':
-                case 'blockman':
-                    $keys =     array_keys($connection->getControllerDefaults());
-                    $values =   $connection->getControllerDefaults();
-                    break;
                 case 'driver - diesel and electric':
                     $keys =     array_keys($connection->getPoweredDefaults());
                     $values =   $connection->getPoweredDefaults();
@@ -37,7 +31,12 @@ class RoleCompetencySeeder extends Seeder
                     $keys =     array_keys($connection->getSteamDefaults());
                     $values =   $connection->getSteamDefaults();
                     break;
+                case 'controller':
+                case 'guard':
+                case 'blockman':
                 default:
+                    $keys =     array_keys($connection->getControllerDefaults());
+                    $values =   $connection->getControllerDefaults();
                     break;
             }
             if (!empty($keys) || !empty($values)) {

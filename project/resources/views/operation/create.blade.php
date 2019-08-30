@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <input class="form-group btn btn-primary" type="submit" value="Submit">
+                    <button class="form-group btn btn-primary" type="submit"><i class="fas fa-save"></i> Submit</button>
                 </div>
             </form>
         </section>

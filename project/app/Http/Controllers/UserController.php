@@ -114,7 +114,7 @@ class UserController extends Controller
             'notes' => 'min:1:max1024|string|nullable',
         ]);
 
-        $user->fill($request->except('password', 'is_available', 'is_admin'));
+        $user->fill($request->except('password', 'is_available', 'is_admin', 'date_of_last_inspection'));
 
         // Check if admin-only things have been filled in and validate accordingly
         if (($request->get('is_admin') || $request->get('date_of_last_inspection'))) {
@@ -124,6 +124,11 @@ class UserController extends Controller
         // Check for password changes
         if ($request->get('password')) {
             $user->password = bcrypt($request->get('password'));
+        }
+
+        // Date of last inspection
+        if ($request->get('date_of_last_inspection')) {
+            $user->date_of_last_inspection = $request->get('date_of_last_inspection');
         }
 
         // TODO: Figure out a much better way to handle checkboxes because this is disgusting. Really disgusting.

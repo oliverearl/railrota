@@ -57,9 +57,4 @@ class RoleType extends Model
     {
         return $this->defaultTypes;
     }
-
-    public function getAllRoleTypes()
-    {
-        return RoleType::all();
-    }
 }

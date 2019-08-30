@@ -28,7 +28,7 @@
                     <tbody>
                     @foreach ($locations as $location)
                         <tr>
-                            <td><a class="btn btn-secondary" href=" {{ route('locations.show', $location->id) }}">View</a></td>
+                            <td><a class="btn btn-secondary" href=" {{ route('locations.show', $location->id) }}"><i class="fas fa-binoculars"></i> View</a></td>
                             @if (Auth::user()->isAdmin())
                                 <td><a class="btn btn-primary" href=" {{ route('locations.edit', $location->id) }}"><i class="fas fa-edit"></i> Edit</a></td>
                                 <td>
