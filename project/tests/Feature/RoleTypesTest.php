@@ -44,7 +44,7 @@ class RoleTypesTest extends TestCase
 
         $response = $this->get(route('role_types.index'));
 
-        $response->assertSee($roleType->name);
+        $response->assertSee(htmlspecialchars($roleType->name));
     }
 
     /**
@@ -57,7 +57,7 @@ class RoleTypesTest extends TestCase
 
         $response = $this->get(route('role_types.show', $roleType->id));
 
-        $response->assertSee($roleType->name);
+        $response->assertSee(htmlspecialchars($roleType->name));
     }
 
     /**
