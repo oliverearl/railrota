@@ -106,7 +106,7 @@ class RoleTypesTest extends TestCase
 
         $roleType = factory('App\RoleType')->create();
 
-        $response = $this->delete(route('users.destroy', $roleType->id));
+        $response = $this->delete(route('role_types.destroy', $roleType->id));
         $response->assertForbidden();
         $this->assertDatabaseHas('role_types', ['id' => $roleType->id]);
     }
