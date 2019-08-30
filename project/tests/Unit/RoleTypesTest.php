@@ -21,4 +21,13 @@ class RoleTypesTest extends TestCase
         $this->assertIsArray($defaults);
         $this->assertNotEmpty($defaults);
     }
+
+    /**
+     * Check for associated operation shifts
+     */
+    public function test_a_user_can_retrieve_its_associated_operation_shifts()
+    {
+        $roleType = factory('App\RoleType')->create();
+        $this->assertNotNull($roleType->operation_shifts);
+    }
 }

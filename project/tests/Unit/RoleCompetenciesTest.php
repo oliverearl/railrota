@@ -96,4 +96,12 @@ class RoleCompetenciesTest extends TestCase
         $this->assertIsArray($defaults);
         $this->assertNotEmpty($defaults);
     }
+
+    /**
+     * Check for associated operation shifts
+     */
+    public function test_a_role_competency_can_retrieve_its_associated_operation_shifts()
+    {
+        $this->assertNotNull($this->roleCompetency->operation_shifts);
+    }
 }

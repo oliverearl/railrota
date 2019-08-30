@@ -20,4 +20,14 @@ class LocationsTest extends TestCase
         $this->assertIsArray($defaults);
         $this->assertNotEmpty($defaults);
     }
+
+    /**
+     * Check for associated operation shifts
+     */
+    public function test_a_location_can_retrieve_its_associated_operation_shifts()
+    {
+        $location = factory('App\Location')->create();
+
+        $this->assertNotNull($location->operation_shifts);
+    }
 }
