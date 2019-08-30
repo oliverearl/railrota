@@ -9,7 +9,8 @@
             <div class="card">
                 <div class="card-header">{{ config('app.name') }}</div>
                 <div class="card-body">
-                    Temporary placeholder for the homepage of the application.
+                    <h2>Welcome!</h2>
+                    <p>Railrota requires you to <a href="{{ route('login') }}">login</a>, or <a href="{{ route('register') }}">register</a> a new account.</p>
                 </div>
             </div>
         </div>
