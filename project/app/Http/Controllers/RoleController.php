@@ -43,10 +43,17 @@ class RoleController extends Controller
     {
         $this->authorize('manipulate');
 
+        // TODO: Hotfix 30/8/19
+        if ($request->role_type_id) {
+           $request->request->add(['role_types' => $request->role_type_id]);
+        }
+
         $this->validate($request, [
             'user_id' => 'required|integer|exists:users,id',
             'role_types' => 'required|integer|exists:role_types,id'
         ]);
+
+
 
         $query = Role::where([
             ['user_id', '=', $request->user_id],
