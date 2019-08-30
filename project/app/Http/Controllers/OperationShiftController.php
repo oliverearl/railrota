@@ -207,7 +207,8 @@ class OperationShiftController extends Controller
     public function deregister(Operation $operation, $id)
     {
         $operationShift = OperationShift::findOrFail($id);
-        
+
+        abort_if($operationShift->user_id === null, 403);
         abort_unless($operationShift->user_id == Auth::id() || Auth::user()->isAdmin(), 403);
         $operationShift->user_id = null;
         $operationShift->update();
