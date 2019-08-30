@@ -20,4 +20,14 @@ class SteamLocomotivesTest extends TestCase
         $this->assertIsArray($defaults);
         $this->assertNotEmpty($defaults);
     }
+
+    /**
+     * Check for associated operation shifts
+     */
+    public function test_a_steam_locomotive_can_retrieve_its_associated_operation_shifts()
+    {
+        $locomotive = factory('App\SteamLocomotive')->create();
+
+        $this->assertNotNull($locomotive->operation_shifts);
+    }
 }
