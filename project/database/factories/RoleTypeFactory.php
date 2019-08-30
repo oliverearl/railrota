@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(RoleType::class, function (Faker $faker) {
     return [
-        'name' => $faker->company,
+        'name' => htmlspecialchars($faker->company),
         'description' => $faker->realText(),
     ];
 });
