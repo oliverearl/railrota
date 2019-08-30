@@ -72,9 +72,4 @@ class User extends Authenticatable
     {
         return $this-> id === $user->id;
     }
-
-    public static function getUser($id)
-    {
-        return User::findOrDie($id);
-    }
 }
