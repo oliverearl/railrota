@@ -1,9 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "oliverearl/railrota",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Railway rostering software built on Laravel.",
     "keywords": [
-        "framework",
+        "railrota",
+        "rostering",
         "laravel"
     ],
     "license": "MIT",
@@ -60,6 +61,14 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ]
+        ],
+        "test": "phpunit --testdox",
+        "test export": "phpunit --testdox-html tests.html",
+        "docs": "@php sami.phar update sami.config.php",
+        "script-descriptions": {
+            "test": "Run PHPUnit tests and output to stdout.",
+            "test export": "Run PHPUnit tests and output to tests.html.",
+            "docs": "Run Sami and output automatically generated PHPDoc documentation."
+        }
     }
 }
