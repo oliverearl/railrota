@@ -1,10 +1,20 @@
 \chapter{Design}
 
 \section{Analysis of Relevant Technologies}
+Determing what programming language(s) and framework(s) to use in a project implementation is an important decision process. A chosen technology must be runnable within the constraints defined in Appendix \ref{Operating Environment}, and ideally should be a technology that the development team, in this case a solo developer, is familiar with as to minimise excessive amounts of time learning.
+
+On the other hand, there is an important balance that must be struck between choosing a tool that is familiar, and that which is most effective, as argued by Vinegar who states that 'writing quality, sustainable software comes second to fiddling with what's sexy'. \cite{Vinegar1}
+
+Ultimately, the languages were refined down to PHP, JavaScript, and Python, as they are all comfortably understood by the developer, appropriate for the task of constructing a full-stack web application, and should run on the designated GNU/Linux system environment without issue.
 
 \subsection{PHP}
+PHP, otherwise known by the recursive acronym PHP Hypertext Preprocessor, is one of the most famous and important programming languages on the Internet, originally written in 1994 by Rasmus Lerdorf. It can be used in a procedural or object-oriented style, and is allegedly used on more than 20 million websites today. \cite{Wolfe1}
 
-\subsection{Node.js}
+While PHP can be used on its own to great success, there are numerous frameworks available that build on top of PHP to make it better suited for producing full-stack web monoliths that will likely require the use of the popular Model View Controller (MVC) design pattern. This design pattern is described in greater detail in Design Patterns.
+
+The most popular framework of this nature is Laravel, originally conceived by Arkansas developer Taylor Otwell, who in around 2011 was unhappy with the most popular framework at the time, CodeIgniter. \cite{OBrien1} Today, it features a range of features such as built-in authorisation and authentication, MVC clearly built-in as the core design pattern in mind, security mitigations, and most notably, abstracts a lot of the complex database work that would be required in this project behind an Object-Relational Mapper (ORM) called Eloquent, heavily based on ActiveRecord that is found in Ruby on Rails. This functionality would drastically simply development efforts and reduce the quantity of boilerplate code that would need to be written, when the framework can simply be leveraged instead. \cite{Shah1} \cite{Laravel1}
+
+\subsection{JavaScript (Node.js)}
 
 \subsection{Python}
 
