@@ -5,7 +5,7 @@ Determing what programming language(s) and framework(s) to use in a project impl
 
 On the other hand, there is an important balance that must be struck between choosing a tool that is familiar, and that which is most effective, as argued by Vinegar who states that 'writing quality, sustainable software comes second to fiddling with what's sexy'. \cite{Vinegar1}
 
-Ultimately, the languages were refined down to PHP, JavaScript, and Python, as they are all comfortably understood by the developer, appropriate for the task of constructing a full-stack web application, and should run on the designated GNU/Linux system environment without issue.
+Ultimately, the languages were refined down to PHP, Node.js, and Python, as they are all comfortably understood by the developer, appropriate for the task of constructing a full-stack web application, and should run on the designated GNU/Linux system environment without issue.
 
 \subsection{PHP}
 PHP, otherwise known by the recursive acronym PHP Hypertext Preprocessor, is one of the most famous and important programming languages on the Internet, originally written in 1994 by Rasmus Lerdorf. It can be used in a procedural or object-oriented style, and is allegedly used on more than 20 million websites today. \cite{Wolfe1}
@@ -14,11 +14,16 @@ While PHP can be used on its own to great success, there are numerous frameworks
 
 The most popular framework of this nature is Laravel, originally conceived by Arkansas developer Taylor Otwell, who in around 2011 was unhappy with the most popular framework at the time, CodeIgniter. \cite{OBrien1} Today, it features a range of features such as built-in authorisation and authentication, MVC clearly built-in as the core design pattern in mind, security mitigations, and most notably, abstracts a lot of the complex database work that would be required in this project behind an Object-Relational Mapper (ORM) called Eloquent, heavily based on ActiveRecord that is found in Ruby on Rails. This functionality would drastically simply development efforts and reduce the quantity of boilerplate code that would need to be written, when the framework can simply be leveraged instead. \cite{Shah1} \cite{Laravel1}
 
-\subsection{JavaScript (Node.js)}
+\subsection{Node.js (JavaScript)}
+JavaScript, sometimes referred to as ECMAScript due to standards specifications it conforms to,\cite{Mozilla1} was famously written in 10 days by then Netscape employee Brendan Eich for use on the Internet as a client-side, browser interpreted language. \cite{Buytaert1} 
+
+Node.js is an implementation of JavaScript on the server-side and outside of the DOM (Document Object Model) found in webpages that was created in 2009, where over the last decade it has been adopted rapidly by organisations big and small as it unifies the choice of language to JavaScript across the entire web stack. \cite{Copes1}
+
+Like PHP, while it can be used on its own (sometimes referred to as 'vanilla'), there exists a range of frameworks that simplify and better purpose Node.js for use in building complex full-stack web applications and RESTful (Representational State Transfer) APIs. (Application Programming Interface) The most popular example of which, is Express, a minimalist and unopinionated (flexible and easily restructured) released in 2010. \cite{Mozilla2}
+
+While Express eases the workload in developing working routing and other components that make up the MVC design pattern, it is as previously mentioned, minimalist. This means that a lot of the complex work such as working with databases, providing security layers, and programming authentication would need to still be carried out, or delegated to additional libraries, further complicating development.
 
 \subsection{Python}
-
-\subsection{Miscellaneous}
 
 \subsection{Additional Considerations}
 
