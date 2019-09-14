@@ -29,17 +29,36 @@ Python is a scripting language that was created in 1990 by Dutch programmer Guid
 The two most popular Python web frameworks are Flask and Django - with Flask taking an unopinionated, minimalistic, plugin approach like Express does, whereas Django more closely resembles Laravel and Ruby on Rails for its rich features, such as built-in authentication, and the use of an ORM. 
 
 \subsection{Conclusion}
+After a substantial amount of consideration, it was decided upon to use Laravel and PHP for use of the project. Whilst JavaScript and Node.js continue to increase in popularity thanks in part to a unification of languages across the entire web stack, allowing for the reuse of libraries and skill sets for development, testing, etc. it would take significantly more time to develop much of the underlying functionality and architecture that would be necessary for powering an MVC web application, due to Express' minimalism and specific design for lightweight APIs and microservices, as opposed to monolithic, full-stack apps. % TODO: Add citations! %
 
+Django and Python would be a perfect fit for the application - providing a near identical set of functionality and boilerplating necessary to develop such an application quickly. Ultimately, personal preference and experience with the PHP ecosystem and best practices, including years of prior usage in substantial academic work and personal projects made PHP a more comfortable choice, and as there are no known downsides or impracticalities from opting for said language, it was an easy decision to make, as opposed to unnecessarily familiarising oneself with new technologies when there are looming deadlines for completion of work, as well as needing to demo work and progress to the client on a weekly basis. As written in the Agile Manifesto, working code is the most ideal indicator of progress. % TODO: Provide citations! %
 
 \subsection{Front-End Considerations}
+With PHP and Laravel determined as the back-end language and framework of choice, attention must be paid to any necessary design considerations, libraries, or technologies that will be needed on the front-end. Laravel includes Laravel Mix, an implementation of popular JavaScript workflow tool Webpack, which is used to minify any JavaScript or stylesheet code written, as well as to compile superset languages such as Sass into their basic languages (in this case, CSS) so that it can be interpreted by a web browser. By default, the stylesheet markup language Sass, and the JavaScript framework Vue.js are included with Laravel, but they can be readily interchanged with other technologies such as React or Less.
+
+One of the main requirements put forth by the customer in regards to front-end design is the need for responsive design, that is, for the application to work and present itself seamlessly regardless of viewport size or device specification: i.e. on a computer, tablet, or smartphone. By including Bootstrap 4, a popular CSS and JavaScript framework developed by Twitter which is additionally included in Laravel by default, the application can be made with responsiveness in mind. While it is not necessary and responsiveness can be implemented in plain CSS or Sass, such as by leveraging the new CSS Grid standard, this is arguably not as quick to scaffold and present to a customer, at the cost of the overhead of requiring to download additional styling and code to be executed within the browser. % Add citations! %
+
+% Add citations! %
 
 \section{Design Patterns}
 
 \section{Data Persistence}
 
+PHP supports a wealth of relational databases out-of-the-box, and this functionality is extensible with the use of drivers. For development, the use of a SQLite or local MySQL database is more than sufficient, and both Laravel and PHP itself will work wtih different databases without the need for different code or parameters. The PDO (PHP Data Object) is the means in which PHP applications can interface with databases, which fully abstracts away any underlying database mechanisms and allows developers to write fully database agnostic code, without the need of knowing what dialect of SQL, or even writing database queries at all.
+
+Resultingly, the customer is free to use whatever database technology they wish, provided that they have the necessary drivers installed on their PHP installation or within their container. These include MySQL, PostgreSQ, MariaDB, or SQLite.
+
+% TODO: Please don't forget to add citations and check your godawful spelling when you type on this damn laptop! %
+
 \section{Security Considerations}
 
 \section{Development Environment}
+The application in a macOS (UNIX) environment, on a computer with the following specifications:
+
+% insert specs here TODO insert specs %
+
+
+
 
 \section{FDD Feature List}
 
