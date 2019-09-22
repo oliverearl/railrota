@@ -40,27 +40,38 @@ One of the main requirements put forth by the customer in regards to front-end d
 
 \section{Design Patterns}
 
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{Figures/mvc}
+    \caption{Model View Controller (MVC) Design Pattern}
+    \label{fig:mvc1} \cite{mvcimage}
+\end{figure}
+
+Some text goes here about MVC.
 
 \section{Data Persistence}
 
 PHP supports a wealth of relational databases out-of-the-box, and this functionality is extensible with the use of drivers. For development, the use of a SQLite or local MySQL database is more than sufficient, and both Laravel and PHP itself will work wtih different databases without the need for different code or parameters. The PDO (PHP Data Object) is the means in which PHP applications can interface with databases, which fully abstracts away any underlying database mechanisms and allows developers to write fully database agnostic code, without the need of knowing what dialect of SQL, or even writing database queries at all. Resultingly, the customer is free to use whatever database technology they wish, provided that they have the necessary drivers installed on their PHP installation or within their container, such as MySQL, PostgresSQL, or SQLite. \cite{PHP1}
 
 \section{Security Considerations}
+An application working with user information, regardless of sensitivity must address certain security considerations in order to conform with the Data Protection Act of 2018, which includes the ability for users to view, edit, and delete aspects of their personal information. This was updated that year to include the British implementation of the European General Data Protection Regulation (GDPR) which has come into effect as the United Kingdom withdraws from the European Union. Charities are not exempt from this legislation. \cite{HMGovt1} \cite{HMGovt2}
+
+It is a well-established concept in software engineering that data from a client (i.e. data from a user) cannot be trusted and must be properly sanitised and validated in order to protect underlying data systems from invalid input, especially malicious input designed to bring harm to data or the systems containing it, such as by means of a SQL Injection attempt - manipulating data inputs to run arbitrary SQL code. \cite{CorePHPProgramming} \cite{Microsoft2}
+
+A wealth of functionality exists within Laravel and will be leveraged in order to mitigate security risks as aforementioned, including full validation and authorisation checks, automatic escaping of data retrieved from database, and CSRF (Cross Site Request Forgery) protection. Passwords are also automatically encrypted when stored in the database and remain so when accessing the user model, providing additional protection. \cite{Laravel4} \cite{Laravel5}
 
 \section{Development Environment}
-The application in a macOS (UNIX) environment, on a computer with the following specifications:
+The application in a macOS (UNIX) environment, on a desktop computer with the following specifications:
 
-% insert specs here TODO insert specs %
-% Do these later
-% macOS 10.13.6 High Sierra
-% Mac Pro 3,1 (early 2008)
-% 2 x Quad-Core 2.8GHz Intel Xeon 
-% 32GB 667MHz DDR2 RAM
-% GeForce GTX 1050Ti 4095MB
-% Solid-State Drive
-% my computer is ancient, I know %
+\begin{itemize}
+    \item Mac Pro (Early 2008)
+    \item macOS 10.3.6 High Sierra Operating System
+    \item 2 x 2.8GHz Quad Intel Xeon E5462 Processors
+    \item 32GB 667MHz Random-Access Memory (RAM)
+    \item NVIDIA GeForce GTX1050 Ti Graphics Card
+    \item Solid-State Drive
+\end{itemize}
 
-
+Software development is carried out using JetBrains PhpStorm IDE (Integrated Development Environment) thanks to its powerful Laravel and PHP code analysis and refactoring tools that are provided out-of-the-box, making it the most specialised program compared to standard code editors. \cite{Jetbrains1}
 
 \section{FDD Feature List}
 
