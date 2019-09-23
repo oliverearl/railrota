@@ -40,7 +40,7 @@ One of the main requirements put forth by the customer in regards to front-end d
 
 \section{Design Patterns}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{Figures/mvc}
     \caption{Model View Controller (MVC) Design Pattern}
     \label{fig:mvc1} \cite{mvcimage}
@@ -83,9 +83,9 @@ Software development is carried out using JetBrains PhpStorm IDE (Integrated Dev
 
 \section{Use Case Design}
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \includegraphics[width=\textwidth]{Figures/usecase}
-    \caption{Use Case Diagram}
+    \caption{Use Case Diagram.}
     \label{fig:usecase}
 \end{figure}
 
@@ -99,6 +99,52 @@ The UI design went through two phases - initial sketches done on paper based on 
 In traditional development methodologies, design is something that is done extensively at the start of application development with the final outputs expected to closely resemble the end product. However, agile methodologies, including this Scrum adaptation, recognise that design is a continuous process throughout development, and that the end product may vary vastly from any drawings or early documentation as the result of changing requirements or additional variables such as customer feedback - thus making design a far more cooperative, agile process. \cite{Kiss1}
 
 \subsection{Early Concept Art}
-Early concept art can be found in \ref{Concept Art}Appendix F due to their large resolutions.
+Early concept art can be found in Appendix \ref{Concept Art} due to their large resolutions.
 
 \subsection{Final Iteration}
+These rudimentary designs were expanded upon in much more detail that demonstrates a far more mature iteration of the design process.
+
+\subsubsection{Homepage}
+\begin{figure}[h]
+    \includegraphics[width=1.0\textwidth]{Figures/design-homepage}
+    \caption{Default design of the homepage as viewed on a desktop web browser.}
+    \label{fig:homepage}
+\end{figure}
+
+The homepage design as visible from desktop viewports provides insight into the UI and how it should appear, most notably showing off the navigation bar.
+
+\subsubsection{Responsive Design}
+\begin{figure}[h]
+    \includegraphics[width=1.0\textwidth]{Figures/design-mobile}
+    \caption{Design of how the web application responsively appears in smaller viewports.}
+    \label{fig:mobile}
+\end{figure}
+
+With the aforementioned emphasis and importance of responsive design and an importance of the design to work and view correctly on mobile devices such as smartphones and tablets, a reduced viewport design was considered important. In particular, this is to demonstrate the use of a collapsable 'hamburger menu', a commonly used dropdown menu optimised for touchscreens, and readily implementable in Bootstrap 4. \cite{Bootstrap4}
+
+\subsubsection{Operations Design}
+\begin{figure}[h]
+    \includegraphics[width=1.0\textwidth]{Figures/design-operations}
+    \caption{Design of the operations page that displays operations and shifts.}
+    \label{fig:operations}
+\end{figure}
+
+This design expands upon the drawing, showing in more detail how each operation might be displayed on the application, with respective information on available shifts, the volunteers either staffing them or whether there are vacancies, and additional buttons for actions on that particular operation.
+
+\subsubsection{Volunteers Design}
+\begin{figure}[h]
+    \includegraphics[width=1.0\textwidth]{Figures/design-volunteers}
+    \caption{Design of the operations page that displays operations and shifts.}
+    \label{fig:volunteers}
+\end{figure}
+
+An additional design was drawn up to demonstrate how a tabular view might look, in this instance, displaying a list of volunteers with their personal details, so that a volunteer or an administrator can quickly look up a fellow volunteer and view their public information, such as their availability or contact information.
+
+\subsubsection{Glance / Calendar Design}
+\begin{figure}[h]
+    \includegraphics[width=1.0\textwidth]{Figures/design-glance}
+    \caption{Design of the more compact operations view, more akin to a calendar.}
+    \label{fig:glance}
+\end{figure}
+
+Following a conversation with the customer, they expressed a desire to have a view, potentially downloadable and/or printable, that could show 'at a glance' the available shifts and the current staffing at that moment in time. This should somewhat resemble the existing system that is shown in Appendix \ref{Example Timetable}. This is desirable functionality that came into being after development actually began, with the intention in including it into a release of the software, time permitting.
