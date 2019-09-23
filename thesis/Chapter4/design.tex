@@ -46,7 +46,15 @@ One of the main requirements put forth by the customer in regards to front-end d
     \label{fig:mvc1} \cite{mvcimage}
 \end{figure}
 
-Some text goes here about MVC.
+Laravel, like many application frameworks utilises the Model View Controller architectural pattern in order to help separate concerns and to help compartmentalise code into easily reusable sections. \cite{Ighodaro1} These concerns can be broken down like thus:
+
+\begin{itemize}
+    \item The model relates directly due to the data domain, reflecting data held in the database, and almost always is responsible for all actions that involve database access.
+    \item The view is what the user sees and interacts with, which can pass instructions back to controllers.
+    \item Controllers facilitate communication between the Model and the View, and encapsulate other business logic also. \cite{7892651}
+\end{itemize}
+
+It is important to note however, that although Laravel utilises MVC, like many other frameworks, it is does not necessarily consider itself to be such and continues to be a disputed topic in the web development community. \cite{Otwell1} Nevertheless, the application will be developed with this pattern in mind.
 
 \section{Data Persistence}
 
@@ -73,12 +81,24 @@ The application in a macOS (UNIX) environment, on a desktop computer with the fo
 
 Software development is carried out using JetBrains PhpStorm IDE (Integrated Development Environment) thanks to its powerful Laravel and PHP code analysis and refactoring tools that are provided out-of-the-box, making it the most specialised program compared to standard code editors. \cite{Jetbrains1}
 
-\section{FDD Feature List}
-
 \section{Use Case Design}
 
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{Figures/usecase}
+    \caption{Use Case Diagram}
+    \label{fig:usecase}
+\end{figure}
+
+Based on the full requirements list in Chapter 1, there are two primary use cases identified for the application - both for everyday volunteers (users), and administrators. The above diagram shows that the a great deal of functionality is accessible by both user groups, and that administrators have a superset of what could be considered user privileges, such as the ability to add, delete, and modify shifts, in addition to being able to register for a shift. This is because administrators could readily be volunteers themselves and may wish to use the application as such without the need for an additional account.
+
+Users on the other hand, do not have use cases that involve the manipulation of data outside of their own personal information that can and should be updated whenever necessary.
+
 \section{User Interface Design}
+The UI design went through two phases - initial sketches done on paper based on initial ideas for how the layout for the application will appear, followed by digital artwork that can be considered the final design before implementation.
+
+In traditional development methodologies, design is something that is done extensively at the start of application development with the final outputs expected to closely resemble the end product. However, agile methodologies, including this Scrum adaptation, recognise that design is a continuous process throughout development, and that the end product may vary vastly from any drawings or early documentation as the result of changing requirements or additional variables such as customer feedback - thus making design a far more cooperative, agile process. \cite{Kiss1}
 
 \subsection{Early Concept Art}
+Early concept art can be found in \ref{Concept Art}Appendix F due to their large resolutions.
 
 \subsection{Final Iteration}
