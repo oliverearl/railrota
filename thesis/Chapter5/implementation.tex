@@ -31,9 +31,16 @@ When a HTTP (Hypertext Transfer Protocol) request is received by the web server 
 
 \section{HTTP Routes}
 
+\begin{figure}[!ht]
+    \includegraphics[width=1.0\textwidth]{Figures/routes}
+    \caption{A print out of HTTP routes defined within the application, their corresponding URLs, associated controllers and methods, and HTTP actions.}
+    \label{fig:methods}
+\end{figure}
 
+The controllers for each resource (i.e. users, operations) as well as individual webpages uses a RESTful (Representational State Transfer) architecture, and have methods that correspond to the CRUD verbs - create, read, update, and delete. There are also additional methods that help facilitate the CRUD operations, such as 'show' for viewing individual entries, and 'edit' to display a form in order to modify an existing record. Different actions may expect different HTTP requests, such as GET, POST, PATCH, and DELETE respectively. Each action, whether viewing one's own profile, editing a user's profile, registering for a shift, or deleting an operation, are all represented by their own route within the application, including custom defined routes that do not correspond to CRUD, such as those used for (de)registering to an operation. \cite{Laravel7} \cite{7539825}
 
 \section{Models and Relationships}
+
 
 \section{Users}
 
