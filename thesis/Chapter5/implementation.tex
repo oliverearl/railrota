@@ -41,10 +41,52 @@ The controllers for each resource (i.e. users, operations) as well as individual
 
 \section{Models and Relationships}
 
+\begin{figure}[!ht]
+    \includegraphics[width=1.0\textwidth]{Figures/Models}
+    \caption{UML diagram showing the relationships between database tables and their structure. The relationships are defined by their Eloquent relationships.}
+    \label{fig:relationships}
+\end{figure}
+
+Database models define their column names and data types within migration files, alongside foreign keys, their references, and any constraints. As shown by Figure \ref{fig:relationships}, many of the tables belong to shifts, as each shift can have corresponding vehicles associated with it, a designated location, a required role and competency level, as well as the volunteer that is assigned to that volunteer, which is of course null when the shift is vacant.
 
 \section{Users}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-users}
+    \caption{Screenshot of the Users interface within the application.}
+    \label{fig:users}
+\end{figure}
+
+All volunteers are users within the application, with users that have access to administrative privileges being denoted by a boolean true value in \textbf{is\_admin}. Users can modify a subset of their own information, but are unable to assign themselves roles or privileges, or modify a date value indicating the last time they were inspected.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-edit-user}
+    \caption{Screenshot of the Edit User interface, as seen by an administrator.}
+    \label{fig:users-edit}
+\end{figure}
+
+The following destroy CRUD method in the User controller, demonstrates how after checking the policies that the current user is authorised to delete a user (so is an administrator), it checks first whether they are attempting to delete themselves, which is understandably undesirable behaviour, and redirects back with an error message if this is the case. Otherwise, the \textbf{delete} Eloquent method is called on the user object, and it is deleted from the database; redirecting back with a success notification. The User object is resolved from the unique ID in the URL. \cite{Laravel7}
+
+\begin{lstlisting}[language=PHP, breaklines]
+    public function destroy(User $user)
+    {
+        $this->authorize('delete', $user);
+
+        if ($user->id === Auth::id()) {
+            flash()->error('You can\'t delete yourself!')->important();
+            return redirect()->back();
+        }
+
+        $user->delete();
+        flash()->success("{$user->name} has been deleted successfully!")->important();
+        return redirect()->route('users.index');
+    }
+\end{lstlisting}
+
 \subsection{Authentication}
+Authentication.
 
 \subsection{Authorisation and Policies}
 
@@ -54,9 +96,7 @@ The controllers for each resource (i.e. users, operations) as well as individual
 
 \section{Roles}
 
-\section{Locations}
-
-\section{Locomotives}
+\section{Locations and Locomotives}
 
 \section{Operations and Shifts}
 
