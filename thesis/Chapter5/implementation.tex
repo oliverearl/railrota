@@ -49,6 +49,36 @@ The controllers for each resource (i.e. users, operations) as well as individual
 
 Database models define their column names and data types within migration files, alongside foreign keys, their references, and any constraints. As shown by Figure \ref{fig:relationships}, many of the tables belong to shifts, as each shift can have corresponding vehicles associated with it, a designated location, a required role and competency level, as well as the volunteer that is assigned to that volunteer, which is of course null when the shift is vacant.
 
+\section{Views and Laravel Blade}
+
+Controller methods, as part of their response to the user's request will return a view that can be populated with data processed or retrieved, such as returning the current resource object for display when viewing an individual item, like a role type. Laravel uses a language called Blade for its templating engine, which allows for reusable front-end code, and more legible syntax for inserting data into views or extending existing template files than using raw PHP alone, though vanilla PHP script is nevertheless supported and will be interpreted all the same. \cite{Laravel9} \cite{Underwood1}
+
+An example of a data being passed to a view can be seen in the following code, that is taken from the controller for operations, where all operations retrieved from the database (by Eloquent) are injected into the view as an argument, to be parsed and displayed there:
+
+\begin{lstlisting}[language=PHP, breaklines]
+    public function index()
+    {
+        $operations = Operation::orderBy('date', 'desc')->paginate(3);
+        return view('operation.index', compact('operations'));
+    }
+\end{lstlisting}
+
+The name of the view to be rendered by Laravel is 'operation.index', which will now have access to the contents of \texttt{\$operations}. In the following snippet of Blade code, you can see the contents of this variable being iterated through and printed in tabular form, as well as the usage of vanilla PHP script where it has been deemed necessary:
+
+\begin{lstlisting}[language=HTML, breaklines]
+    <tbody>
+    @foreach ($operations as $operation)
+        @php
+            $operationDate = \Carbon\Carbon::parse($operation->date);
+        @endphp
+        <tr>
+        ...
+        </tr>
+        ...
+    @endforeach
+    </tbody>
+\end{lstlisting}
+
 \section{Users}
 
 \begin{figure}[!ht]
@@ -86,13 +116,76 @@ The following destroy CRUD method in the User controller, demonstrates how after
 \end{lstlisting}
 
 \subsection{Authentication}
-Authentication.
+Authentication functionality can be scaffolded seamlessly by Laravel by issuing the \texttt{php artisan make:auth} command at on the command line, and provides all the necessary registration, login, and password reset functionality - and automatically ties this into the User model.
+
+By declaring routes within the authentication middleware group as the following code demonstrates, Laravel will ensure that a user is authenticated in order to access any of the routes contained therein, otherwise redirecting back to the login page. \cite{Laravel8}
+
+\begin{lstlisting}[language=PHP, breaklines]
+    Route::group(['middleware' => ['auth']], function() {
+        Route::resource('users', 'UserController');
+    }
+\end{lstlisting}
 
 \subsection{Authorisation and Policies}
+Authorisation - determing who can and who cannot access resources or carry out certain actions is determined by classes known as policies within Laravel - where authorisation logic is stored. \cite{Larashout1} In this application, a policy is necessary wherever there are actions that users and administrators have different levels of access to, such as being able to create roles, operations, or modify user data.
+
+A corresponding method is typically called in a controller's respective policy (i.e. UserController will have a matching policy called UserPolicy) and within the controller action itself, the appropriate method for that action is passed as an argument, alongside the currently authenticated user object, like thus:
+
+\begin{lstlisting}[language=PHP, breaklines]
+    $this->authorize('create', $user);
+\end{lstlisting}
+
+This calls the corresponding create method in its policy file, which will return either true for successful authorisation and allowing the remainder of the controller method to execute. Otherwise, the action is prevented. A call to this method absolutely must exist for any authorisation to occur, regardless of whether there is a corresponding policy class to the aforementioned controller and model. The corresponding 'create' policy method in the UserPolicy file is as follows:
+
+\begin{lstlisting}[language=PHP, breaklines]
+    public function create(User $user)
+    {
+        return $user->isAdmin();
+    }
+\end{lstlisting}
+
+This simple but effective method calls a custom method on the model itself that returns whether or not the attribute \textbf{is\_admin} on the currently authenticated user is true or not. If the value isn't truthful, then execution halts as authorisation has subsequently failed.
 
 \section{Role Types}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-roletypes}
+    \caption{Screenshot of the Role Types interface within the application.}
+    \label{fig:users}
+\end{figure}
+
+In order to volunteer for a shift, a user must have the relevant role type that is also shared by the shift. For example, a shift might have a \textit{Blockman} vacancy available, but in order to volunteer for the role, they need to have that role themselves. Role types are treated as resources with CRUD routes, and can only be modified in any form by administrators.
+
+Role types are not hardcoded into the system, and are their own database table, although a list of defaults is defined in the source code that can be used during initial setup, and consist of the following roles: 
+
+\begin{itemize}
+    \item Controller
+    \item Guard
+    \item Blockman
+    \item Driver (Diesel/Electric)
+    \item Driver (Steam)
+    \item Museum Staff
+\end{itemize}
+
+Additional role types can be added to the system to accommodate any future needs of the railway, or existing ones may be modified or deleted as necessary.
+
 \section{Role Competencies}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-competency-create}
+    \caption{Screenshot of an administrator adding a new competency level to the a driver role.}
+    \label{fig:users}
+\end{figure}
+
+Each role can have multiple competency levels, each with their own tier between 1 and 10. Those with a competency in a specific role can volunteer for shifts equal or lesser to their numerical tier. 
+
+For example, if there is a Blockman Shift requiring at least a Trainee, which have a numerical tier of 1, then those with Passed (2) or Examiner (3) can also sign up for the same work. If the shift required someone with Passed (2) level, then a Trainee (1) would not be able to register for it.
+
+Each of the default role types have predefined default competencies also, but additional competencies can be added and those existing may also be modified. Furthermore, the numerical tiers are not unique, so multiple competencies for a role may share the same tier. Shifts can also not have tier requirements set, and can therefore be met by any level, including if a user does not have a competency level defined for whatever reason.
+
+This algorithm that ensures that competency levels are met is explored in more detail in the Operations and Shift subsection.
 
 \section{Roles}
 
