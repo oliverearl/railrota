@@ -228,7 +228,7 @@ In a nutshell, an operation can be thought of as a workday, with each vacancy th
     \label{fig:nested}
 \end{figure}
 
-All operations can be viewed in a reverse-chronological, paginated view, or individual operations and their shifts can be viewed independently. This is one of three primary ways of viewing shift availabilities and their information, designed to be a more modern, bespoke solution for navigating data in line with early concept artwork. It is important to note that shifts are a nested resource of operation - shifts cannot be viewed individually as they are instrinsically dependent on their operation. How this is represented in Laravel is shown in figure \ref{fig:nested}
+All operations can be viewed in a reverse-chronological, paginated view, or individual operations and their shifts can be viewed independently. This is one of three primary ways of viewing shift availabilities and their information, designed to be a more modern, bespoke solution for navigating data in line with early concept artwork. It is important to note that shifts are a nested resource of operation - shifts cannot be viewed individually as they are instrinsically dependent on their operation. How this is represented in Laravel is shown in figure \ref{fig:nested}. If an operation is deleted, shifts associated with it are also deleted to prevent the occurance of orphaned shifts within the database.
 
 Whilst adminstrators have complete control over operations and shifts and as aforementioned, can manually assign users to shifts, regular users are expected to sign up for shifts that they are capable (in terms of role and role competency) to do. This is referred to internally as 'registering', with pulling out of a shift and leaving it vacant as 'deregistering'.
 
