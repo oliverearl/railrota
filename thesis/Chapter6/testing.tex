@@ -2,9 +2,9 @@
 
 \section{Introduction}
 
-Softawre testing is an integral part of agile software development - with the use of Feature-Driven Development, it is important to know when a feature has reached the state of 'done', and this is typically once automated tests have confirmed that the functionality works as intended. \cite{Karam1} Radigan explains that incorporating agile testing practices, such as those used in FDD or Test-Driven Development (TDD) are a great way of minimising technical debt, and allowing for QA (Quality Assurance) staff to 'keep up with development'. \cite{Radigan1}
+Software testing is an integral part of agile software development - with the use of Feature-Driven Development, it is important to know when a feature has reached the state of 'done', and this is typically once automated tests have confirmed that the functionality works as intended. \cite{Karam1} Radigan explains that incorporating agile testing practices, such as those used in FDD or Test-Driven Development (TDD) are a great way of minimising technical debt, and allowing for QA (Quality Assurance) staff to 'keep up with development'. \cite{Radigan1}
 
-The Laravel framework is reportedly built for 'testing in mind', and PHPUnit, a xUnit (akin to JUnit) testing framework for PHP developed by Sebastian Bergmann is included by default. There are also browser-facing testing tools included under Laravel Dusk, but due to time-constraints were omitted. The autokmated tests used by this application were therefore all written in PHPUnit. \cite{Laravel10} \cite{Bergmann1}
+The Laravel framework is reportedly built for 'testing in mind', and PHPUnit, a xUnit (akin to JUnit) testing framework for PHP developed by Sebastian Bergmann is included by default. There are also browser-facing testing tools included under Laravel Dusk, but due to time-constraints were omitted. The automated tests used by this application were therefore all written in PHPUnit. \cite{Laravel10} \cite{Bergmann1}
 
 
 \section{Automated Testing}
@@ -18,7 +18,7 @@ The Laravel framework is reportedly built for 'testing in mind', and PHPUnit, a 
 
 Two subdirectories are defined within the tests directory, one for unit tests, and the other for feature testing. All tests from both subdirectories are executed when PHPUnit is directed to begin testing. Two base classes also exist within this parent directory for subsequent tests to extend from; these files are provided by Laravel. \cite{Laravel10}
 
-A characteristic shared by both types of test is their use of a \texttt{setUp} method, which can set up certain parameters for testing, such as the use of a predefined volunteer user or adminstrator user for testing, so that they do not need to be set up with each test. \texttt{DatabaseMigrations} is also imported into the class to instruct PHPUnit to ensure that database migrations are ran before testing commences, so that tests do not attempt to run on a blank dummy database, and subsequently fail as tables they depend upon, do not exist. \cite{Laravel10}
+A characteristic shared by both types of test is their use of a \texttt{setUp} method, which can set up certain parameters for testing, such as the use of a predefined volunteer user or administrator user for testing, so that they do not need to be set up with each test. \texttt{DatabaseMigrations} is also imported into the class to instruct PHPUnit to ensure that database migrations are ran before testing commences, so that tests do not attempt to run on a blank dummy database, and subsequently fail as tables they depend upon, do not exist. \cite{Laravel10}
 
 Finally, all tests are written with method names resembling sentences, with a prefix of 'test'. This is so that when tests are run, as shown in figure \ref{fig:testscmd}, the purpose of each test is parsed into a readable sentence.
 
@@ -82,7 +82,7 @@ The reverse test equivalent to this checks that users cannot attempt to store op
 The test works in a near identical way, with the same preliminary actions being taken, except this time a pre-generated user without admin privileges has been used. The assertions however this time, are that instead of being redirected, that the application has returned a HTTP 403 Forbidden error code, and that the entry created has not been saved to the database.
 
 \section{Manual Testing}
-Some manual testing was done to complement the automated test coverage, primarily for the authentication routes - being able to log in, log out, register, and reset a password. Though automated testing is used for the vast majority of the application behaviour, manual testing can be complementary for behaviour that is user-focused and not 'black-and-white' - Nordeen goes on to explain the importance of both in parallel: 'testers must dispel old black-and-white notions of manual testing versus automation testing. Both have their place in modern sofware development, and it's more a matter of knowing when and where to use each.' \cite{Nordeen1}
+Some manual testing was done to complement the automated test coverage, primarily for the authentication routes - being able to log in, log out, register, and reset a password. Though automated testing is used for the vast majority of the application behaviour, manual testing can be complementary for behaviour that is user-focused and not 'black-and-white' - Nordeen goes on to explain the importance of both in parallel: 'testers must dispel old black-and-white notions of manual testing versus automation testing. Both have their place in modern software development, and it's more a matter of knowing when and where to use each.' \cite{Nordeen1}
 
 Manual testing tables are available on Appendix \ref{Manual Test Results}.
 

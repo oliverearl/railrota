@@ -10,7 +10,7 @@ Automatically assigning staff to a roster is a well-known problem in computing. 
     \item Availability of staff - staff cannot be away or on leave
     \item Staff cannot carry out more than a certain number of consecutive shifts
     \item Staff cannot exceed maximum numbers of shifts, or fall under a given minimum
-    \item Staff must be of the right subtype, or meet criteria such as skill level or qualification
+    \item Staff must be of the right sub-type, or meet criteria such as skill level or qualification
 \end{itemize}
 
 The efficiency of the outcome is determined not only by its validity, but also by how well it meets 'soft' constraints, such as regularity of shifts.
@@ -20,9 +20,9 @@ In general, software for tackling this problem exist to reduce the intrinsic dif
 Based on the project's aims and objectives, it is already established that an automated or semi-automated solution to automatically roster staff is unnecessary and beyond the scope of the application, as there are dedicated personnel responsible for ensuring that necessary gaps are filled, and volunteers add themselves to roles which they are qualified to fulfill at their own discretion. Nevertheless, having an understanding for this computational problem remains useful for the design and implementation of the project and is subsequently worth researching.
 
 \section{The Nurse Scheduling Problem (NSP)}
-The aforementioned problem of automatically finding the most optimal way to assign workers to shifts, with both hard constraints that must be met in order to be valid, and soft constraints that determine the optimality of the solution, is commonly referred to as the Nurse Scheduling Problem (henceforth NSP) and is considered by most sources to be of NP-hard (nondeterministic polynomial time) complexity. \cite{Tassopoulos2013} 
+The aforementioned problem of automatically finding the most optimal way to assign workers to shifts, with both hard constraints that must be met in order to be valid, and soft constraints that determine the optimality of the solution, is commonly referred to as the Nurse Scheduling Problem (henceforth NSP) and is considered by most sources to be of NP-hard (non-deterministic polynomial time) complexity. \cite{Tassopoulos2013} 
 
-The reason behind nursing being the focus for this particular scheduling problem is that it is particularly challenging to roster for shifts that exist around the clock (healthcare institutions such as carehomes and hospitals work during the day and night), that require staff with varying required skill and competency levels for different types of work, whilst also ensuring that other soft constraints such as regularity and routine of schedules to benefit nurse wellbeing are met. \cite{Burke2004}
+The reason behind nursing being the focus for this particular scheduling problem is that it is particularly challenging to roster for shifts that exist around the clock (healthcare institutions such as care-homes and hospitals work during the day and night), that require staff with varying required skill and competency levels for different types of work, whilst also ensuring that other soft constraints such as regularity and routine of schedules to benefit nurse wellbeing are met. \cite{Burke2004}
 
 This has a strong parallel with the current challenges presented by the steam railway, where although there exists only one shift per day, vastly simplifying the problem, there is also a need for various volunteers with different skill levels and related constraints to be met.
 
@@ -31,7 +31,7 @@ The two most well-researched and documented solutions to this problem involve th
 \subsection{Genetic Algorithms (GA)}
 Genetic algorithms (GA) are described by McCall as a heuristic search and optimisation technique originating in the 1960s that is modelled on Darwinian natural evolution, whereby a population of chromosomes - each a solution to a problem and a measurement of its effectiveness, called fitness. Those with the highest fitness are combined to produce new child chromosomes, and this process continues until criteria pertinent to the solution are met. \cite{MCCALL2005205}
 
-Furthermore, random mutations have a possibility of occuring on each new generation, further modelling the real-world phenomenon of evolution and to diversify the population of chromosomes, as well as to increase the possibility of discovering the most optimal solution. \cite{AUGUSTINE2009}
+Furthermore, random mutations have a possibility of occurring on each new generation, further modelling the real-world phenomenon of evolution and to diversify the population of chromosomes, as well as to increase the possibility of discovering the most optimal solution. \cite{AUGUSTINE2009}
 
 \subsection{Simulated Annealing}
 Baird describes simulated annealing as an optimisation algorithm that is used to find global optima in the presence of local optima. He explains that moves are randomly selected and always accepted if the current solution is improved as a result of that move. Should this not be the case, the move has a chance of being made anyway, with the probability determined based on the 'badness' of the move, which in turn is determined by the quantity in which the solution is made worse. \cite{Baird1998}
@@ -78,7 +78,7 @@ Finally, Three Rings was recommended, alongside more rudimentary freeware soluti
 
 \subsection{ABC Roster} 
 
-ABC Roster is a proprietary freeware rostering application that is now used by a wide range of businesses and charitiable organisations that prides itself on being easy to use, 'with a convenient and intuitive way of creating schedules quickly.' It appears to include all required functionality, such as availability management, the ability to email staff, as well as desirable bonus functionality such as the automated production of schedules and exportability. \cite{ABC1}
+ABC Roster is a proprietary freeware rostering application that is now used by a wide range of businesses and charitable organisations that prides itself on being easy to use, 'with a convenient and intuitive way of creating schedules quickly.' It appears to include all required functionality, such as availability management, the ability to email staff, as well as desirable bonus functionality such as the automated production of schedules and exportability. \cite{ABC1}
 
 \begin{figure}[!ht]
     \includegraphics[width=\textwidth]{Figures/abcroster}
@@ -92,11 +92,11 @@ In spite of this, there are things that can be taken away from ABC Roster and no
 
 \[ (3x - 2y) * 4w \]
 
-Let x as the required number of employees; y as the actual number of employees, and w as the constraint weight. The pentalty for satisfied constraints is zero. \cite{ABC2}
+Let x as the required number of employees; y as the actual number of employees, and w as the constraint weight. The penalty for satisfied constraints is zero. \cite{ABC2}
 
 \section{Research Conclusion}
-While as previously discussed, resolving the NST and implementing an automated rostering solution is beyond the scope of this project, it provides an important insight into the maturity of the computational problem, and importantly the solutions that exist to address said problem, including the software packages in which they are contained. This research is nevertheless a valuable pursuit, as with all agile software projects, there is nothing prohibiting this functionality to become desirable in future revisions, or even as a desired inclusion into an early deliverable. As stated by Ambler, 'project stakeholders have the right to define new requirements, change their minds about existing requirements, and even reprioritise requirements as they see fit.' \cite{Ambler2}
+While as previously discussed, resolving the NST and implementing an automated rostering solution is beyond the scope of this project, it provides an important insight into the maturity of the computational problem, and importantly the solutions that exist to address said problem, including the software packages in which they are contained. This research is nevertheless a valuable pursuit, as with all agile software projects, there is nothing prohibiting this functionality to become desirable in future revisions, or even as a desired inclusion into an early deliverable. As stated by Ambler, 'project stakeholders have the right to define new requirements, change their minds about existing requirements, and even re-prioritise requirements as they see fit.' \cite{Ambler2}
 
-The investigation of existing software solutions has provided a wealth of insight into shared functionality, what solutions do well, and some of their shortcomings that renders them inappropriate. It can be safely concluded from the research that a solution like Three Rings is very ideal for the task at hand, and subsequently this software project should look to emulate its offerings in some form, whilst incorporating doamin specialism demonstrated by a product such as HOPS. In a nutshell, this research has provided valuable insight into what the ideal software solution looks like: responsive and easy to use, with a UI that is similar to the existing calendar / spreadsheet system, and specifically catered for the Corris Railway.
+The investigation of existing software solutions has provided a wealth of insight into shared functionality, what solutions do well, and some of their shortcomings that renders them inappropriate. It can be safely concluded from the research that a solution like Three Rings is very ideal for the task at hand, and subsequently this software project should look to emulate its offerings in some form, whilst incorporating domain specialism demonstrated by a product such as HOPS. In a nutshell, this research has provided valuable insight into what the ideal software solution looks like: responsive and easy to use, with a UI that is similar to the existing calendar / spreadsheet system, and specifically catered for the Corris Railway.
 
 Should this research be continued or expanded upon, it would be ideal to explore even more examples of rostering software, including those used by major corporations and organisations that are not explicitly within the third sector. Furthermore, additional research into implementations of NST solutions is a good direction, so that should this be desired in a future revision of the software, it can be readily and promptly installed.

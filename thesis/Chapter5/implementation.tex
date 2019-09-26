@@ -91,7 +91,7 @@ The name of the view to be rendered by Laravel is 'operation.index', which will 
     \label{fig:users}
 \end{figure}
 
-All volunteers are users within the application, with users that have access to administrative privileges being denoted by a boolean true value in \textbf{is\_admin}. Users can modify a subset of their own information, but are unable to assign themselves roles or privileges, or modify a date value indicating the last time they were inspected.
+All volunteers are users within the application, with users that have access to administrative privileges being denoted by a Boolean true value in \textbf{is\_admin}. Users can modify a subset of their own information, but are unable to assign themselves roles or privileges, or modify a date value indicating the last time they were inspected.
 
 \begin{figure}[!ht]
     \centering
@@ -130,7 +130,7 @@ By declaring routes within the authentication middleware group as the following 
 \end{lstlisting}
 
 \subsection{Authorisation and Policies}
-Authorisation - determing who can and who cannot access resources or carry out certain actions is determined by classes known as policies within Laravel - where authorisation logic is stored. \cite{Larashout1} In this application, a policy is necessary wherever there are actions that users and administrators have different levels of access to, such as being able to create roles, operations, or modify user data.
+Authorisation - determining who can and who cannot access resources or carry out certain actions is determined by classes known as policies within Laravel - where authorisation logic is stored. \cite{Larashout1} In this application, a policy is necessary wherever there are actions that users and administrators have different levels of access to, such as being able to create roles, operations, or modify user data.
 
 A corresponding method is typically called in a controller's respective policy (i.e. UserController will have a matching policy called UserPolicy) and within the controller action itself, the appropriate method for that action is passed as an argument, alongside the currently authenticated user object, like thus:
 
@@ -160,7 +160,7 @@ This simple but effective method calls a custom method on the model itself that 
 
 In order to volunteer for a shift, a user must have the relevant role type that is also shared by the shift. For example, a shift might have a \textit{Blockman} vacancy available, but in order to volunteer for the role, they need to have that role themselves. Role types are treated as resources with CRUD routes, and can only be modified in any form by administrators.
 
-Role types are not hardcoded into the system, and are their own database table, although a list of defaults is defined in the source code that can be used during initial setup, and consist of the following roles: 
+Role types are not hard-coded into the system, and are their own database table, although a list of defaults is defined in the source code that can be used during initial setup, and consist of the following roles: 
 
 \begin{itemize}
     \item Controller
@@ -222,7 +222,7 @@ When deleting any of these nullable resources, shifts that point to affected tab
 
 Operations are each individual day where the railway will be operating, and each operation can have an unlimited amount of shifts. A shift is a specific volunteering vacancy, with its only requirement being the role type, i.e. what kind of work is required for that shift. Additional information such as location, locomotives, and competencies can also be specified, but are optional. Users can be manually assigned to shifts on creation, such as if an administrator knows in advance that a volunteer is to staff a certain shift, which can, with warning, override any typically enforced role requirements.
 
-In a nutshell, an operation can be thought of as a workday, with each vacancy therein being an individual shift. This system is inspired by the exisitng system showed in Appendix \ref{Example Timetable} and additional domain knowledge examined from research into the HOPS platform. \cite{Hops2} If the operation is declared closed for whatever reason, such as understaffing of critical volunteers, it is impossible for users to sign up for shifts.
+In a nutshell, an operation can be thought of as a workday, with each vacancy therein being an individual shift. This system is inspired by the existing system showed in Appendix \ref{Example Timetable} and additional domain knowledge examined from research into the HOPS platform. \cite{Hops2} If the operation is declared closed for whatever reason, such as under-staffing of critical volunteers, it is impossible for users to sign up for shifts.
 
 \begin{figure}[!ht]
     \centering
@@ -231,11 +231,11 @@ In a nutshell, an operation can be thought of as a workday, with each vacancy th
     \label{fig:nested}
 \end{figure}
 
-All operations can be viewed in a reverse-chronological, paginated view, or individual operations and their shifts can be viewed independently. This is one of three primary ways of viewing shift availabilities and their information, designed to be a more modern, bespoke solution for navigating data in line with early concept artwork. It is important to note that shifts are a nested resource of operation - shifts cannot be viewed individually as they are instrinsically dependent on their operation. How this is represented in Laravel is shown in figure \ref{fig:nested}. If an operation is deleted, shifts associated with it are also deleted to prevent the occurance of orphaned shifts within the database.
+All operations can be viewed in a reverse-chronological, paginated view, or individual operations and their shifts can be viewed independently. This is one of three primary ways of viewing shift availabilities and their information, designed to be a more modern, bespoke solution for navigating data in line with early concept artwork. It is important to note that shifts are a nested resource of operation - shifts cannot be viewed individually as they are intrinsically dependent on their operation. How this is represented in Laravel is shown in figure \ref{fig:nested}. If an operation is deleted, shifts associated with it are also deleted to prevent the occurrence of orphaned shifts within the database.
 
-Whilst adminstrators have complete control over operations and shifts and as aforementioned, can manually assign users to shifts, regular users are expected to sign up for shifts that they are capable (in terms of role and role competency) to do. This is referred to internally as 'registering', with pulling out of a shift and leaving it vacant as 'deregistering'.
+Whilst administrators have complete control over operations and shifts and as aforementioned, can manually assign users to shifts, regular users are expected to sign up for shifts that they are capable (in terms of role and role competency) to do. This is referred to internally as 'registering', with pulling out of a shift and leaving it vacant as 'de-registering'.
 
-Whilst deregistration is relatively straightforward and generall risk-free, registering for a shift is complex and carries out substantial amounts of validation checks to ensure that a volunteer is eligible to do so. First, the currently authenticated user is checked for administrative privileges. If they have them, they are able to bypass all further checks, as they are expected to ensure that rules are enforced themselves and not be confined by the rules of the system. 
+Whilst de-registration is relatively straightforward and generally risk-free, registering for a shift is complex and carries out substantial amounts of validation checks to ensure that a volunteer is eligible to do so. First, the currently authenticated user is checked for administrative privileges. If they have them, they are able to bypass all further checks, as they are expected to ensure that rules are enforced themselves and not be confined by the rules of the system. 
 
 \begin{lstlisting}[language=PHP, breaklines]
     public function register(Operation $operation, $id)
@@ -268,7 +268,7 @@ Whilst deregistration is relatively straightforward and generall risk-free, regi
 
 Otherwise, the user is first retrieved from the database and checked to see if the user has a role associated with them with the required role type. If they do not, then an error is displayed and the user is redirected back. The next check ensures that, if the shift has a competency requirement specified, that the user meets that requirement by having a tier level that is not less than required, and failure is met with the same fate.
 
-Lastly, the system checks that the shift has not already been filled and the user is erronously attempting to overwrite another volunteer's place in the system. While the interface would normally not allow for this, the check has been put into place to protect against malicious or accidental data submission, such as from an old or manipulated form.
+Lastly, the system checks that the shift has not already been filled and the user is erroneously attempting to overwrite another volunteer's place in the system. While the interface would normally not allow for this, the check has been put into place to protect against malicious or accidental data submission, such as from an old or manipulated form.
 
 With these checks complete, the remainder of the method continues executing, and data is saved to the database using Eloquent, before redirecting the user to a view and alerting them of their success.
 
@@ -281,7 +281,7 @@ With these checks complete, the remainder of the method continues executing, and
     \label{fig:calendarview}
 \end{figure}
 
-Originally coined 'at a glance' view, or just 'glance' view, this functionality was intended to mimic the existing calendar used in Appendix \ref{Example Timetable} to make the transition to the new application easier, and to provide a straightforward means of being able to view vacancies and volunteer staffings en masse. This went through numerous iterations, following multiple rounds of feedback with the customer, before reaching its current phase, reflected in figure \ref{fig:calendarview}.
+Originally coined 'at a glance' view, or just 'glance' view, this functionality was intended to mimic the existing calendar used in Appendix \ref{Example Timetable} to make the transition to the new application easier, and to provide a straightforward means of being able to view vacancies and volunteer staffing en masse. This went through numerous iterations, following multiple rounds of feedback with the customer, before reaching its current phase, reflected in figure \ref{fig:calendarview}.
 
 Information is spread horizontally, where each operation will contain the names, or a registration link, for vacancies of any shifts running of each type. If there are multiple shifts with the same role type, they will co-exist responsively within the same table field. Historic vacancies - vacancies that went unfilled the day following the operation are labelled as 'unfulfilled'.
 
@@ -315,7 +315,7 @@ A custom route was defined to generate PDF documents, which calls a pdf method i
     }
 \end{lstlisting}
 
-The workings of this method are rudimentary to understand, as most of the heavy lifting is done behind the scenes by the library. First, all operations are retrieved in descending order by leveraging Eloquent and stored within \texttt{\$operations}, and all role types are similarly retrieved and stored within another variable. A filename string is built by using the Carbon datetime library, which is included with Laravel, and concatenating '\_operations' to the end of it. This produces a filename in the format of '20190127\_operations.pdf'.
+The workings of this method are rudimentary to understand, as most of the heavy lifting is done behind the scenes by the library. First, all operations are retrieved in descending order by leveraging Eloquent and stored within \texttt{\$operations}, and all role types are similarly retrieved and stored within another variable. A filename string is built by using the Carbon date-time library, which is included with Laravel, and concatenating '\_operations' to the end of it. This produces a filename in the format of '20190127\_operations.pdf'.
 
 With this necessary information obtained, a new instance of laravel-dompdf is instantiated, and is requested to load a particular view that utilises basic, print-appropriate layout and styling, and injecting the previously retrieved data to be parsed by Blade. Once done rendering, a copy of the generated PDF file is saved in the Laravel storage directory. Lastly, the file is presented to the user for download.
 

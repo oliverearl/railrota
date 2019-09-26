@@ -1,7 +1,7 @@
 \chapter{Design}
 
 \section{Analysis of Relevant Technologies}
-Determing what programming language(s) and framework(s) to use in a project implementation is an important decision process. A chosen technology must be runnable within the constraints defined in Appendix \ref{Operating Environment}, and ideally should be a technology that the development team, in this case a solo developer, is familiar with as to minimise excessive amounts of time learning.
+Determining what programming language(s) and framework(s) to use in a project implementation is an important decision process. A chosen technology must be runnable within the constraints defined in Appendix \ref{Operating Environment}, and ideally should be a technology that the development team, in this case a solo developer, is familiar with as to minimise excessive amounts of time learning.
 
 On the other hand, there is an important balance that must be struck between choosing a tool that is familiar, and that which is most effective, as argued by Vinegar who states that 'writing quality, sustainable software comes second to fiddling with what's sexy'. \cite{Vinegar1}
 
@@ -58,7 +58,7 @@ It is important to note however, that although Laravel utilises MVC, like many o
 
 \section{Data Persistence}
 
-PHP supports a wealth of relational databases out-of-the-box, and this functionality is extensible with the use of drivers. For development, the use of a SQLite or local MySQL database is more than sufficient, and both Laravel and PHP itself will work wtih different databases without the need for different code or parameters. The PDO (PHP Data Object) is the means in which PHP applications can interface with databases, which fully abstracts away any underlying database mechanisms and allows developers to write fully database agnostic code, without the need of knowing what dialect of SQL, or even writing database queries at all. Resultingly, the customer is free to use whatever database technology they wish, provided that they have the necessary drivers installed on their PHP installation or within their container, such as MySQL, PostgresSQL, or SQLite. \cite{PHP1}
+PHP supports a wealth of relational databases out-of-the-box, and this functionality is extensible with the use of drivers. For development, the use of a SQLite or local MySQL database is more than sufficient, and both Laravel and PHP itself will work with different databases without the need for different code or parameters. The PDO (PHP Data Object) is the means in which PHP applications can interface with databases, which fully abstracts away any underlying database mechanisms and allows developers to write fully database agnostic code, without the need of knowing what dialect of SQL, or even writing database queries at all. Resultingly, the customer is free to use whatever database technology they wish, provided that they have the necessary drivers installed on their PHP installation or within their container, such as MySQL, PostgresSQL, or SQLite. \cite{PHP1}
 
 \section{Security Considerations}
 An application working with user information, regardless of sensitivity must address certain security considerations in order to conform with the Data Protection Act of 2018, which includes the ability for users to view, edit, and delete aspects of their personal information. This was updated that year to include the British implementation of the European General Data Protection Regulation (GDPR) which has come into effect as the United Kingdom withdraws from the European Union. Charities are not exempt from this legislation. \cite{HMGovt1} \cite{HMGovt2}
@@ -120,7 +120,7 @@ The homepage design as visible from desktop viewports provides insight into the 
     \label{fig:mobile}
 \end{figure}
 
-With the aforementioned emphasis and importance of responsive design and an importance of the design to work and view correctly on mobile devices such as smartphones and tablets, a reduced viewport design was considered important. In particular, this is to demonstrate the use of a collapsable 'hamburger menu', a commonly used dropdown menu optimised for touchscreens, and readily implementable in Bootstrap 4. \cite{Bootstrap4}
+With the aforementioned emphasis and importance of responsive design and an importance of the design to work and view correctly on mobile devices such as smartphones and tablets, a reduced viewport design was considered important. In particular, this is to demonstrate the use of a collapsible 'hamburger menu', a commonly used drop-down menu optimised for touchscreens, and readily implementable in Bootstrap 4. \cite{Bootstrap4}
 
 \subsubsection{Operations Design}
 \begin{figure}[!ht]
