@@ -1,1 +1,65 @@
-\chapter{Evaluation}
+\chapter{Critical Evaluation}
+
+\section{Introduction}
+The aims of this chapter are to provide a critical analysis and evaluation of various aspects of the development process, including providing insight into what could have been done better and the various shortcomings that could have been approached better throughout the lifecycle of the project. 
+
+\section{Implementation of Requirements}
+
+\subsection{Functional Requirements}
+The requirements that were successfully implemented for this release of the project are as follows:
+
+\begin{itemize}
+    \item All users must be able to navigate the roster, and view current, upcoming, and/or historic shifts
+    \item Users must be able to fill in and edit their personal information
+    \item Users must be able to assign themselves to shifts of which they are able to do
+    \item Users must \textbf{not} be able to assign themsleves to shifts that they are unable to do
+    \item Users must be able to indicate periods of availability
+    \item Users must be able to operate the web application easily from a mobile device such as a smartphone
+    \item Administrators must be able to modify user information
+    \item Administrators must be able to assign roles and privileges that reflect a volunteer's ability and status
+    \item Administrators must be able to add, edit, and delete shifts
+    \item Administrators must be able to mark a shift as closed
+    \item Administrators must be able to define a shift's staffing requirements
+    \item The application must run on a predetermined operating environment
+\end{itemize}
+
+The behaviours that were not successfully implemented are:
+
+\begin{itemize}
+    \item Users must \textbf{not} be able to assign themsleves to simultaneous roles on the same shifts
+    \item Users must be able to indicate their willingness or desire to do an upcoming shift (i.e. an unspecified upcoming weekend)
+    \item Administrators must be able to email users regarding upcoming shifts
+\end{itemize}
+
+The first of these two requirements was intentionally left out after a conversation with the client, where it was expressed that it was certainly possible for a particular volunteer to be carrying out more than one role, although unlikely, during an operation. This might be the case for example where an experienced member of staff is monitoring a trainee, whilst also carrying out some miscellaneous function. Nevertheless, should the customer change their mind on this and wish to have this requirement reinstated, it could be reverted in a straightforward manner.
+
+The next point, being able to indicate willingness or desire to do an upcoming shift was actually overlooked and, due to human error, not implemented before development was frozen. While embarrassing, an important lesson can be learned from this experience on the importance on continuously ensuring and checking that requirements are being met at all stages of the project, and that any ongoing work should be directly attributable to a requirement, such as by using user stories. 
+
+Lastly, the functionality to email users with upcoming shift information was simply not able to be implemented in time for the initial software release, purely a result of time constraints. This was communicated to the customer as a matter of urgency; reassuring them that it would be included in a future revision of software, and was met with approval.
+
+Despite having missed three functional requirements within the first release, this success rate of 80\% is nevertheless a positive one, especially given that changes and feedback were continuously exchanged throughout the development process. This should be considered a successful delivery of functionality, which ultimately is the key indicator of progress and success in an agile software project. \cite{beck2001agile}
+
+\subsection{Desirable Functionality}
+
+Automated rostering was considered beyond the scope of this release due to it being a complicated computational problem, and following discussion with the customer, it was deemed not to be an issue, but perhaps functionality that could be considered in a distant future release as the number of railway volunteers increases. They also stressed that they did not want optional automated rostering from potentially complicating the UI of the application, which was what initially prompted its inception in the first place, as existing solution HOPS was considered too complex for the average user to navigate.
+
+The ability to implement localisation into the program was researched and was considered for the first release. Ultimately however, time constraints made it necessary to triage this functionality for a future release. This was discussed with the customer, as due to the high number of Welsh speakers in Machynlleth \cite{Census1} this might be a greater priority than an initial analysis might reveal. The customer nevertheless provided reassurance that it was not necessary for a first release of the software, but would gladly welcome it in a future revision.
+
+\section{Adherence to Agile Methodology}
+Overall adherence to the hybrid FDD methodology was mostly successful, with the Build by Feature iteration taking up the vast majority of development time, and fitting comfortably within the predetermined timeframe. However, one of the major violations of this methodology that happened periodically was not producing unit or feature tests as components were developed, and simply moving onto the next feature or route - without a concrete indication of behaviour being done. In order to rectify this, substantial time had to be allocated to going back and ensuring adequate test coverage was in place to prevent any accidental regressions in behaviour.
+
+Furthermore, it was difficult to remain within the confines of the timeframes used in place of Scrum sprints. With all the best planning and foresight in the world, certain real life events can occur that can be problematic obstacles for solo developers who do not have other software engineers whom they can delegate work to when problems arise. In spite of these difficulties, 80\% of planned required functionality has made it into the initial release, showing a great deal of adaptability and resourcefulness on the developer's behalf, which are crucial elements in agile software development in a world where, for better or for worse, programmers do not have psychic abilities.
+
+\section{Difficulties Encountered with Domain Knowledge}
+By far the greatest difficulty with this project was wrestling with an onslaught of specific domain knowledge and terminology unique to railways, steam railways, and the work carried out thereon. Whilst the customer made every effort possible to ensure a wealth of documentation and terminology guidelines were available, it remained nevertheless difficult to fully assimilate without slowing down development efforts. Some problems did arise from confusion regarding specific terminology at multiple points in development, but thankfully due to regular meetings with the client these problems were diagnosed early and could be quickly rectified with further clarification and insight from the customer. 
+
+This truly demonstrates the importance of face-to-face meetings, or in this instance, oral conversation, where information can far more readily be transferred from customer to developer without the need of lengthy or confusing documentation. This theory is backed up by Chow et al who identified customer involvement as a strong indicator for success in agile projects. \cite{CHOW2008961}
+
+In a nutshell, when faced with a project that requires a substantial deal of domain knowledge or expertise, it is best to communicate with those with that expertise, i.e. the customer, as much as possible so that any issues can be quickly rectified and that large portions of the codebase need not be re-engineered.
+
+\section{Suitability of Development Choices}
+
+
+\section{Improvements to Testing Methodology}
+
+\section{Shortcomings and Recommendations for Further Releases}
