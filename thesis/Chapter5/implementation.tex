@@ -152,7 +152,7 @@ This simple but effective method calls a custom method on the model itself that 
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/screenshot-roletypes}
     \caption{Screenshot of the Role Types interface within the application.}
-    \label{fig:users}
+    \label{fig:roletypes}
 \end{figure}
 
 In order to volunteer for a shift, a user must have the relevant role type that is also shared by the shift. For example, a shift might have a \textit{Blockman} vacancy available, but in order to volunteer for the role, they need to have that role themselves. Role types are treated as resources with CRUD routes, and can only be modified in any form by administrators.
@@ -176,7 +176,7 @@ Additional role types can be added to the system to accommodate any future needs
     \centering
     \includegraphics[width=1.0\textwidth]{Figures/screenshot-competency-create}
     \caption{Screenshot of an administrator adding a new competency level to the a driver role.}
-    \label{fig:users}
+    \label{fig:competencies-create}
 \end{figure}
 
 Each role can have multiple competency levels, each with their own tier between 1 and 10. Those with a competency in a specific role can volunteer for shifts equal or lesser to their numerical tier. 
@@ -189,13 +189,101 @@ This algorithm that ensures that competency levels are met is explored in more d
 
 \section{Roles}
 
+A role type and role competency is linked to a user by means of a role - which can be viewed as properties of a user, as users can have multiple roles each with their own role type and role competency.
+
+As they are used akin to a pivot table, tying information on the aforementioned tables together, there are no forms to directly create them, and the necessary controls to do so are only visible to an administrator on the respective user's edit UI, as shown by figure \ref{fig:users-edit}.
+
 \section{Locations and Locomotives}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-locations}
+    \caption{Screenshot of locations being listed within the application, which is viewable by all users.}
+    \label{fig:locations}
+\end{figure}
+
+Locations and two types of Locomotives, both Steam and Diesel/Electric are all individual tables in the database but have been grouped for the sake of brevity, as they all function in an identical way, with the only difference being that they have different default values that can be used during initial set up. The information is minimal - the name, an optional description, and timestamps.
+
+Shifts can have optional location information, providing information to users where a shift is located (i.e. what station or railway, or some other geographical location) and if it involves a vehicle, such as a steam locomotive, which one. These resources can only be created or manipulated by administrators, but users can view information about them in the same way they may view other resource data.
+
+When deleting any of these nullable resources, shifts that point to affected table entries will also be nulled.
 
 \section{Operations and Shifts}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-operations}
+    \caption{Screenshot of the operations interface, containing one shift and administrative controls.}
+    \label{fig:operations}
+\end{figure}
+
+Operations are each individual day where the railway will be operating, and each operation can have an unlimited amount of shifts. A shift is a specific volunteering vacancy, with its only requirement being the role type, i.e. what kind of work is required for that shift. Additional information such as location, locomotives, and competencies can also be specified, but are optional. Users can be manually assigned to shifts on creation, such as if an administrator knows in advance that a volunteer is to staff a certain shift, which can, with warning, override any typically enforced role requirements.
+
+In a nutshell, an operation can be thought of as a workday, with each vacancy therein being an individual shift. This system is inspired by the exisitng system showed in Appendix \ref{Example Timetable} and additional domain knowledge examined from research into the HOPS platform. \cite{Hops2} If the operation is declared closed for whatever reason, such as understaffing of critical volunteers, it is impossible for users to sign up for shifts.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/nested-components}
+    \caption{Screenshot showing how nested components (operations and shifts) appear within Laravel.}
+    \label{fig:nested}
+\end{figure}
+
+All operations can be viewed in a reverse-chronological, paginated view, or individual operations and their shifts can be viewed independently. This is one of three primary ways of viewing shift availabilities and their information, designed to be a more modern, bespoke solution for navigating data in line with early concept artwork. It is important to note that shifts are a nested resource of operation - shifts cannot be viewed individually as they are instrinsically dependent on their operation. How this is represented in Laravel is shown in figure \ref{fig:nested}
+
+Whilst adminstrators have complete control over operations and shifts and as aforementioned, can manually assign users to shifts, regular users are expected to sign up for shifts that they are capable (in terms of role and role competency) to do. This is referred to internally as 'registering', with pulling out of a shift and leaving it vacant as 'deregistering'.
+
+Whilst deregistration is relatively straightforward and generall risk-free, registering for a shift is complex and carries out substantial amounts of validation checks to ensure that a volunteer is eligible to do so. First, the currently authenticated user is checked for administrative privileges. If they have them, they are able to bypass all further checks, as they are expected to ensure that rules are enforced themselves and not be confined by the rules of the system. 
+
+\begin{lstlisting}[language=PHP, breaklines]
+    public function register(Operation $operation, $id)
+    {
+        ...
+            $roleCheck = Role::where([
+                ['user_id', '=', Auth::id()],
+                ['role_type_id', '=', $operationShift->role_type_id]
+            ])->first();
+            
+            if (is_null($roleCheck)) {
+                flash()->error('You do not have the required role type.')->important();
+                return redirect()->back();
+            } else {
+                if (!is_null($operationShift->role_competency_id)) {
+                    if ($roleCheck->role_competency->tier < $operationShift->role_competency->tier) {
+                        flash()->error('You do not have a sufficient competency / grade tier.')->important();
+                        return redirect()->back();
+                    }
+                }
+                if (!is_null($operationShift->user_id) && $operationShift->user_id !== Auth::id()) {
+                    flash()->error('This shift is not vacant.')->important();
+                    return redirect()->back();
+                }
+            }
+        }
+        ...
+    }
+\end{lstlisting}
+
+Otherwise, the user is first retrieved from the database and checked to see if the user has a role associated with them with the required role type. If they do not, then an error is displayed and the user is redirected back. The next check ensures that, if the shift has a competency requirement specified, that the user meets that requirement by having a tier level that is not less than required, and failure is met with the same fate.
+
+Lastly, the system checks that the shift has not already been filled and the user is erronously attempting to overwrite another volunteer's place in the system. While the interface would normally not allow for this, the check has been put into place to protect against malicious or accidental data submission, such as from an old or manipulated form.
+
+With these checks complete, the remainder of the method continues executing, and data is saved to the database using Eloquent, before redirecting the user to a view and alerting them of their success.
+
 \section{Calendar View}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-calendar}
+    \caption{Screenshot showing the calendar view, with one operation containing a vacant shift.}
+    \label{fig:calendarview}
+\end{figure}
+
+Originally coined 'at a glance' view, or just 'glance' view, this functionality was intended to mimic the existing calendar used in Appendix \ref{Example Timetable} to make the transition to the new application easier, and to provide a straightforward means of being able to view vacancies and volunteer staffings en masse. This went through numerous iterations before reaching its current phase, reflected in figure \ref{fig:calendarview}.
+
+Information is spread horizontally, where each operation will contain the names, or a registration link, for vacancies of any shifts running of each type. If there are multiple shifts with the same role type, they will co-exist responsively within the same table field. Historic vacancies - vacancies that went unfilled the day following the operation are labelled as 'unfulfilled'.
+
 \section{PDF Export Functionality}
+
 
 \section{Administration Panel}
 
