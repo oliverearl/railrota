@@ -278,13 +278,61 @@ With these checks complete, the remainder of the method continues executing, and
     \label{fig:calendarview}
 \end{figure}
 
-Originally coined 'at a glance' view, or just 'glance' view, this functionality was intended to mimic the existing calendar used in Appendix \ref{Example Timetable} to make the transition to the new application easier, and to provide a straightforward means of being able to view vacancies and volunteer staffings en masse. This went through numerous iterations before reaching its current phase, reflected in figure \ref{fig:calendarview}.
+Originally coined 'at a glance' view, or just 'glance' view, this functionality was intended to mimic the existing calendar used in Appendix \ref{Example Timetable} to make the transition to the new application easier, and to provide a straightforward means of being able to view vacancies and volunteer staffings en masse. This went through numerous iterations, following multiple rounds of feedback with the customer, before reaching its current phase, reflected in figure \ref{fig:calendarview}.
 
 Information is spread horizontally, where each operation will contain the names, or a registration link, for vacancies of any shifts running of each type. If there are multiple shifts with the same role type, they will co-exist responsively within the same table field. Historic vacancies - vacancies that went unfilled the day following the operation are labelled as 'unfulfilled'.
 
 \section{PDF Export Functionality}
 
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-pdf}
+    \caption{Screenshot of an exported PDF containing operation and shift data.}
+    \label{fig:calendarview}
+\end{figure}
 
-\section{Administration Panel}
+As the previous system was purely spreadsheet based, it was a simple task to print and distribute copies of the current timetable to volunteers for their convenience. While this is not mandatory functionality requested by the user, it was deemed important enough for inclusion in order to better bridge the gap in workflow between systems. 
+
+The system works by using a PHP library known as DOMPDF, which renders HTML (Hypertext Markup Language) and CSS (Cascading Style Sheets) of webpages into PDF documents. Getting this set up to work with the Laravel framework would have been particularly challenging, if not for a pre-existing open source Laravel wrapper called laravel-dompdf developed primarily by Dutch developer Barry vd. Heuvel. This made installation incredibly straight forward, and the wrapper provided the necessary Laravel facades and configuration modules to quickly access the library's features and integrate it into the framework. \cite{dompdf1} \cite{Heuvel1}
+
+A custom route was defined to generate PDF documents, which calls a pdf method in the operations controller:
+
+\begin{lstlisting}[language=PHP, breaklines]
+    public function pdf()
+    {
+        $operations = Operation::orderBy('date', 'desc')->get();
+        $roleTypes = RoleType::all();
+        $filename = Carbon::now()->format('ymd') . '_operations.pdf';
+    
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadView('pdf.operations', compact('operations', 'roleTypes'));
+        $pdf->save(storage_path() . '/' . $filename);
+    
+        return $pdf->download($filename);
+    }
+\end{lstlisting}
+
+The workings of this method are rudimentary to understand, as most of the heavy lifting is done behind the scenes by the library. First, all operations are retrieved in descending order by leveraging Eloquent and stored within \texttt{\$operations}, and all role types are similarly retrieved and stored within another variable. A filename string is built by using the Carbon datetime library, which is included with Laravel, and concatenating '\_operations' to the end of it. This produces a filename in the format of '20190127\_operations.pdf'.
+
+With this necessary information obtained, a new instance of laravel-dompdf is instantiated, and is requested to load a particular view that utilises basic, print-appropriate layout and styling, and injecting the previously retrieved data to be parsed by Blade. Once done rendering, a copy of the generated PDF file is saved in the Laravel storage directory. Lastly, the file is presented to the user for download.
 
 \section{Additional Webpages}
+There are three additional webpages, in addition to those used by application resources, and those used for authentication (i.e. login, register).
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-homepage}
+    \caption{Screenshot of the homepage displayed after authentication.}
+    \label{fig:homepage}
+\end{figure}
+
+The homepage view, which behaves as the application's actual homepage when the user has logged in, shows some convenient information on that volunteer's upcoming shifts, and their total number of shifts so far. This is different to the much more simple 'welcome' view, that is displayed to an unauthenticated user when they first navigate to the application's web address, and prompts the user to login.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Figures/screenshot-admin}
+    \caption{Screenshot of the administration panel, only accessible by users with administrative rights.}
+    \label{fig:adminpanel}
+\end{figure}
+
+Administrators also have access to an administrative panel - though this view does not provide any additional functionalities by itself per se, it does provide quick links to resources pages that an administrator might need to access when adding or changing elements of the application. It also provides a convenient link to the diagnostic tool Laravel Telescope, explored in further detail in Chapter 6.
