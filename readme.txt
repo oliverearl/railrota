@@ -4,11 +4,6 @@ Web-Based Rostering System for Volunteer Worked Organisations - MSc Project CHM9
 Oliver Earl
 ole4@aber.ac.uk
 
-A live instance of the application is available on my personal webspace for your convenience:
-https://www.oliverearl.co.uk/railrota
-
-Email: jane.doe@railrota.com
-Password: password
 
 ***********************
 Directories of this Repository
@@ -19,7 +14,7 @@ This contains all of the files that make up the developed software project, Rail
 More in-depth information into the subdirectories within this subdirectory and the other files and their respective purposes can be found in the readme.md file therein.
 
 --written_deliverable--
-This is a compiled PDF of the final thesis deliverable. It is the same document as the additional write-up document that was submitted to Blackboard.
+This is a compiled PDF of the final thesis deliverable. It is the same document as the additional write-up document that was submitted to Blackboard. More information on the grade of the MSc project and feedback from university marking staff can be found therein.
 
 --thesis--
 This contains the LaTeX source code of the write-up, including any appendices and images. There are also Bash and Perl scripts for quickly compiling the markup and performing word counts. Please see the readme.txt file in this subdirectory for more information.

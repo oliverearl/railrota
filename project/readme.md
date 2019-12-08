@@ -36,11 +36,6 @@ Planned future functionality (outside the scope of the MSc deliverable, but for 
 
 + Improved code quality and reduced code duplication.
 
-## Live Instance
-
-A live instance of the application is available for testing. It can be found at:
-[https://www.oliverearl.co.uk/railrota](https://www.oliverearl.co.uk/railrota])
-
 ## Deployment
 
 You must meet the system environment requirements to run Laravel 5.8. These requirements can be found in the official [Laravel documentation](https://laravel.com/docs/5.8#installing-laravel).
